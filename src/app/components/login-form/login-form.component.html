@@ -1,11 +1,10 @@
 <form class="form-group__login">
-    <div class="mat-title">Log In</div>
 
-    <label for="email">Email: </label>
-    <input id="email" type="text" [formControl]="email">
 
-    <label for="password">Password: </label>
-    <input id="password" type="password" [formControl]="password">
+    <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Favorite food</mat-label>
+        <input matInput placeholder="Email" type="email" required>
+    </mat-form-field>
 
-    <button mat-stroked-button color="accent">Accent</button>
+    <button mat-stroked-button color="accent">Log In</button>
 </form>
