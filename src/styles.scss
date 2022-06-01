@@ -13,3 +13,15 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.form-group__auth {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    min-height: 300px;
+    border-radius: 30px;
+    border: 2px solid #10f72f;
+    background-color: rgb(193, 34, 214);
+    margin: 0 auto;
+    padding: 20px;
+}

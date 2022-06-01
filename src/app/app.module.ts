@@ -14,6 +14,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/pages/registration-page/registration-page.component';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
+import { TasksListComponent } from './components/tasks-list/tasks-list.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HomePageComponent } from './components/pages/home-page/home-page.compon
     LoginFormComponent,
     LoginPageComponent,
     RegistrationPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    TasksListComponent
   ],
   imports: [
     BrowserModule,
