@@ -1,75 +1,48 @@
-<table mat-table class="table__task-list">
-    <thead>
-        <tr>
-            <th>N</th>
-            <th>Task name</th>
-            <th>Deadline</th>
-            <th>Priority</th>
-            <th>Category</th>
-            <th>Edit task</th>
-            <th>Delete task</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr *ngFor="let task of tasks">
-            <td>1</td>
-            <td>{{task.name}}</td>
-            <td>{{task.deadline}}</td>
-            <td>{{task.priority}}</td>
-            <td>{{task.category}}</td>
-            <td>
-                <button mat-icon-button color="primary" aria-label="Edit task" (click)="openModalEdit()">
-                  <mat-icon>edit icon</mat-icon>
-                </button>
-            </td>
-            <td>
-                <button mat-icon-button color="warn" aria-label="Delete task" (click)="openModalDelete()">
-                  <mat-icon>delete icon</mat-icon>
-                </button>
-            </td>
-        </tr>
-    </tbody>
-
-</table>
-
-<!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="tasks" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8 content-wrapper__table__task-list">
 
     <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{"element.position"}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> No. </th>
+        <td mat-cell *matCellDef="index"> {{1`}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Task name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by task name"> Task name </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="deadline">
-        <th mat-header-cell *matHeaderCellDef> Deadline </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by deadline"> Deadline </th>
         <td mat-cell *matCellDef="let element"> {{element.deadline}} </td>
     </ng-container>
 
     <ng-container matColumnDef="priority">
-        <th mat-header-cell *matHeaderCellDef> Priority </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by priority"> Priority </th>
         <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
     </ng-container>
 
     <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by category"> Category </th>
         <td mat-cell *matCellDef="let element"> {{element.category}} </td>
     </ng-container>
 
     <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> Edit </th>
-        <td mat-cell *matCellDef="let element"> </td>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" aria-label="Edit task" (click)="openModalEdit()">
+            <mat-icon>edit icon</mat-icon>
+          </button>
+        </td>
     </ng-container>
 
     <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef> Delete </th>
-        <td mat-cell *matCellDef="let element"> </td>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" aria-label="Delete task" (click)="openModalDelete()">
+            <mat-icon>delete icon</mat-icon>
+          </button>
+        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->
+</table>

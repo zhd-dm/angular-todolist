@@ -2,9 +2,13 @@
 .header-wrapper {
     width: 100%;
     padding: 20px;
+    margin-bottom: 30px;
     background-color: $primary;
     border-bottom: 1px solid black;
     a {
         margin-right: 10px;
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }
