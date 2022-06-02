@@ -15,6 +15,7 @@ import { LoginPageComponent } from './components/pages/login-page/login-page.com
 import { RegistrationPageComponent } from './components/pages/registration-page/registration-page.component';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
+import { CreateTaskComponent } from './components/create-task/create-task.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TasksListComponent } from './components/tasks-list/tasks-list.component
     LoginPageComponent,
     RegistrationPageComponent,
     HomePageComponent,
-    TasksListComponent
+    TasksListComponent,
+    CreateTaskComponent
   ],
   imports: [
     BrowserModule,

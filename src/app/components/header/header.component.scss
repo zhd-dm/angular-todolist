@@ -1,8 +1,9 @@
+@import "../../../variables.scss";
 .header-wrapper {
     width: 100%;
     padding: 20px;
     margin-bottom: 70px;
-    background-color: rgb(193, 34, 214);
+    background-color: $primary;
     border-bottom: 1px solid black;
     a {
         margin-right: 10px;

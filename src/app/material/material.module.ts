@@ -5,13 +5,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+// import { MatTableModule } from '@angular/material/table';
 
 const MaterialComponents = [
   MatSliderModule,
   MatIconModule,
   MatButtonModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  // MatTableModule
 ]
 
 @NgModule({
