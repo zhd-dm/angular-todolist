@@ -13,7 +13,7 @@
 
     <tbody>
         <tr *ngFor="let task of tasks">
-            <td>{{[]}}</td>
+            <td>1</td>
             <td>{{task.name}}</td>
             <td>{{task.deadline}}</td>
             <td>{{task.priority}}</td>
@@ -24,7 +24,7 @@
                 </button>
             </td>
             <td>
-                <button mat-icon-button color="warn" aria-label="Delete task">
+                <button mat-icon-button color="warn" aria-label="Delete task" (click)="openModal()">
                   <mat-icon>delete icon</mat-icon>
                 </button>
             </td>

@@ -16,6 +16,8 @@ import { RegistrationPageComponent } from './components/pages/registration-page/
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
 import { CreateTaskComponent } from './components/create-task/create-task.component';
+import { DeleteTaskComponent } from './components/delete-task/delete-task.component';
+import { EditTaskComponent } from './components/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { CreateTaskComponent } from './components/create-task/create-task.compon
     RegistrationPageComponent,
     HomePageComponent,
     TasksListComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    DeleteTaskComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
+@import "../../../variables.scss";
 .table__task-list {
     width: 70vw;
-    margin: 0 auto;
+    margin: 40px auto;
     text-align: center;
+    background-color: transparentize($accent, 0.8);
 }

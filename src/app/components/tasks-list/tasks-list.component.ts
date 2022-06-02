@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteTaskComponent } from '../delete-task/delete-task.component';
 
 export interface Task {
   name: string;
@@ -36,6 +37,50 @@ export interface Task {
       deadline: 121313,
       priority: false,
       category: "main"
+    },
+    {
+      name: "Have lunch",
+      deadline: 121313,
+      priority: false
+    },
+    {
+      name: "Drink water",
+      deadline: 121313,
+      priority: true,
+      category: "food"
+    },
+    {
+      name: "Listen music",
+      deadline: 121313,
+      priority: true,
+    },
+    {
+      name: "Delete App",
+      deadline: 121313,
+      priority: false,
+      category: "main"
+    },
+    {
+      name: "Have lunch",
+      deadline: 121313,
+      priority: false
+    },
+    {
+      name: "Drink water",
+      deadline: 121313,
+      priority: true,
+      category: "food"
+    },
+    {
+      name: "Listen music",
+      deadline: 121313,
+      priority: true,
+    },
+    {
+      name: "Delete App",
+      deadline: 121313,
+      priority: false,
+      category: "main"
     }
   ]
 
@@ -48,9 +93,13 @@ export interface Task {
 export class TasksListComponent implements OnInit {
   tasks = DATA;
 
+  constructor(private dialogRef: MatDialog) {
 
-  // displayedColumns: string[] = ['name', 'deadline', 'priority', 'category'];
-  // dataSource = DATA;
+  }
+
+  openModal() {
+    this.dialogRef.open(DeleteTaskComponent)
+  }
 
   ngOnInit(): void {
 
