@@ -19,6 +19,8 @@ import { CreateTaskComponent } from './components/create-task/create-task.compon
 import { DeleteTaskComponent } from './components/delete-task/delete-task.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { ButtonCreateTaskComponent } from './components/UI/button-create-task/button-create-task.component';
+import { ButtonCreateCategoryComponent } from './components/UI/button-create-category/button-create-category.component';
+import { CreateCategoryComponent } from './components/create-category/create-category.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ButtonCreateTaskComponent } from './components/UI/button-create-task/bu
     CreateTaskComponent,
     DeleteTaskComponent,
     EditTaskComponent,
-    ButtonCreateTaskComponent
+    ButtonCreateTaskComponent,
+    ButtonCreateCategoryComponent,
+    CreateCategoryComponent
   ],
   imports: [
     BrowserModule,

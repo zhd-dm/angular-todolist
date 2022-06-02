@@ -1,6 +1,6 @@
-<form class="form-group__auth form-group__auth_login">
+<form class="form-group form-group__auth_login">
 
-    <div class="mat-title">Log In</div>
+    <div class="mat-title mat-title__auth">Log In</div>
 
     <mat-form-field class="form-group__login_email" color="accent" appearance="outline">
         <mat-label>Email</mat-label>
@@ -15,7 +15,13 @@
 
     <mat-form-field class="form-group__login_password" color="accent" appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Password" required>
+        <input type="password" matInput [formControl]="passwordFormControl" placeholder="Password">
+        <mat-error *ngIf="passwordFormControl.invalid">
+            Password must be between 5 and 16 characters
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>
+        </mat-error>
     </mat-form-field>
 
     <button mat-raised-button color="accent">Log In</button>

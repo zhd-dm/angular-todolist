@@ -1,12 +1,16 @@
 <header class="header-wrapper">
     <a routerLink="/auth/login">
-        <button mat-raised-button color="primary">Login page</button>
+        <button mat-raised-button color="primary">Login</button>
     </a>
     <a routerLink="/auth/registration">
-        <button mat-raised-button color="primary">Registration page</button>
+        <button mat-raised-button color="primary">Registration</button>
     </a>
     <a routerLink="/home">
         <button mat-raised-button color="accent">Task list</button>
     </a>
+
+    <app-button-create-task></app-button-create-task>
+
+    <app-button-create-category></app-button-create-category>
 
 </header>

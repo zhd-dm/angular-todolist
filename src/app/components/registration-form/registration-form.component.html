@@ -1,25 +1,46 @@
-<form class="form-group__auth form-group__auth_registration">
+<form class="form-group form-group__auth_registration">
 
-    <div class="mat-title">Registration</div>
+    <div class="mat-title mat-title__auth">Registration</div>
 
     <mat-form-field class="form-group__registration_username" color="accent" appearance="outline">
         <mat-label>Username</mat-label>
-        <input matInput type="text" placeholder="Username" required>
+        <input type="text" matInput [formControl]="usernameFormControl" placeholder="Username">
+        <mat-error *ngIf="usernameFormControl.invalid">
+            Username must be between 5 and 12 characters
+        </mat-error>
+        <mat-error *ngIf="usernameFormControl.hasError('required')">
+            Please enter username
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group__registration_email" color="accent" appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Email" required>
+        <input type="email" matInput [formControl]="emailFormControl" placeholder="Email">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group__registration_password" color="accent" appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Password" required>
+        <input type="password" matInput [formControl]="passwordFormControl" placeholder="Password">
+        <mat-error *ngIf="passwordFormControl.invalid">
+            Password must be between 6 and 16 characters
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field class="form-group__registration_password" color="accent" appearance="outline">
-        <mat-label>Repeat password</mat-label>
-        <input matInput type="password" placeholder="Repeat password" required>
+        <mat-label>Confirm password</mat-label>
+        <input type="password" matInput [formControl]="confirmPasswordFormControl" placeholder="Confirm password">
+        <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
+            Please enter confirm password
+        </mat-error>
     </mat-form-field>
 
     <button mat-raised-button color="accent">Registration</button>

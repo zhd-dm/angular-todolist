@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -6,15 +6,12 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  // passwordFormControl = new FormControl('', [Validators.required, Validators.max]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(16)]);
 
-  email = new FormControl('');
-  password = new FormControl('');
-
-  checkLogIn() {
+  ngOnInit(): void {
 
   }
 
