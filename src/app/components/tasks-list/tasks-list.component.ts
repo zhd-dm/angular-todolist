@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteTaskComponent } from '../delete-task/delete-task.component';
+import { EditTaskComponent } from '../edit-task/edit-task.component';
 
 export interface Task {
   name: string;
@@ -93,11 +94,13 @@ export interface Task {
 export class TasksListComponent implements OnInit {
   tasks = DATA;
 
-  constructor(private dialogRef: MatDialog) {
+  constructor(public dialogRef: MatDialog) {}
 
+  openModalEdit() {
+    this.dialogRef.open(EditTaskComponent)
   }
 
-  openModal() {
+  openModalDelete() {
     this.dialogRef.open(DeleteTaskComponent)
   }
 

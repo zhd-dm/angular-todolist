@@ -19,12 +19,12 @@
             <td>{{task.priority}}</td>
             <td>{{task.category}}</td>
             <td>
-                <button mat-icon-button color="primary" aria-label="Edit task">
+                <button mat-icon-button color="primary" aria-label="Edit task" (click)="openModalEdit()">
                   <mat-icon>edit icon</mat-icon>
                 </button>
             </td>
             <td>
-                <button mat-icon-button color="warn" aria-label="Delete task" (click)="openModal()">
+                <button mat-icon-button color="warn" aria-label="Delete task" (click)="openModalDelete()">
                   <mat-icon>delete icon</mat-icon>
                 </button>
             </td>

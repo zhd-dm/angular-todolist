@@ -1,7 +1,7 @@
 <div class="modal__edit-task">
     <div class="mat-title">Edit your task</div>
 
-    <mat-form-field class="form-group__modal__edit-task_task-name" color="primary" appearance="outline">
+    <!-- <mat-form-field class="form-group__modal__edit-task_task-name" color="primary" appearance="outline">
         <mat-label>Task name:</mat-label>
         <input matInput type="text" matInput placeholder="Create app">
     </mat-form-field>
@@ -19,7 +19,7 @@
     <mat-form-field class="form-group__modal__edit-task_category" color="primary" appearance="outline">
         <mat-label>Category:</mat-label>
         <input matInput type="text" placeholder="Main">
-    </mat-form-field>
+    </mat-form-field> -->
 
-    <button mat-raised-button color="accent">Save</button>
+    <button mat-raised-button color="accent" (click)="updateTask()">Save</button>
 </div>
