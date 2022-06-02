@@ -1,5 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-
+@import "./variables.scss";
 * {
     box-sizing: border-box;
 }
@@ -7,6 +6,7 @@
 html,
 body {
     height: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -21,7 +21,7 @@ body {
     min-height: 300px;
     border-radius: 30px;
     border: 2px solid #10f72f;
-    background-color: rgb(193, 34, 214);
+    background-color: $primary;
     margin: 0 auto;
     padding: 20px;
 }
