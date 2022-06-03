@@ -18,11 +18,6 @@ export class EditTaskComponent implements OnInit {
     taskPriorityFormControl: new FormControl('')
   })
 
-  // taskNameFormControl = new FormControl('', [Validators.required, Validators.minLength(5)]);
-  // taskDeadlineFormControl = new FormControl('', [Validators.required]);
-  // taskCategoryFormControl = new FormControl('');
-  // taskPriorityFormControl = new FormControl('');
-
   constructor(
     public dialogRef: MatDialogRef<EditTaskComponent>
     ) { }
@@ -31,7 +26,6 @@ export class EditTaskComponent implements OnInit {
   }
 
   updateTask(): void {
-    console.log(this.taskForm.value);
     // const updatedTask: Task = {
       // name: this.taskNameFormControl.value,
       // deadline: this.taskDeadlineFormControl.value,
