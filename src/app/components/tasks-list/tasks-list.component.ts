@@ -17,7 +17,7 @@ import { DATA } from '../../../data';
 })
 export class TasksListComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['position', 'name', 'deadline', 'priority', 'category', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'deadline', 'priority', 'category', 'edit', 'delete'];
   tasks = new MatTableDataSource(DATA);
 
   constructor(

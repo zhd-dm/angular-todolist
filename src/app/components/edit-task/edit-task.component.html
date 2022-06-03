@@ -3,11 +3,11 @@
 
     <mat-form-field class="form-group__modal__edit-task_task-name" color="accent" appearance="outline">
         <mat-label>Task name:</mat-label>
-        <input type="text" matInput formControlName="taskNameFormControl" matInput placeholder="Update app">
-        <!-- <mat-error *ngIf="taskNameFormControl.hasError('required')">
+        <input type="text" matInput formControlName="taskNameFormControl" placeholder="Update app">
+        <!-- <mat-error *ngIf="taskForm.get('taskNameFormControl').hasError('required')">
             Please enter a task name
         </mat-error>
-        <mat-error *ngIf="taskNameFormControl.invalid">
+        <mat-error *ngIf="taskForm.get('taskNameFormControl').invalid">
             Task name must be more than 5 characters
         </mat-error> -->
     </mat-form-field>
@@ -24,11 +24,11 @@
 
     <mat-form-field class="form-group__modal__edit-task_category" color="accent" appearance="outline">
         <mat-label>Category:</mat-label>
-        <input type="text" matInput placeholder="Main">
+        <input type="text" matInput formControlName="taskCategoryFormControl" placeholder="Main">
     </mat-form-field>
 
     <section class="form-group__modal__edit-task_priority">
-        <mat-checkbox class="example-margin">Priority?</mat-checkbox>
+        <mat-checkbox formControlName="taskPriorityFormControl" class="example-margin">Priority?</mat-checkbox>
     </section>
 
     <button type="submit" [disabled]="!taskForm.valid" mat-raised-button color="accent">Create</button>

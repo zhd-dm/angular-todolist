@@ -31,6 +31,7 @@ export class EditTaskComponent implements OnInit {
   }
 
   updateTask(): void {
+    console.log(this.taskForm.value);
     // const updatedTask: Task = {
       // name: this.taskNameFormControl.value,
       // deadline: this.taskDeadlineFormControl.value,
@@ -39,7 +40,7 @@ export class EditTaskComponent implements OnInit {
     // }
     // console.log(updatedTask)
     // console.log(taskForm.valid)
-    console.log(this.taskForm)
+    console.log(this.taskForm.value)
     this.dialogRef.close();
   }
 
