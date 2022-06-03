@@ -7,6 +7,6 @@ export interface User {
 export interface Task {
   name: string;
   deadline: number;
-  priority: boolean;
+  priority?: boolean;
   category?: string;
 }

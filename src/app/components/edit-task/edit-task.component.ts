@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { Task } from 'src/types';
 
 @Component({
   selector: 'app-edit-task',
@@ -9,8 +11,17 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class EditTaskComponent implements OnInit {
 
-  taskNameFormControl = new FormControl('', [Validators.required, Validators.minLength(5)]);
-  taskDeadlineFormControl = new FormControl('', [Validators.required]);
+  taskForm = new FormGroup ({
+    taskNameFormControl: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    taskDeadlineFormControl: new FormControl('', [Validators.required]),
+    taskCategoryFormControl: new FormControl(''),
+    taskPriorityFormControl: new FormControl('')
+  })
+
+  // taskNameFormControl = new FormControl('', [Validators.required, Validators.minLength(5)]);
+  // taskDeadlineFormControl = new FormControl('', [Validators.required]);
+  // taskCategoryFormControl = new FormControl('');
+  // taskPriorityFormControl = new FormControl('');
 
   constructor(
     public dialogRef: MatDialogRef<EditTaskComponent>
@@ -20,6 +31,15 @@ export class EditTaskComponent implements OnInit {
   }
 
   updateTask(): void {
+    // const updatedTask: Task = {
+      // name: this.taskNameFormControl.value,
+      // deadline: this.taskDeadlineFormControl.value,
+      // category: this.taskCategoryFormControl,
+      // priority: this.taskPriorityFormControl
+    // }
+    // console.log(updatedTask)
+    // console.log(taskForm.valid)
+    console.log(this.taskForm)
     this.dialogRef.close();
   }
 
