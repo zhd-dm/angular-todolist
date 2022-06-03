@@ -8,7 +8,7 @@ import { User } from "src/types";
 export class AuthService {
 
 
-  registration(user: User): any {
+  saveUser(user: User): any {
     let users = [];
     let storage = localStorage.getItem('Users');
     users.push(JSON.stringify(storage));
@@ -28,7 +28,7 @@ export class AuthService {
 
   }
 
-  logIn(user: User) {
+  checkUser(user: User) {
 
   }
 }

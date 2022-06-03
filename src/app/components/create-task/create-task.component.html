@@ -3,12 +3,14 @@
 
     <mat-form-field class="form-group__modal__create-task_task-name" color="accent" appearance="outline">
         <mat-label>Task name:</mat-label>
-        <input type="text" matInput formControlName="taskNameFormControl" placeholder="Create app" required>
+        <input type="text" matInput formControlName="taskNameFormControl" placeholder="Create app">
     </mat-form-field>
 
     <mat-form-field class="form-group__modal__create-task_deadline" color="accent" appearance="outline">
         <mat-label>Deadline:</mat-label>
-        <input type="text" matInput formControlName="taskDeadlineFormControl" placeholder="17.01.2000" required>
+        <input type="text" matInput formControlName="taskDeadlineFormControl" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="form-group__modal__create-task_category" color="accent" appearance="outline">
@@ -20,5 +22,5 @@
         <mat-checkbox formControlName="taskPriorityFormControl" class="example-margin">Priority?</mat-checkbox>
     </section>
 
-    <button mat-raised-button color="accent" (click)="createTask()">Create</button>
+    <button type="submit" [disabled]="!createTaskForm.valid" mat-raised-button color="accent" (click)="createTask()">Create</button>
 </form>

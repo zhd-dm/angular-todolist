@@ -9,15 +9,15 @@ export class TaskService {
 
   constructor() { }
 
-  getTasks() {
+  getTasks(tasks: Task[]) {
 
   }
 
-  updateTask() {
+  updateTask(task: Task) {
 
   }
 
-  createTask() {
-
+  saveTask(newTask: Task) {
+    console.log(newTask);
   }
 }

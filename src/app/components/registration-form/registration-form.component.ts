@@ -36,7 +36,7 @@ export class RegistrationFormComponent implements OnInit {
     this.user.password = this.registrationForm.value.passwordFormControl;
     this.user.confirmPassword = this.registrationForm.value.confirmPasswordFormControl;
 
-    this.auth.registration(this.user)
+    this.auth.saveUser(this.user)
       // .subscribe({
 
       // })

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TaskService } from 'src/app/services/task.service';
+import { Task } from 'src/types';
 
 @Component({
   selector: 'app-create-task',
@@ -16,15 +18,31 @@ export class CreateTaskComponent implements OnInit {
     taskPriorityFormControl: new FormControl('')
   })
 
+  newTask: Task = {
+    name: "",
+    deadline: 0,
+    priority: false,
+    category: ""
+  }
+
 
   constructor(
-    public dialogRef: MatDialogRef<CreateTaskComponent>
+    public dialogRef: MatDialogRef<CreateTaskComponent>,
+    private task: TaskService
   ) { }
 
   ngOnInit(): void {
   }
 
-  createTask(): void {
+  createTask() {
+    this.newTask.name = this.createTaskForm.value.taskNameFormControl;
+    this.newTask.deadline = this.createTaskForm.value.taskDeadlineFormControl;
+    this.newTask.category = this.createTaskForm.value.taskCategoryFormControl;
+    this.newTask.priority = this.createTaskForm.value.taskPriorityFormControl;
+
+    this.task.saveTask(this.newTask)
+    // tasks.push(this.task)
+
     this.dialogRef.close();
   }
 }

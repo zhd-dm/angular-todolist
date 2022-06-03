@@ -16,6 +16,8 @@ export class DeleteTaskComponent implements OnInit {
   }
 
   deleteTask(): void {
+
+
     this.dialogRef.close();
   }
 

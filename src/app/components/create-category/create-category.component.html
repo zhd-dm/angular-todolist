@@ -1,10 +1,10 @@
-<div class="form-group form-group__modal form-group__modal__create-category">
+<form [formGroup]="createCategoryForm" class="form-group form-group__modal form-group__modal__create-category">
     <div class="mat-title">Create new category</div>
 
     <mat-form-field class="form-group__modal__create-category_category-name" color="accent" appearance="outline">
         <mat-label>Category name:</mat-label>
-        <input matInput type="text" matInput placeholder="Create app" required>
+        <input type="text" matInput formControlName="categoryNameFormControl" placeholder="Create app" required>
     </mat-form-field>
 
-    <button mat-raised-button color="accent" (click)="createCategory()">Create</button>
-</div>
+    <button type="submit" [disabled]="!createCategoryForm.valid" mat-raised-button color="accent" (click)="createCategory()">Create</button>
+</form>
