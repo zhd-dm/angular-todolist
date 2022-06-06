@@ -9,6 +9,7 @@ import { DeleteTaskComponent } from '../delete-task/delete-task.component';
 import { EditTaskComponent } from '../edit-task/edit-task.component';
 
 import { DATA } from '../../../data';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-tasks-list',
@@ -22,7 +23,8 @@ export class TasksListComponent implements AfterViewInit {
 
   constructor(
     public dialogRef: MatDialog,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private tasker: TaskService
   ) {}
 
   @ViewChild(MatSort) sort: MatSort = new MatSort;

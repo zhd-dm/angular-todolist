@@ -33,7 +33,7 @@ export class RegistrationFormComponent implements OnInit {
     this.user.email = this.registrationForm.value.emailFormControl;
     this.user.password = this.registrationForm.value.passwordFormControl;
 
-    this.auth.checkUser(this.user);
+    this.auth.saveUser(this.user);
   }
 
 

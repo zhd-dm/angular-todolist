@@ -1,4 +1,3 @@
-import { IfStmt } from "@angular/compiler";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { IUser } from "src/types";
@@ -14,7 +13,7 @@ export class AuthService {
 
     let users: IUser[] = [];
 
-    let storage;
+    let storage: IUser[];
 
     if(!localStorage.getItem('Users')) {
       users.push(user);
@@ -26,11 +25,20 @@ export class AuthService {
       }
       users.push(user);
       localStorage.setItem('Users', JSON.stringify(users));
-      console.log(users)
+      console.log(users);
     }
   }
 
   checkUser(user: IUser) {
+    let storage: IUser[];
 
+    if(!localStorage.getItem('Users')) {
+      storage = JSON.parse(localStorage.getItem('Users') || 'Empty users store')
+      for (let i = 0; i < storage.length; i++) {
+        if(storage[i].email == user.email && storage[i].password == user.password) {
+          return localStorage.setItem('isLoggedIn', 'true');
+        }
+      }
+    }
   }
 }

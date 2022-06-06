@@ -19,6 +19,11 @@ export class LoginFormComponent implements OnInit {
 
   logIn() {
     console.log(this.loginForm.value)
+
+
+
+
+    return localStorage.setItem('isLoggedIn', 'true');
   }
 
 }
