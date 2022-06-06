@@ -9,13 +9,10 @@ export class TaskService {
 
   constructor() { }
 
-  getTasks() {
+  getAllTasks() {
     let storage: ITask[] = [];
-    if(localStorage.getItem('Tasks')) {
-      return storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
-    } else {
-      return console.log('Empty tasks storage')
-    }
+    storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
+    return storage;
   }
 
   updateTask(task: ITask) {
@@ -37,8 +34,14 @@ export class TaskService {
     let tasks: ITask[] = [];
     let storage: ITask[] = [];
     storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
-    tasks.push(newTask);
-    localStorage.setItem('Tasks', JSON.stringify(tasks));
-    // console.log();
+    storage.push(newTask);
+    localStorage.setItem('Tasks', JSON.stringify(storage));
+  }
+
+  incrementId() {
+    let storage: ITask[] = [];
+      storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
+      let id = storage.length + 1;
+      return id;
   }
 }

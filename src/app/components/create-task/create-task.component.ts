@@ -18,18 +18,21 @@ export class CreateTaskComponent implements OnInit {
     taskPriorityFormControl: new FormControl('')
   })
 
-  newTask: ITask = {
-    name: "",
-    deadline: 0,
-    priority: false,
-    category: ""
-  }
+
 
 
   constructor(
     public dialogRef: MatDialogRef<CreateTaskComponent>,
     private task: TaskService
   ) { }
+
+  newTask: ITask = {
+    id: this.task.incrementId(),
+    name: "",
+    deadline: 0,
+    priority: false,
+    category: ""
+  }
 
   ngOnInit(): void {
   }

@@ -10,6 +10,7 @@ import { EditTaskComponent } from '../edit-task/edit-task.component';
 
 import { DATA } from '../../../data';
 import { TaskService } from 'src/app/services/task.service';
+import { ITask } from 'src/types';
 
 @Component({
   selector: 'app-tasks-list',
@@ -18,14 +19,21 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TasksListComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['name', 'deadline', 'priority', 'category', 'edit', 'delete'];
-  tasks = new MatTableDataSource(DATA);
+  // displayedColumns: string[] = ['name', 'deadline', 'priority', 'category', 'edit', 'delete'];
+  // tasks = new MatTableDataSource(DATA);
 
   constructor(
     public dialogRef: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
     private tasker: TaskService
   ) {}
+
+  displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'edit', 'delete'];
+  tasks = new MatTableDataSource(this.tasker.getAllTasks());
+
+  ngOnInit(): void {
+  }
+
 
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
