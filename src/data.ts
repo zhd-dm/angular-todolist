@@ -1,6 +1,6 @@
-import { Task } from "./types"
+import { ITask } from "./types"
 
-export const DATA: Task[] = [
+export const DATA: ITask[] = [
   {
     name: "Create App",
     deadline: 121313,

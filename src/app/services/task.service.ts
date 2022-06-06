@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Task } from 'src/types';
+import { ITask } from 'src/types';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +9,15 @@ export class TaskService {
 
   constructor() { }
 
-  getTasks(tasks: Task[]) {
+  getTasks(tasks: ITask[]) {
+    tasks = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks list');
+  }
+
+  updateTask(task: ITask) {
 
   }
 
-  updateTask(task: Task) {
-
-  }
-
-  saveTask(newTask: Task) {
+  saveTask(newTask: ITask) {
     console.log(newTask);
   }
 }

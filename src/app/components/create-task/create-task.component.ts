@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TaskService } from 'src/app/services/task.service';
-import { Task } from 'src/types';
+import { ITask } from 'src/types';
 
 @Component({
   selector: 'app-create-task',
@@ -18,7 +18,7 @@ export class CreateTaskComponent implements OnInit {
     taskPriorityFormControl: new FormControl('')
   })
 
-  newTask: Task = {
+  newTask: ITask = {
     name: "",
     deadline: 0,
     priority: false,

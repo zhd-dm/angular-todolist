@@ -1,6 +1,7 @@
+import { IfStmt } from "@angular/compiler";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { User } from "src/types";
+import { IUser } from "src/types";
 
 @Injectable({
   providedIn: 'root'
@@ -8,27 +9,28 @@ import { User } from "src/types";
 export class AuthService {
 
 
-  saveUser(user: User): any {
-    let users = [];
-    let storage = localStorage.getItem('Users');
-    users.push(JSON.stringify(storage));
+  saveUser(user: IUser): any {
 
-    console.log('Storage ', storage);
-    console.log('Users ', users);
 
-    if(users.length > 0) {
+    let users: IUser[] = [];
+
+    let storage;
+
+    if(!localStorage.getItem('Users')) {
       users.push(user);
       localStorage.setItem('Users', JSON.stringify(users));
-      console.log('New User ', user);
+    } else {
+      storage = JSON.parse(localStorage.getItem('Users') || 'Empty users store');
+      for(let i = 0; i < storage.length; i++) {
+        users.push(storage[i]);
+      }
+      users.push(user);
+      localStorage.setItem('Users', JSON.stringify(users));
+      console.log(users)
     }
-    // return (
-    //   // localStorage.setItem('Users', JSON.stringify(user))
-    //   console.log(localStorage.getItem('Users'))
-    // )
-
   }
 
-  checkUser(user: User) {
+  checkUser(user: IUser) {
 
   }
 }

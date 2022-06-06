@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Task } from 'src/types';
+import { ITask } from 'src/types';
 
 @Component({
   selector: 'app-edit-task',
@@ -26,7 +26,7 @@ export class EditTaskComponent implements OnInit {
   }
 
   updateTask(): void {
-    // const updatedTask: Task = {
+    // const updatedTask: ITask = {
       // name: this.taskNameFormControl.value,
       // deadline: this.taskDeadlineFormControl.value,
       // category: this.taskCategoryFormControl,

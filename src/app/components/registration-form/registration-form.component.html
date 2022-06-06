@@ -35,13 +35,5 @@
         </mat-error> -->
     </mat-form-field>
 
-    <mat-form-field class="form-group__registration_password" color="accent" appearance="outline">
-        <mat-label>Confirm password</mat-label>
-        <input type="password" matInput formControlName="confirmPasswordFormControl" placeholder="Confirm password">
-        <!-- <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
-            Please enter confirm password
-        </mat-error> -->
-    </mat-form-field>
-
     <button type="submit" [disabled]="!registrationForm.valid" mat-raised-button color="accent">Registration</button>
 </form>

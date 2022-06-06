@@ -1,11 +1,10 @@
-export interface User {
+export interface IUser {
   name: string;
   email: string;
   password: string;
-  confirmPassword?: string;
 }
 
-export interface Task {
+export interface ITask {
   name: string;
   deadline: number;
   priority?: boolean;
