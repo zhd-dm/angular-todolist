@@ -18,16 +18,13 @@ export class CreateTaskComponent implements OnInit {
     taskPriorityFormControl: new FormControl('')
   })
 
-
-
-
   constructor(
     public dialogRef: MatDialogRef<CreateTaskComponent>,
     private task: TaskService
   ) { }
 
   newTask: ITask = {
-    id: this.task.incrementId(),
+    id: this.task.setId(),
     name: "",
     deadline: 0,
     priority: false,
@@ -44,8 +41,6 @@ export class CreateTaskComponent implements OnInit {
     this.newTask.priority = this.createTaskForm.value.taskPriorityFormControl;
 
     this.task.saveTask(this.newTask)
-    // tasks.push(this.task)
-
     this.dialogRef.close();
   }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ITask } from 'src/types';
@@ -19,10 +19,18 @@ export class EditTaskComponent implements OnInit {
   })
 
   constructor(
-    public dialogRef: MatDialogRef<EditTaskComponent>
+    public dialogRef: MatDialogRef<EditTaskComponent>,
+    @Inject(MAT_DIALOG_DATA) public editTask: any
     ) { }
 
   ngOnInit(): void {
+    console.log(this.editTask);
+    if(this.editTask) {
+      this.taskForm.controls['taskNameFormControl'].setValue(this.editTask.name);
+      this.taskForm.controls['taskDeadlineFormControl'].setValue(this.editTask.deadline);
+      this.taskForm.controls['taskCategoryFormControl'].setValue(this.editTask.category);
+      this.taskForm.controls['taskPriorityFormControl'].setValue(this.editTask.priority);
+    }
   }
 
   updateTask(): void {

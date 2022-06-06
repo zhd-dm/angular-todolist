@@ -38,10 +38,8 @@ export class TaskService {
     localStorage.setItem('Tasks', JSON.stringify(storage));
   }
 
-  incrementId() {
-    let storage: ITask[] = [];
-      storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
-      let id = storage.length + 1;
-      return id;
+  setId() {
+    let id: number = Date.now();
+    return id;
   }
 }

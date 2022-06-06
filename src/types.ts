@@ -5,7 +5,7 @@ export interface IUser {
 }
 
 export interface ITask {
-  id: number;
+  id: Date | number;
   name: string;
   deadline: number;
   priority?: boolean;
