@@ -35,7 +35,18 @@ export class TaskService {
     let storage: ITask[] = [];
     storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
     storage.push(newTask);
-    localStorage.setItem('Tasks', JSON.stringify(storage));
+    return localStorage.setItem('Tasks', JSON.stringify(storage));
+  }
+
+  deleteTask(task: ITask) {
+    let storage: ITask[] = [];
+    storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
+    for(let i = 0; i < storage.length; i++) {
+      if(task.id == storage[i].id) {
+        storage.splice(i, 1);
+      }
+    }
+    return localStorage.setItem('Tasks', JSON.stringify(storage));
   }
 
   setId() {

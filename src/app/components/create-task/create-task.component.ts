@@ -20,11 +20,11 @@ export class CreateTaskComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CreateTaskComponent>,
-    private task: TaskService
+    private tasker: TaskService
   ) { }
 
   newTask: ITask = {
-    id: this.task.setId(),
+    id: this.tasker.setId(),
     name: "",
     deadline: 0,
     priority: false,
@@ -40,7 +40,7 @@ export class CreateTaskComponent implements OnInit {
     this.newTask.category = this.createTaskForm.value.taskCategoryFormControl;
     this.newTask.priority = this.createTaskForm.value.taskPriorityFormControl;
 
-    this.task.saveTask(this.newTask)
+    this.tasker.saveTask(this.newTask)
     this.dialogRef.close();
   }
 }

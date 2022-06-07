@@ -1,4 +1,4 @@
-<form [formGroup]="createTaskForm" class="form-group form-group__modal form-group__modal__create-task">
+<form [formGroup]="createTaskForm" (ngSubmit)="createTask()" class="form-group form-group__modal form-group__modal__create-task">
     <div class="mat-title">Create new task</div>
 
     <mat-form-field class="form-group__modal__create-task_task-name" color="accent" appearance="outline">
@@ -22,5 +22,5 @@
         <mat-checkbox formControlName="taskPriorityFormControl" class="example-margin">Priority?</mat-checkbox>
     </section>
 
-    <button type="submit" [disabled]="!createTaskForm.valid" mat-raised-button color="accent" (click)="createTask()">Create</button>
+    <button type="submit" [disabled]="!createTaskForm.valid" mat-raised-button color="accent">Create</button>
 </form>

@@ -19,9 +19,6 @@ import { ITask } from 'src/types';
 })
 export class TasksListComponent implements AfterViewInit {
 
-  // displayedColumns: string[] = ['name', 'deadline', 'priority', 'category', 'edit', 'delete'];
-  // tasks = new MatTableDataSource(DATA);
-
   constructor(
     public dialogRef: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
@@ -57,7 +54,9 @@ export class TasksListComponent implements AfterViewInit {
     });
   }
 
-  openModalDelete() {
-    this.dialogRef.open(DeleteTaskComponent)
+  openModalDelete(row: any) {
+    this.dialogRef.open(DeleteTaskComponent, {
+      data: row
+    });
   }
 }

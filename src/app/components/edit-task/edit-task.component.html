@@ -1,9 +1,13 @@
 <form [formGroup]="taskForm" (ngSubmit)="updateTask()" class="form-group form-group__modal form-group__modal__edit-task">
     <div class="mat-title">Edit task</div>
+    <!--
+      ИСПРАВИТЬ
+    -->
+    <input matInput formControlName="taskIdFormControl" style="visibility: hidden;">
 
     <mat-form-field class="form-group__modal__edit-task_task-name" color="accent" appearance="outline">
         <mat-label>Task name:</mat-label>
-        <input type="text" matInput formControlName="taskNameFormControl" placeholder="Create app">
+        <input matInput formControlName="taskNameFormControl" placeholder="Create app">
         <!-- <mat-error *ngIf="taskForm.get('taskNameFormControl').hasError('required')">
             Please enter a task name
         </mat-error>
@@ -24,7 +28,7 @@
 
     <mat-form-field class="form-group__modal__edit-task_category" color="accent" appearance="outline">
         <mat-label>Category:</mat-label>
-        <input type="text" matInput formControlName="taskCategoryFormControl" placeholder="Main">
+        <input matInput formControlName="taskCategoryFormControl" placeholder="Main">
     </mat-form-field>
 
     <section class="form-group__modal__edit-task_priority">
