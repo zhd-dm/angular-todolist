@@ -18,6 +18,7 @@ export class AuthService {
         return console.error('Email busy');
       }
     }
+    user.email = user.email.toLowerCase();
     storage.push(user);
     localStorage.setItem('loggedIn', 'true');
     return localStorage.setItem('Users', JSON.stringify(storage));
@@ -27,7 +28,7 @@ export class AuthService {
     let storage: IUser[] = [];
     storage = JSON.parse(localStorage.getItem('Users') || 'Empty users store');
     for(let i = 0; i < storage.length; i++) {
-      if(user.email == storage[i].email && user.password == storage[i].password) {
+      if(user.email.toLowerCase() == storage[i].email && user.password == storage[i].password) {
         console.log('Login success');
         return localStorage.setItem('loggedIn', 'true');
       }

@@ -1,0 +1,14 @@
+<form [formGroup]="updateCategoryForm" (ngSubmit)="updateCategory()" class="form-group form-group__modal form-group__modal__create-category">
+    <div class="mat-title">Categories</div>
+    <div class="container" *ngFor="let category of categories">
+        <mat-form-field class="form-group__modal__categories-list" color="accent" appearance="outline">
+            <mat-label>{{category.name}}</mat-label>
+            <input type="text" value={{category.name}} matInput formControlName="categoryNameFormControl">
+            <!--
+          ИСПРАВИТЬ
+        -->
+            <input matInput formControlName="categoryIdFormControl" style="visibility: hidden;">
+        </mat-form-field>
+    </div>
+    <button type="submit" mat-raised-button color="accent">Update category name</button>
+</form>
