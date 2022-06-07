@@ -28,7 +28,10 @@
 
     <mat-form-field class="form-group__modal__edit-task_category" color="accent" appearance="outline">
         <mat-label>Category:</mat-label>
-        <input matInput formControlName="taskCategoryFormControl" placeholder="Main">
+        <!-- <input matInput formControlName="taskCategoryFormControl" placeholder="Main"> -->
+        <mat-select formControlName="taskCategoryFormControl">
+            <mat-option *ngFor="let category of categories" value={{category.id}}>{{category.name}}</mat-option>
+        </mat-select>
     </mat-form-field>
 
     <section class="form-group__modal__edit-task_priority">

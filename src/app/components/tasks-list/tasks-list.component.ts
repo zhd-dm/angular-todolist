@@ -3,7 +3,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 import { DeleteTaskComponent } from '../delete-task/delete-task.component';
 import { EditTaskComponent } from '../edit-task/edit-task.component';
@@ -27,13 +27,12 @@ export class TasksListComponent implements AfterViewInit {
   ) {}
 
   displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
-  tasks = new MatTableDataSource(this.tasker.getAllTasks());
+  tasks = new MatTableDataSource(this.tasker.getTasks());
 
   ngOnInit(): void {
-    // console.log(this.updateTask);
   }
 
-
+  @ViewChild(MatTable) private tasksTable: MatTable<ITask> | undefined
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
   ngAfterViewInit() {
@@ -49,16 +48,11 @@ export class TasksListComponent implements AfterViewInit {
   }
 
   openModalEdit(row: any) {
-    const modalEdit = this.dialogRef.open(EditTaskComponent, {
-      data: row
+    let modalEdit = this.dialogRef.open(EditTaskComponent, {data: row})
+    modalEdit.afterClosed().subscribe(editedTask => {
+      this.tasker.getTasks();
+      this.tasksTable?.renderRows();
     });
-
-
-    // modalEdit.afterClosed().subscribe(result => {
-    //   if(result) {
-    //     this.tasker.getAllTasks()
-    //   }
-    // });
   }
 
   openModalDelete(row: any) {

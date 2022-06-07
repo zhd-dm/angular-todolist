@@ -12,3 +12,8 @@ export interface ITask {
   priority?: boolean;
   category?: string;
 }
+
+export interface ICategory {
+  id: number;
+  name: string;
+}

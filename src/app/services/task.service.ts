@@ -9,7 +9,7 @@ export class TaskService {
 
   constructor() { }
 
-  getAllTasks() {
+  getTasks() {
     let storage: ITask[] = [];
     storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
     return storage;

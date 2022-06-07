@@ -2,8 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ITask } from 'src/types';
+import { ICategory, ITask } from 'src/types';
 import { TaskService } from 'src/app/services/task.service';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-edit-task',
@@ -23,7 +24,8 @@ export class EditTaskComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public editedTaskData: any,
-    private tasker: TaskService
+    private tasker: TaskService,
+    private categoer: CategoryService
     ) { }
 
   editedTask: ITask = {
@@ -32,7 +34,11 @@ export class EditTaskComponent implements OnInit {
     deadline: 0
   }
 
+  categories: ICategory[] = [];
+
   ngOnInit(): void {
+    this.categories = this.categoer.getCategories();
+
     if(this.editedTaskData) {
       this.taskForm.controls['taskIdFormControl'].setValue(this.editedTaskData.id);
       this.taskForm.controls['taskNameFormControl'].setValue(this.editedTaskData.name);
@@ -52,7 +58,7 @@ export class EditTaskComponent implements OnInit {
     console.log('Send to save: ', this.editedTask);
 
     this.tasker.updateTask(this.editedTask);
-    this.dialogRef.close();
+    this.dialogRef.close(this.editedTask);
   }
 
 }

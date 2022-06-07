@@ -38,7 +38,7 @@ export class CreateTaskComponent implements OnInit {
     this.newTask.category = this.createTaskForm.value.taskCategoryFormControl;
     this.newTask.priority = this.createTaskForm.value.taskPriorityFormControl || false;
 
-    this.tasker.saveTask(this.newTask)
+    this.tasker.saveTask(this.newTask);
     this.dialogRef.close();
   }
 }
