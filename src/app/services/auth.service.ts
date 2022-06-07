@@ -7,24 +7,20 @@ import { IUser } from "src/types";
 })
 export class AuthService {
 
-
-  saveUser(user: IUser): any {
-    let users: IUser[] = [];
-
+  saveUser(user: IUser) {
     let storage: IUser[];
-
     if(!localStorage.getItem('Users')) {
-      users.push(user);
-      localStorage.setItem('Users', JSON.stringify(users));
-    } else {
-      storage = JSON.parse(localStorage.getItem('Users') || 'Empty users store');
-      for(let i = 0; i < storage.length; i++) {
-        users.push(storage[i]);
-      }
-      users.push(user);
-      localStorage.setItem('Users', JSON.stringify(users));
-      console.log(users);
+      localStorage.setItem('Users', JSON.stringify([]))
     }
+    storage = JSON.parse(localStorage.getItem('Users') || 'Empty users store');
+    for(let i = 0; i < storage.length; i++) {
+      if(user.email == storage[i].email) {
+        return console.error('Email busy');
+      }
+    }
+    storage.push(user);
+    localStorage.setItem('loggedIn', 'true');
+    return localStorage.setItem('Users', JSON.stringify(storage));
   }
 
   checkUser(user: IUser) {
@@ -36,15 +32,10 @@ export class AuthService {
         return localStorage.setItem('loggedIn', 'true');
       }
     }
-    return console.log('User not found!');
+    return console.error('User not found!');
   }
 
   setId() {
-    let id: number = Date.now();
-    return id;
-  }
-
-  getId() {
     let id: number = Date.now();
     return id;
   }

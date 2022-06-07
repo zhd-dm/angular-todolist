@@ -10,6 +10,9 @@ export class TaskService {
   constructor() { }
 
   getTasks() {
+    if(!localStorage.getItem('Tasks')) {
+      localStorage.setItem('Tasks', JSON.stringify([{id: 0, name: 'Test Task', deadline: 0}]))
+    }
     let storage: ITask[] = [];
     storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
     return storage;
@@ -31,6 +34,9 @@ export class TaskService {
 
   saveTask(newTask: ITask) {
     let storage: ITask[] = [];
+    if(!localStorage.getItem('Tasks')) {
+      localStorage.setItem('Categories', JSON.stringify([{id: 0, name: 'Test Task', deadline: 0}]))
+    }
     storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
     storage.push(newTask);
     return localStorage.setItem('Tasks', JSON.stringify(storage));

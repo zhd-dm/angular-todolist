@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { CategoryService } from 'src/app/services/category.service';
 import { TaskService } from 'src/app/services/task.service';
-import { ITask } from 'src/types';
+import { ICategory, ITask } from 'src/types';
 
 @Component({
   selector: 'app-create-task',
@@ -20,7 +21,8 @@ export class CreateTaskComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CreateTaskComponent>,
-    private tasker: TaskService
+    private tasker: TaskService,
+    private categoer: CategoryService
   ) { }
 
   newTask: ITask = {
@@ -29,7 +31,10 @@ export class CreateTaskComponent implements OnInit {
     deadline: 0
   }
 
+  categories: ICategory[] = [];
+
   ngOnInit(): void {
+    this.categories = this.categoer.getCategories();
   }
 
   createTask() {
