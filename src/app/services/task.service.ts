@@ -16,7 +16,6 @@ export class TaskService {
   }
 
   updateTask(task: ITask) {
-    let tasks: ITask[] = [];
     let storage: ITask[] = [];
     storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
     for(let i = 0; i < storage.length; i++) {
@@ -31,18 +30,17 @@ export class TaskService {
   }
 
   saveTask(newTask: ITask) {
-    let tasks: ITask[] = [];
     let storage: ITask[] = [];
     storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
     storage.push(newTask);
     return localStorage.setItem('Tasks', JSON.stringify(storage));
   }
 
-  deleteTask(task: ITask) {
+  deleteTask(id: number) {
     let storage: ITask[] = [];
     storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');
     for(let i = 0; i < storage.length; i++) {
-      if(task.id == storage[i].id) {
+      if(id == storage[i].id) {
         storage.splice(i, 1);
       }
     }
