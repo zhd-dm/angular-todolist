@@ -23,6 +23,7 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { CreateCategoryComponent } from './components/create-category/create-category.component';
 import { ButtonCreateTaskComponent } from './components/UI/button-create-task/button-create-task.component';
 import { ButtonCreateCategoryComponent } from './components/UI/button-create-category/button-create-category.component';
+import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ButtonCreateCategoryComponent } from './components/UI/button-create-cat
     EditTaskComponent,
     CreateCategoryComponent,
     ButtonCreateTaskComponent,
-    ButtonCreateCategoryComponent
+    ButtonCreateCategoryComponent,
+    EditCategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -9,8 +9,6 @@ export class AuthService {
 
 
   saveUser(user: IUser): any {
-
-
     let users: IUser[] = [];
 
     let storage: IUser[];
@@ -30,15 +28,35 @@ export class AuthService {
   }
 
   checkUser(user: IUser) {
-    let storage: IUser[];
-
-    if(!localStorage.getItem('Users')) {
-      storage = JSON.parse(localStorage.getItem('Users') || 'Empty users store')
-      for (let i = 0; i < storage.length; i++) {
-        if(storage[i].email == user.email && storage[i].password == user.password) {
-          return localStorage.setItem('isLoggedIn', 'true');
-        }
+    let storage: IUser[] = [];
+    storage = JSON.parse(localStorage.getItem('Users') || 'Empty users store');
+    for(let i = 0; i < storage.length; i++) {
+      if(user.email == storage[i].email && user.password == storage[i].password) {
+        console.log('Login success');
+        return localStorage.setItem('loggedIn', 'true');
       }
     }
+    return console.log('User not found!');
+  }
+
+  setId() {
+    let id: number = Date.now();
+    return id;
+  }
+
+  getId() {
+    let id: number = Date.now();
+    return id;
+  }
+
+  checkAuth() {
+    if(!localStorage.getItem('loggedIn')) {
+      return localStorage.setItem('loggedIn', 'false')
+    }
+    return localStorage.getItem('loggedIn');
+  }
+
+  exitUser() {
+    return localStorage.setItem('loggedIn', 'false');
   }
 }

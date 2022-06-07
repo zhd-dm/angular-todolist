@@ -48,7 +48,7 @@ export class EditTaskComponent implements OnInit {
     this.editedTask.name = this.taskForm.value.taskNameFormControl;
     this.editedTask.deadline = this.taskForm.value.taskDeadlineFormControl;
     this.editedTask.category = this.taskForm.value.taskCategoryFormControl;
-    this.editedTask.priority = this.taskForm.value.taskPriorityFormControl;
+    this.editedTask.priority = this.taskForm.value.taskPriorityFormControl || false;
     console.log('Send to save: ', this.editedTask);
 
     this.tasker.updateTask(this.editedTask);

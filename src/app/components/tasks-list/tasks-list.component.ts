@@ -26,7 +26,7 @@ export class TasksListComponent implements AfterViewInit {
 
   ) {}
 
-  displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
   tasks = new MatTableDataSource(this.tasker.getAllTasks());
 
   ngOnInit(): void {
@@ -49,9 +49,16 @@ export class TasksListComponent implements AfterViewInit {
   }
 
   openModalEdit(row: any) {
-    this.dialogRef.open(EditTaskComponent, {
+    const modalEdit = this.dialogRef.open(EditTaskComponent, {
       data: row
     });
+
+
+    // modalEdit.afterClosed().subscribe(result => {
+    //   if(result) {
+    //     this.tasker.getAllTasks()
+    //   }
+    // });
   }
 
   openModalDelete(row: any) {

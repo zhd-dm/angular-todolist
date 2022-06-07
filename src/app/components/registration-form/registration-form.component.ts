@@ -17,23 +17,26 @@ export class RegistrationFormComponent implements OnInit {
     passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)])
   });
 
-  user: IUser = {
+  constructor(
+    private logger: AuthService
+  ){}
+
+  userData: IUser = {
+    id: this.logger.setId(),
     name: "",
     email: "",
     password: ""
   }
 
-  constructor(private auth: AuthService){ }
-
   ngOnInit(): void {
   }
 
   registration() {
-    this.user.name = this.registrationForm.value.usernameFormControl;
-    this.user.email = this.registrationForm.value.emailFormControl;
-    this.user.password = this.registrationForm.value.passwordFormControl;
+    this.userData.name = this.registrationForm.value.usernameFormControl;
+    this.userData.email = this.registrationForm.value.emailFormControl;
+    this.userData.password = this.registrationForm.value.passwordFormControl;
 
-    this.auth.saveUser(this.user);
+    this.logger.saveUser(this.userData);
   }
 
 

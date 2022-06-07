@@ -26,9 +26,7 @@ export class CreateTaskComponent implements OnInit {
   newTask: ITask = {
     id: this.tasker.setId(),
     name: "",
-    deadline: 0,
-    priority: false,
-    category: ""
+    deadline: 0
   }
 
   ngOnInit(): void {
@@ -38,7 +36,7 @@ export class CreateTaskComponent implements OnInit {
     this.newTask.name = this.createTaskForm.value.taskNameFormControl;
     this.newTask.deadline = this.createTaskForm.value.taskDeadlineFormControl;
     this.newTask.category = this.createTaskForm.value.taskCategoryFormControl;
-    this.newTask.priority = this.createTaskForm.value.taskPriorityFormControl;
+    this.newTask.priority = this.createTaskForm.value.taskPriorityFormControl || false;
 
     this.tasker.saveTask(this.newTask)
     this.dialogRef.close();
