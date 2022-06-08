@@ -37,13 +37,13 @@ export class CreateTaskComponent implements OnInit {
     this.categories = this.categoer.getCategories();
   }
 
-  createTask() {
+  createTask(): void {
     this.newTask.name = this.createTaskForm.value.taskNameFormControl;
     this.newTask.deadline = this.createTaskForm.value.taskDeadlineFormControl;
     this.newTask.category = this.createTaskForm.value.taskCategoryFormControl;
     this.newTask.priority = this.createTaskForm.value.taskPriorityFormControl || false;
 
-    this.tasker.saveTask(this.newTask);
-    this.dialogRef.close();
+    this.tasker.saveTask(this.newTask); // tasker.saveTask() - функция сервиса сохранения новой таски в localStorage
+    this.dialogRef.close(this.newTask);
   }
 }

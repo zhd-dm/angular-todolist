@@ -49,7 +49,7 @@ export class EditTaskComponent implements OnInit {
     }
   }
 
-  updateTask(): void {
+  public updateTask(): void { // editedTask - объект, в который я записываю данные формы
     this.editedTask.id = this.taskForm.value.taskIdFormControl;
     this.editedTask.name = this.taskForm.value.taskNameFormControl;
     this.editedTask.deadline = this.taskForm.value.taskDeadlineFormControl;
@@ -57,8 +57,8 @@ export class EditTaskComponent implements OnInit {
     this.editedTask.priority = this.taskForm.value.taskPriorityFormControl || false;
     console.log('Send to save: ', this.editedTask);
 
-    this.tasker.updateTask(this.editedTask);
-    this.dialogRef.close(this.editedTask);
+    this.tasker.updateTask(this.editedTask); // updateTask() в localStorage добавит в старый массив новую таску
+    this.dialogRef.close(this.editedTask); // и передаю этот объект в openModalEdit
   }
 
 }

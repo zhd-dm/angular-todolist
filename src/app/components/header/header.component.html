@@ -1,18 +1,40 @@
-<header class="header-wrapper">
-    <a routerLink="/auth/login">
-        <button mat-raised-button color="primary">Login</button>
-    </a>
-    <a routerLink="/auth/registration">
-        <button mat-raised-button color="primary">Registration</button>
-    </a>
-    <a routerLink="/home">
-        <button mat-raised-button color="accent">Task list</button>
-    </a>
+<ng-container *ngIf="isAuth(); else notLogged">
+    <header class="header-wrapper">
+        <a routerLink="/home">
+            <button mat-raised-button color="accent">Task list</button>
+        </a>
+        <app-button-create-task style="margin-right: 10px;"></app-button-create-task>
+        <app-button-create-category style="margin-right: 10px;"></app-button-create-category>
+        <button mat-raised-button color="warn" (click)="exit()">Exit</button>
+    </header>
+</ng-container>
 
-    <app-button-create-task style="margin-right: 10px;"></app-button-create-task>
+<ng-template #notLogged>
+    <header class="header-wrapper">
+        <a routerLink="/auth/login">
+            <button mat-raised-button color="primary">Login</button>
+        </a>
+        <a routerLink="/auth/registration">
+            <button mat-raised-button color="primary">Registration</button>
+        </a>
+    </header>
+</ng-template>
 
-    <app-button-create-category style="margin-right: 10px;"></app-button-create-category>
 
-    <button mat-raised-button color="warn" (click)="exit()">Exit</button>
+<!-- <header class="header-wrapper" [ngIf]="isAuth">
+  <a routerLink="/auth/login">
+      <button mat-raised-button color="primary">Login</button>
+  </a>
+  <a routerLink="/auth/registration">
+      <button mat-raised-button color="primary">Registration</button>
+  </a>
+  <a routerLink="/home">
+      <button mat-raised-button color="accent">Task list</button>
+  </a>
 
-</header>
+  <app-button-create-task style="margin-right: 10px;"></app-button-create-task>
+
+  <app-button-create-category style="margin-right: 10px;"></app-button-create-category>
+
+  <button mat-raised-button color="warn" (click)="exit()">Exit</button>
+</header> -->

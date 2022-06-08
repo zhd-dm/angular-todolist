@@ -45,7 +45,7 @@ export class AuthService {
     if(!localStorage.getItem('loggedIn')) {
       return localStorage.setItem('loggedIn', 'false')
     }
-    return localStorage.getItem('loggedIn');
+    return Boolean(localStorage.getItem('loggedIn'));
   }
 
   exitUser() {
