@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  res: Boolean = <Boolean>this.logger.checkAuth();
+  // res: Boolean = <Boolean>this.logger.checkAuth();
 
   constructor(
     private logger: AuthService
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   isAuth() {
 
     // console.log(this.res)
-    return this.res;
+    // return this.res;
 
   }
 

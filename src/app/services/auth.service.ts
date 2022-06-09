@@ -20,7 +20,7 @@ export class AuthService {
     }
     user.email = user.email.toLowerCase();
     storage.push(user);
-    localStorage.setItem('loggedIn', 'admin@mail');
+    localStorage.setItem('loggedIn', (user.email));
     return localStorage.setItem('Users', JSON.stringify(storage));
   }
 
@@ -33,7 +33,7 @@ export class AuthService {
     for(let i = 0; i < storage.length; i++) {
       if(user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
         console.log('Login success');
-        return localStorage.setItem('loggedIn', 'true');
+        return localStorage.setItem('loggedIn', JSON.stringify(user.email.toLowerCase()));
       }
     }
     return console.error('User not found!');
@@ -44,14 +44,14 @@ export class AuthService {
     return id;
   }
 
-  checkAuth() {
-    if(!localStorage.getItem('loggedIn')) {
-      return localStorage.setItem('loggedIn', 'false')
-    }
-    return Boolean(localStorage.getItem('loggedIn'));
-  }
+  // checkAuth() {
+  //   if(!localStorage.getItem('loggedIn')) {
+  //     return localStorage.setItem('loggedIn', 'false')
+  //   }
+  //   return Boolean(localStorage.getItem('loggedIn'));
+  // }
 
   exitUser() {
-    return localStorage.setItem('loggedIn', 'false');
+    return localStorage.setItem('loggedIn', JSON.stringify(''));
   }
 }

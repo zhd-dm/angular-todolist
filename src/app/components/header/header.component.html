@@ -1,4 +1,4 @@
-<ng-container *ngIf="res">
+<ng-container *ngIf="true">
     <header class="header-wrapper">
         <a routerLink="/home">
             <button mat-raised-button color="accent">Task list</button>
@@ -9,7 +9,7 @@
     </header>
 </ng-container>
 
-<ng-container *ngIf="!isAuth()">
+<ng-container *ngIf="false">
     <header class="header-wrapper">
         <a routerLink="/auth/login">
             <button mat-raised-button color="primary">Login</button>
