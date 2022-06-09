@@ -1,6 +1,5 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectionStrategy, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit, Input, DoCheck } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { BehaviorSubject } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -9,7 +8,6 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DeleteTaskComponent } from '../delete-task/delete-task.component';
 import { EditTaskComponent } from '../edit-task/edit-task.component';
 
-import { DATA } from '../../../data';
 import { TaskService } from 'src/app/services/task.service';
 import { ITask } from 'src/types';
 
@@ -17,9 +15,9 @@ import { ITask } from 'src/types';
   selector: 'app-tasks-list',
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListComponent implements OnInit, AfterViewInit {
+export class TasksListComponent implements OnInit, AfterViewInit, DoCheck {
 
   @Input()
   tasks: ITask[] = [];
@@ -29,12 +27,16 @@ export class TasksListComponent implements OnInit, AfterViewInit {
     public dialogRef: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
     private tasker: TaskService,
-    private changeDetRef: ChangeDetectorRef
+    // private changeDetRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.tasks = this.tasker.getTasks();
     this.table = new MatTableDataSource(this.tasks);
+  }
+
+  ngDoCheck(): void {
+    // this.updateTable()
   }
 
   ngAfterViewInit() {
@@ -57,15 +59,20 @@ export class TasksListComponent implements OnInit, AfterViewInit {
   openModalEdit(row: any) {
     let modalEdit = this.dialogRef.open(EditTaskComponent, { data: row });
     modalEdit.afterClosed().subscribe(editTask => {
-      this.table = this.tasker.getTasks()
-      this.tasksTable?.renderRows()
+      this.updateTable();
     });
   }
 
   openModalDelete(row: any) {
     let modalDelete = this.dialogRef.open(DeleteTaskComponent, { data: row });
     modalDelete.afterClosed().subscribe(allTasks => {
-      this.tasksTable?.renderRows();
+      this.updateTable();
     });
+  }
+
+  updateTable() {
+    this.table = new MatTableDataSource(this.tasker.getTasks());
+    this.table.sort = <MatSort>this.sort;
+    this.tasksTable?.renderRows();
   }
 }

@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
   isAuth() {
 
-    console.log(this.res)
+    // console.log(this.res)
     return this.res;
 
   }
