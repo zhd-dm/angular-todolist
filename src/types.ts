@@ -8,7 +8,7 @@ export interface IUser {
 export interface ITask {
   id: number;
   name: string;
-  deadline: number;
+  deadline: string;
   priority?: boolean;
   category?: string;
   owner: string;

@@ -10,11 +10,11 @@ export class AuthService {
   saveUser(user: IUser) {
     let storage: IUser[];
     if(!localStorage.getItem('Users')) {
-      localStorage.setItem('Users', JSON.stringify([]))
+      localStorage.setItem('Users', JSON.stringify([]));
     }
-    storage = JSON.parse(localStorage.getItem('Users') || 'Empty users store');
+    storage = JSON.parse(localStorage.getItem('Users')!);
     for(let i = 0; i < storage.length; i++) {
-      if(user.email == storage[i].email) {
+      if(user.email === storage[i].email) {
         return console.error('Email busy');
       }
     }
@@ -26,9 +26,12 @@ export class AuthService {
 
   checkUser(user: IUser) {
     let storage: IUser[] = [];
-    storage = JSON.parse(localStorage.getItem('Users') || 'Empty users store');
+    if(!localStorage.getItem('Users')) {
+      localStorage.setItem('Users', JSON.stringify([]));
+    }
+    storage = JSON.parse(localStorage.getItem('Users')!);
     for(let i = 0; i < storage.length; i++) {
-      if(user.email.toLowerCase() == storage[i].email && user.password == storage[i].password) {
+      if(user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
         console.log('Login success');
         return localStorage.setItem('loggedIn', 'true');
       }

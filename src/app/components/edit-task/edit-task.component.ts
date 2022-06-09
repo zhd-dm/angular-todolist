@@ -26,12 +26,12 @@ export class EditTaskComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public editedTaskData: any,
     private tasker: TaskService,
     private categoer: CategoryService
-    ) { }
+    ) {}
 
   editedTask: ITask = {
     id: 0,
     name: '',
-    deadline: 0,
+    deadline: "",
     owner: "admin@mail"
   }
 
@@ -50,7 +50,7 @@ export class EditTaskComponent implements OnInit {
     }
   }
 
-  public updateTask(): void { // editedTask - объект, в который я записываю данные формы
+  public updateTask(): void {
     this.editedTask.id = this.taskForm.value.taskIdFormControl;
     this.editedTask.name = this.taskForm.value.taskNameFormControl;
     this.editedTask.deadline = this.taskForm.value.taskDeadlineFormControl;
@@ -58,8 +58,8 @@ export class EditTaskComponent implements OnInit {
     this.editedTask.priority = this.taskForm.value.taskPriorityFormControl || false;
     console.log('Send to save: ', this.editedTask);
 
-    this.tasker.updateTask(this.editedTask); // updateTask() в localStorage добавит в старый массив новую таску
-    this.dialogRef.close(this.editedTask); // и передаю этот объект в openModalEdit
+    this.tasker.updateTask(this.editedTask);
+    this.dialogRef.close(this.editedTask);
   }
 
 }

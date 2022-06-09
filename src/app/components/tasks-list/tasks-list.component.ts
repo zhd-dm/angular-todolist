@@ -19,7 +19,6 @@ import { ITask } from 'src/types';
 })
 export class TasksListComponent implements OnInit, AfterViewInit, DoCheck {
 
-  @Input()
   tasks: ITask[] = [];
   table: any;                 // ?????
 
@@ -36,7 +35,7 @@ export class TasksListComponent implements OnInit, AfterViewInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    // this.updateTable()
+    // this.updateTable();
   }
 
   ngAfterViewInit() {
@@ -75,4 +74,8 @@ export class TasksListComponent implements OnInit, AfterViewInit, DoCheck {
     this.table.sort = <MatSort>this.sort;
     this.tasksTable?.renderRows();
   }
+
+  // onTaskCreate(event: any) {
+  //   console.log('onTaskCreate', event)
+  // }
 }

@@ -1,190 +1,49 @@
-import { ITask } from "./types"
+import { ICategory, ITask } from "./types";
 
-export const DATA: ITask[] = [
+export const TASKS: ITask[] = [
   {
     id: 1,
     name: "Create App",
-    deadline: 121313,
+    deadline: "2022-06-22T21:00:00.000Z",
     priority: true,
-    category: "main",
+    category: "Test",
     owner: "admin@mail"
   },
   {
     id: 2,
     name: "Have lunch",
-    deadline: 121313,
+    deadline: "2022-06-22T21:00:00.000Z",
     priority: false,
     owner: "admin@mail"
   },
   {
     id: 3,
     name: "Drink water",
-    deadline: 121313,
+    deadline: "2022-06-22T21:00:00.000Z",
     priority: true,
-    category: "food",
-    owner: "admin@mail"
+    category: "Test",
+    owner: "default@mail"
   },
   {
     id: 4,
     name: "Listen music",
-    deadline: 121313,
+    deadline: "2022-06-22T21:00:00.000Z",
     priority: true,
-    owner: "admin@mail"
+    owner: "default@mail"
+  }
+];
+
+export const CATEGORIES: ICategory[] = [
+  {
+    id: 1,
+    name: "Main"
   },
   {
-    id: 5,
-    name: "Delete App",
-    deadline: 121313,
-    priority: false,
-    category: "main",
-    owner: "admin@mail"
+    id: 2,
+    name: "Second"
   },
   {
-    id: 6,
-    name: "Have lunch",
-    deadline: 121313,
-    priority: false,
-    owner: "admin@mail"
-  },
-  {
-    id: 7,
-    name: "Drink water",
-    deadline: 121313,
-    priority: true,
-    category: "food",
-    owner: "admin@mail"
-  },
-  {
-    id: 8,
-    name: "Listen music",
-    deadline: 121313,
-    priority: true,
-    owner: "admin@mail"
-  },
-  {
-    id: 9,
-    name: "Delete App",
-    deadline: 121313,
-    priority: false,
-    category: "main",
-    owner: "admin@mail"
-  },
-  {
-    id: 10,
-    name: "Have lunch",
-    deadline: 121313,
-    priority: false,
-    owner: "admin@mail"
-  },
-  {
-    id: 11,
-    name: "Drink water",
-    deadline: 121313,
-    priority: true,
-    category: "food",
-    owner: "admin@mail"
-  },
-  {
-    id: 12,
-    name: "Listen music",
-    deadline: 121313,
-    priority: true,
-    owner: "admin@mail"
-  },
-  {
-    id: 13,
-    name: "Delete App",
-    deadline: 121313,
-    priority: false,
-    category: "main",
-    owner: "admin@mail"
+    id: 3,
+    name: "Other"
   }
 ]
-
-// localStorage.setItem('Tasks', JSON.stringify([
-//   {
-//     id: 1,
-//     name: "Create App",
-//     deadline: 121313,
-//     priority: true,
-//     category: "main"
-//   },
-//   {
-//     id: 2,
-//     name: "Have lunch",
-//     deadline: 121313,
-//     priority: false
-//   },
-//   {
-//     id: 3,
-//     name: "Drink water",
-//     deadline: 121313,
-//     priority: true,
-//     category: "food"
-//   },
-//   {
-//     id: 4,
-//     name: "Listen music",
-//     deadline: 121313,
-//     priority: true,
-//   },
-//   {
-//     id: 5,
-//     name: "Delete App",
-//     deadline: 121313,
-//     priority: false,
-//     category: "main"
-//   },
-//   {
-//     id: 6,
-//     name: "Have lunch",
-//     deadline: 121313,
-//     priority: false
-//   },
-//   {
-//     id: 7,
-//     name: "Drink water",
-//     deadline: 121313,
-//     priority: true,
-//     category: "food"
-//   },
-//   {
-//     id: 8,
-//     name: "Listen music",
-//     deadline: 121313,
-//     priority: true,
-//   },
-//   {
-//     id: 9,
-//     name: "Delete App",
-//     deadline: 121313,
-//     priority: false,
-//     category: "main"
-//   },
-//   {
-//     id: 10,
-//     name: "Have lunch",
-//     deadline: 121313,
-//     priority: false
-//   },
-//   {
-//     id: 11,
-//     name: "Drink water",
-//     deadline: 121313,
-//     priority: true,
-//     category: "food"
-//   },
-//   {
-//     id: 12,
-//     name: "Listen music",
-//     deadline: 121313,
-//     priority: true,
-//   },
-//   {
-//     id: 13,
-//     name: "Delete App",
-//     deadline: 121313,
-//     priority: false,
-//     category: "main"
-//   }
-// ]))

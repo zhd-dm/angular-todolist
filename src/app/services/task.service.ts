@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ITask } from 'src/types';
 
-import { DATA } from "../../data";
+import { TASKS } from "../../data";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class TaskService {
 
   getTasks() {
     if(!localStorage.getItem('Tasks') || JSON.parse(localStorage.getItem('Tasks')!).length === 0) {
-      localStorage.setItem('Tasks', JSON.stringify(DATA))
+      localStorage.setItem('Tasks', JSON.stringify(TASKS))
     }
     let storage: ITask[] = [];
     storage = JSON.parse(localStorage.getItem('Tasks')!);
@@ -25,10 +25,7 @@ export class TaskService {
     storage = JSON.parse(localStorage.getItem('Tasks')!);
     for(let i = 0; i < storage.length; i++) {
       if(task.id == storage[i].id) {
-        storage[i].name = task.name;
-        storage[i].deadline = task.deadline;
-        storage[i].category = task.category;
-        storage[i].priority = task.priority;
+        storage[i] = task;
       }
     }
     return localStorage.setItem('Tasks', JSON.stringify(storage));
@@ -36,9 +33,6 @@ export class TaskService {
 
   saveTask(newTask: ITask) {
     let storage: ITask[] = [];
-    if(!localStorage.getItem('Tasks')) {
-      localStorage.setItem('Categories', JSON.stringify([{id: 0, name: 'Test Task', deadline: 0}]))
-    }
     storage = JSON.parse(localStorage.getItem('Tasks')!);
     storage.push(newTask);
     return localStorage.setItem('Tasks', JSON.stringify(storage));

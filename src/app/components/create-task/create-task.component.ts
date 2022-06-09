@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/services/category.service';
@@ -11,6 +11,8 @@ import { ICategory, ITask } from 'src/types';
   styleUrls: ['./create-task.component.scss']
 })
 export class CreateTaskComponent implements OnInit {
+
+  // @Output() evEmit = new EventEmitter();
 
   createTaskForm = new FormGroup ({
     taskNameFormControl: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -28,7 +30,7 @@ export class CreateTaskComponent implements OnInit {
   newTask: ITask = {
     id: this.tasker.setId(),
     name: "",
-    deadline: 0,
+    deadline: "",
     owner: "admin@mail"
   }
 
@@ -44,6 +46,7 @@ export class CreateTaskComponent implements OnInit {
     this.newTask.category = this.createTaskForm.value.taskCategoryFormControl;
     this.newTask.priority = this.createTaskForm.value.taskPriorityFormControl || false;
 
+    // this.evEmit.emit(this.newTask);
     this.tasker.saveTask(this.newTask);
     this.dialogRef.close(this.newTask);
   }

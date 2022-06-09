@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+
+import { CATEGORIES } from 'src/data';
+
 import { ICategory } from 'src/types';
 
 @Injectable({
@@ -10,13 +13,13 @@ export class CategoryService {
 
   getCategories() {
     let storage: ICategory[] = [];
-    storage = JSON.parse(localStorage.getItem('Categories') || 'Empty category store');
+    storage = JSON.parse(localStorage.getItem('Categories')!);
     return storage;
   }
 
   updateCategory(category: ICategory) {
     let storage: ICategory[] = [];
-    storage = JSON.parse(localStorage.getItem('Categories') || 'Empty category store');
+    storage = JSON.parse(localStorage.getItem('Categories')!);
     for(let i = 0; i < storage.length; i++) {
       if(category.id == storage[i].id) {
         storage[i].name = category.name;
@@ -28,9 +31,9 @@ export class CategoryService {
   saveCategory(newCategory: ICategory) {
     let storage: ICategory[] = [];
     if(!localStorage.getItem('Categories')) {
-      localStorage.setItem('Categories', JSON.stringify([{id: 0, name: 'Test Category'}]));
+      localStorage.setItem('Categories', JSON.stringify(CATEGORIES));
     }
-    storage = JSON.parse(localStorage.getItem('Categories') || 'Empty category store');
+    storage = JSON.parse(localStorage.getItem('Categories')!);
     storage.push(newCategory);
     return localStorage.setItem('Categories', JSON.stringify(storage));
   }
