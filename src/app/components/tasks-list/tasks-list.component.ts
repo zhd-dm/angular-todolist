@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ChangeDetectionStrategy, OnChanges, OnInit, SimpleChange } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { BehaviorSubject } from 'rxjs';
 
@@ -16,9 +16,10 @@ import { ITask } from 'src/types';
 @Component({
   selector: 'app-tasks-list',
   templateUrl: './tasks-list.component.html',
-  styleUrls: ['./tasks-list.component.scss']
+  styleUrls: ['./tasks-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListComponent implements AfterViewInit {
+export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
 
   constructor(
     public dialogRef: MatDialog,
@@ -27,21 +28,26 @@ export class TasksListComponent implements AfterViewInit {
 
   ) {}
 
-  displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
-  tasks = new MatTableDataSource(this.tasker.getTasks());
+  tasks: ITask[] = [];
+  table: any;                 // ?????
 
-  refreshTasks$ = new BehaviorSubject<boolean>(true);
+  ngOnChanges(): void {
+    console.error('ngOnChanges')
+  }
 
   ngOnInit(): void {
-
+    this.tasks = this.tasker.getTasks();
+    this.table = new MatTableDataSource(this.tasks);
   }
+
+  ngAfterViewInit() {
+    this.table.sort = this.sort;
+  }
+
+  displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
 
   @ViewChild(MatTable) private tasksTable: MatTable<ITask> | undefined;
   @ViewChild(MatSort) sort: MatSort = new MatSort;
-
-  ngAfterViewInit() {
-    this.tasks.sort = this.sort
-  }
 
   announceSortChange(sortState: Sort) {
     if(sortState.direction) {
@@ -53,9 +59,8 @@ export class TasksListComponent implements AfterViewInit {
 
   openModalEdit(row: any) {
     let modalEdit = this.dialogRef.open(EditTaskComponent, { data: row });
-    modalEdit.afterClosed().subscribe(editTask => { // editTask - объект, который пришел из функции updateTask()
-      this.tasksTable?.renderRows();
-      // но что дальше я не знаю, уже многое перепробовал
+    modalEdit.afterClosed().subscribe(editTask => {
+      this.tasker.getTasks()
     });
   }
 
