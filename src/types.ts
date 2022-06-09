@@ -11,6 +11,7 @@ export interface ITask {
   deadline: number;
   priority?: boolean;
   category?: string;
+  owner: string;
 }
 
 export interface ICategory {

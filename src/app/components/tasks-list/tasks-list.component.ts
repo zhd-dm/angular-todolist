@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectionStrategy, OnChanges, OnInit, SimpleChange } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ChangeDetectionStrategy, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { BehaviorSubject } from 'rxjs';
 
@@ -19,21 +19,18 @@ import { ITask } from 'src/types';
   styleUrls: ['./tasks-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
+export class TasksListComponent implements OnInit, AfterViewInit {
+
+  @Input()
+  tasks: ITask[] = [];
+  table: any;                 // ?????
 
   constructor(
     public dialogRef: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
-    private tasker: TaskService
-
+    private tasker: TaskService,
+    private changeDetRef: ChangeDetectorRef
   ) {}
-
-  tasks: ITask[] = [];
-  table: any;                 // ?????
-
-  ngOnChanges(): void {
-    console.error('ngOnChanges')
-  }
 
   ngOnInit(): void {
     this.tasks = this.tasker.getTasks();
@@ -60,7 +57,8 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
   openModalEdit(row: any) {
     let modalEdit = this.dialogRef.open(EditTaskComponent, { data: row });
     modalEdit.afterClosed().subscribe(editTask => {
-      this.tasker.getTasks()
+      this.table = this.tasker.getTasks()
+      this.tasksTable?.renderRows()
     });
   }
 

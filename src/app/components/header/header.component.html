@@ -1,4 +1,4 @@
-<ng-container *ngIf="isAuth(); else notLogged">
+<ng-container *ngIf="res">
     <header class="header-wrapper">
         <a routerLink="/home">
             <button mat-raised-button color="accent">Task list</button>
@@ -9,7 +9,7 @@
     </header>
 </ng-container>
 
-<ng-template #notLogged>
+<ng-container *ngIf="!isAuth()">
     <header class="header-wrapper">
         <a routerLink="/auth/login">
             <button mat-raised-button color="primary">Login</button>
@@ -18,7 +18,7 @@
             <button mat-raised-button color="primary">Registration</button>
         </a>
     </header>
-</ng-template>
+</ng-container>
 
 
 <!-- <header class="header-wrapper" [ngIf]="isAuth">

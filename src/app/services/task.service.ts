@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { ITask } from 'src/types';
 
+import { DATA } from "../../data";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +13,7 @@ export class TaskService {
 
   getTasks() {
     if(!localStorage.getItem('Tasks')) {
-      localStorage.setItem('Tasks', JSON.stringify([{id: 0, name: 'Test Task', deadline: 0}]))
+      localStorage.setItem('Tasks', JSON.stringify(DATA))
     }
     let storage: ITask[] = [];
     storage = JSON.parse(localStorage.getItem('Tasks') || 'Empty tasks store');

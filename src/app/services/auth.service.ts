@@ -20,7 +20,7 @@ export class AuthService {
     }
     user.email = user.email.toLowerCase();
     storage.push(user);
-    localStorage.setItem('loggedIn', 'true');
+    localStorage.setItem('loggedIn', 'admin@mail');
     return localStorage.setItem('Users', JSON.stringify(storage));
   }
 
