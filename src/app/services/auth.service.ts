@@ -44,12 +44,12 @@ export class AuthService {
     return id;
   }
 
-  // checkAuth() {
-  //   if(!localStorage.getItem('loggedIn')) {
-  //     return localStorage.setItem('loggedIn', 'false')
-  //   }
-  //   return Boolean(localStorage.getItem('loggedIn'));
-  // }
+  checkAuth() {
+    if(!localStorage.getItem('loggedIn')) {
+      return localStorage.setItem('loggedIn', '')
+    }
+    return JSON.parse((localStorage.getItem('loggedIn'))!);
+  }
 
   exitUser() {
     return localStorage.setItem('loggedIn', JSON.stringify(''));
