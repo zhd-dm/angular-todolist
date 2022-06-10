@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, OnInit, Input, DoCheck } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,7 @@ import { ITask } from 'src/types';
   styleUrls: ['./tasks-list.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListComponent implements OnInit, AfterViewInit, DoCheck {
+export class TasksListComponent implements OnInit, AfterViewInit {
 
   tasks: ITask[] = [];
   table: any;                 // ?????
@@ -32,10 +32,6 @@ export class TasksListComponent implements OnInit, AfterViewInit, DoCheck {
   ngOnInit(): void {
     this.tasks = this.tasker.getTasks();
     this.table = new MatTableDataSource(this.tasks);
-  }
-
-  ngDoCheck(): void {
-    // this.updateTable();
   }
 
   ngAfterViewInit() {

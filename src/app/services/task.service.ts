@@ -18,7 +18,6 @@ export class TaskService {
     let storage: ITask[] = [];
     let currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
     storage = JSON.parse(localStorage.getItem('Tasks')!);
-
     storage = storage.filter(task => task.owner === currentUser || task.owner === "");
     return storage;
   }

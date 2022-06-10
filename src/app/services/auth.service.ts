@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
 import { IUser } from "src/types";
 
 @Injectable({
@@ -20,7 +19,7 @@ export class AuthService {
     }
     user.email = JSON.stringify(user.email.toLowerCase());
     storage.push(user);
-    localStorage.setItem('loggedIn', (user.email));
+    localStorage.setItem('loggedIn', user.email);
     return localStorage.setItem('Users', JSON.stringify(storage));
   }
 
@@ -33,10 +32,12 @@ export class AuthService {
     for(let i = 0; i < storage.length; i++) {
       if(user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
         console.log('Login success');
-        return localStorage.setItem('loggedIn', JSON.stringify(user.email.toLowerCase()));
+        localStorage.setItem('loggedIn', JSON.stringify(user.email.toLowerCase()));
+        return true;
       }
     }
-    return console.error('User not found!');
+    console.error('User not found!');
+    return false;
   }
 
   setId() {
@@ -45,10 +46,11 @@ export class AuthService {
   }
 
   checkAuth() {
-    if(!localStorage.getItem('loggedIn')) {
-      return localStorage.setItem('loggedIn', '')
+    let currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
+    if (!currentUser || currentUser.length === 0 || currentUser === '') {
+      return localStorage.setItem('loggedIn', JSON.stringify(''));
     }
-    return JSON.parse((localStorage.getItem('loggedIn'))!);
+    return JSON.parse(localStorage.getItem('loggedIn')!);
   }
 
   exitUser() {
