@@ -16,13 +16,10 @@ export class TaskService {
       localStorage.setItem('Tasks', JSON.stringify(TASKS))
     }
     let storage: ITask[] = [];
-    let currentUser = JSON.parse(localStorage.getItem('loggedIn')!);
+    let currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
     storage = JSON.parse(localStorage.getItem('Tasks')!);
-    for(let i = 0; i < storage.length; i++) {
-      if(currentUser !== storage[i].owner) {
-        storage.splice(i, 1);
-      }
-    }
+
+    storage = storage.filter(task => task.owner === currentUser || task.owner === "");
     return storage;
   }
 
@@ -39,7 +36,9 @@ export class TaskService {
 
   saveTask(newTask: ITask) {
     let storage: ITask[] = [];
+    let currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
     storage = JSON.parse(localStorage.getItem('Tasks')!);
+    newTask.owner = currentUser;
     storage.push(newTask);
     return localStorage.setItem('Tasks', JSON.stringify(storage));
   }

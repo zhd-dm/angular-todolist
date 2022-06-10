@@ -31,7 +31,7 @@ export class CreateTaskComponent implements OnInit {
     id: this.tasker.setId(),
     name: "",
     deadline: "",
-    owner: "admin@mail"
+    owner: ""
   }
 
   categories: ICategory[] = [];

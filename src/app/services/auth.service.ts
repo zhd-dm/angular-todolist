@@ -18,7 +18,7 @@ export class AuthService {
         return console.error('Email busy');
       }
     }
-    user.email = user.email.toLowerCase();
+    user.email = JSON.stringify(user.email.toLowerCase());
     storage.push(user);
     localStorage.setItem('loggedIn', (user.email));
     return localStorage.setItem('Users', JSON.stringify(storage));

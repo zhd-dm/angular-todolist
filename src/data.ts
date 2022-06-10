@@ -35,7 +35,7 @@ export const TASKS: ITask[] = [
     id: 5,
     name: "Test task for unlogged users",
     deadline: "2022-06-22T21:00:00.000Z",
-    owner: "1"
+    owner: ""
   }
 ];
 
