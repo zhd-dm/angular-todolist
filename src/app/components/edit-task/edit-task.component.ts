@@ -32,7 +32,7 @@ export class EditTaskComponent implements OnInit {
     id: 0,
     name: '',
     deadline: "",
-    owner: "admin@mail"
+    owner: ""
   }
 
   categories: ICategory[] = [];

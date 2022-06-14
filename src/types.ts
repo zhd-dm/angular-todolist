@@ -11,10 +11,10 @@ export interface ITask {
   deadline: string;
   priority?: boolean;
   category?: string;
-  owner: string;
+  owner?: string;
 }
 
 export interface ICategory {
-  id?: number;
+  id: number;
   name: string;
 }

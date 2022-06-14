@@ -38,8 +38,7 @@ export class RegistrationFormComponent implements OnInit {
     this.userData.email = this.registrationForm.value.emailFormControl;
     this.userData.password = this.registrationForm.value.passwordFormControl;
 
-    this.logger.saveUser(this.userData);
-    if(this.logger.checkUser(this.userData)!) {
+    if(this.logger.saveUser(this.userData)!) {
       this.router.navigate(['home']);
     }
   }

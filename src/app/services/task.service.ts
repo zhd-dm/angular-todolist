@@ -24,10 +24,12 @@ export class TaskService {
 
   updateTask(task: ITask) {
     let storage: ITask[] = [];
+    let currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
     storage = JSON.parse(localStorage.getItem('Tasks')!);
     for(let i = 0; i < storage.length; i++) {
       if(task.id == storage[i].id) {
         storage[i] = task;
+        storage[i].owner = currentUser;
       }
     }
     return localStorage.setItem('Tasks', JSON.stringify(storage));

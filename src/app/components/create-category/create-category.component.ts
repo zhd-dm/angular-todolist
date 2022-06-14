@@ -15,6 +15,8 @@ export class CreateCategoryComponent implements OnInit {
     categoryNameFormControl: new FormControl('', [Validators.required, Validators.minLength(3)])
   })
 
+  categories: ICategory[] = [];
+
   constructor(
     public dialogRef: MatDialogRef<CreateCategoryComponent>,
     private categoer: CategoryService
@@ -26,6 +28,7 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.categories = this.categoer.getCategories();
   }
 
   createCategory(): void {

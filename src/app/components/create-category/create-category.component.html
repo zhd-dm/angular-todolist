@@ -1,12 +1,24 @@
 <!-- <app-categories-list></app-categories-list> -->
 
-<form [formGroup]="createCategoryForm" (ngSubmit)="createCategory()" class="form-group form-group__modal form-group__modal__create-category">
+<form [formGroup]="createCategoryForm" class="form-group form-group__modal form-group__modal__create-category">
     <div class="mat-title">Create new category</div>
 
     <mat-form-field class="form-group__modal__create-category_category-name" color="accent" appearance="outline">
         <mat-label>Category name:</mat-label>
-        <input type="text" matInput formControlName="categoryNameFormControl" placeholder="Create app" required>
+        <input type="text" matInput formControlName="categoryNameFormControl" placeholder="Create app">
     </mat-form-field>
+    <button type="submit" [disabled]="!createCategoryForm.valid" mat-raised-button color="accent" (click)="createCategory()">Create</button>
 
-    <button type="submit" [disabled]="!createCategoryForm.valid" mat-raised-button color="accent">Create</button>
+    <br>
+
+    <div class="mat-title">Update old category</div>
+    <mat-form-field appearance="outline" color="accent">
+        <mat-label>Change category name</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+                {{category.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="accent">Update</button>
 </form>

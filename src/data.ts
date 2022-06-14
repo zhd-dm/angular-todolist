@@ -42,14 +42,6 @@ export const TASKS: ITask[] = [
 export const CATEGORIES: ICategory[] = [
   {
     id: 1,
-    name: "Main"
-  },
-  {
-    id: 2,
-    name: "Second"
-  },
-  {
-    id: 3,
-    name: "Other"
+    name: "Test category"
   }
 ]

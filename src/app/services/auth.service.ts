@@ -14,13 +14,15 @@ export class AuthService {
     storage = JSON.parse(localStorage.getItem('Users')!);
     for(let i = 0; i < storage.length; i++) {
       if(user.email === storage[i].email) {
-        return console.error('Email busy');
+        console.error('Email busy');
+        return false;
       }
     }
-    user.email = JSON.stringify(user.email.toLowerCase());
+    user.email = user.email.toLowerCase();
     storage.push(user);
-    localStorage.setItem('loggedIn', user.email);
-    return localStorage.setItem('Users', JSON.stringify(storage));
+    localStorage.setItem('loggedIn', JSON.stringify(user.email));
+    localStorage.setItem('Users', JSON.stringify(storage));
+    return true;
   }
 
   checkUser(user: IUser) {
