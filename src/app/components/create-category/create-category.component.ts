@@ -13,7 +13,11 @@ export class CreateCategoryComponent implements OnInit {
 
   createCategoryForm = new FormGroup ({
     categoryNameFormControl: new FormControl('', [Validators.required, Validators.minLength(3)])
-  })
+  });
+
+  updateCategoryForm = new FormGroup ({
+    // categoryNameFormControl: new FormControl('', [Validators.required, Validators.minLength(3)])
+  });
 
   categories: ICategory[] = [];
 
@@ -35,6 +39,10 @@ export class CreateCategoryComponent implements OnInit {
     this.newCategory.name = this.createCategoryForm.value.categoryNameFormControl;
     this.categoer.saveCategory(this.newCategory);
     this.dialogRef.close();
+  }
+
+  updateCategory() {
+    console.log('update')
   }
 
 }

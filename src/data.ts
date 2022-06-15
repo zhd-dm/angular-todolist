@@ -14,7 +14,7 @@ export const TASKS: ITask[] = [
     name: "Have lunch",
     deadline: "2022-06-22T21:00:00.000Z",
     priority: false,
-    owner: "admin@mail"
+    owner: ""
   },
   {
     id: 3,
@@ -22,14 +22,14 @@ export const TASKS: ITask[] = [
     deadline: "2022-06-22T21:00:00.000Z",
     priority: true,
     category: "Test",
-    owner: "default@mail"
+    owner: ""
   },
   {
     id: 4,
     name: "Listen music",
     deadline: "2022-06-22T21:00:00.000Z",
     priority: true,
-    owner: "default@mail"
+    owner: ""
   },
   {
     id: 5,

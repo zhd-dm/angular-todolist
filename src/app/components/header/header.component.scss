@@ -1,11 +1,10 @@
 @import "../../../variables.scss";
 .header-wrapper {
-    width: 100%;
+    margin-bottom: 60px;
     padding: 20px;
     background-color: $primary;
-    border-bottom: 1px solid black;
-    a {
-        margin-right: 10px;
+    .header-wrapper__link {
+        margin-right: 40px;
         &:last-child {
             margin-right: 0;
         }

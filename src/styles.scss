@@ -1,6 +1,6 @@
 @import "./variables.scss";
 * {
-    box-sizing: border-box;
+    // box-sizing: border-box;
 }
 
 html,
@@ -12,6 +12,18 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: $basic;
+}
+
+.container {
+    margin: 30px auto;
+    &:first-child {
+        margin: auto;
+    }
+    .content-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .form-group {

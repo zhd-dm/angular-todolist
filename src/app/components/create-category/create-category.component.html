@@ -8,9 +8,9 @@
         <input type="text" matInput formControlName="categoryNameFormControl" placeholder="Create app">
     </mat-form-field>
     <button type="submit" [disabled]="!createCategoryForm.valid" mat-raised-button color="accent" (click)="createCategory()">Create</button>
-
-    <br>
-
+</form>
+<!--
+<form [formGroup]="updateCategoryForm" class="form-group form-group__modal form-group__modal__update-category">
     <div class="mat-title">Update old category</div>
     <mat-form-field appearance="outline" color="accent">
         <mat-label>Change category name</mat-label>
@@ -20,5 +20,5 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="accent">Update</button>
-</form>
+    <button type="submit" mat-raised-button color="accent" (click)="updateCategory()">Update</button>
+</form> -->

@@ -1,40 +1,27 @@
-<ng-container *ngIf="isAuth()">
-    <header class="header-wrapper">
-        <a routerLink="/home">
-            <button mat-raised-button color="accent">Task list</button>
-        </a>
-        <app-button-create-task style="margin-right: 10px;"></app-button-create-task>
-        <app-button-create-category style="margin-right: 10px;"></app-button-create-category>
-        <button mat-raised-button color="warn" (click)="exit()">Exit</button>
-    </header>
-</ng-container>
+<div class="container">
+    <ng-container *ngIf="isAuth()">
+        <header class="header-wrapper">
+            <div class="content-wrapper">
+                <a routerLink="/home" class="header-wrapper__link">
+                    <button mat-raised-button color="accent">Task list</button>
+                </a>
+                <app-button-create-task class="header-wrapper__link"></app-button-create-task>
+                <app-button-create-category class="header-wrapper__link"></app-button-create-category>
+                <button mat-raised-button color="warn" (click)="exit()" class="header-wrapper__link">Exit</button>
+            </div>
+        </header>
+    </ng-container>
 
-<ng-container *ngIf="!isAuth()">
-    <header class="header-wrapper">
-        <a routerLink="/auth/login">
-            <button mat-raised-button color="primary">Login</button>
-        </a>
-        <a routerLink="/auth/registration">
-            <button mat-raised-button color="primary">Registration</button>
-        </a>
-    </header>
-</ng-container>
-
-
-<!-- <header class="header-wrapper" [ngIf]="isAuth">
-  <a routerLink="/auth/login">
-      <button mat-raised-button color="primary">Login</button>
-  </a>
-  <a routerLink="/auth/registration">
-      <button mat-raised-button color="primary">Registration</button>
-  </a>
-  <a routerLink="/home">
-      <button mat-raised-button color="accent">Task list</button>
-  </a>
-
-  <app-button-create-task style="margin-right: 10px;"></app-button-create-task>
-
-  <app-button-create-category style="margin-right: 10px;"></app-button-create-category>
-
-  <button mat-raised-button color="warn" (click)="exit()">Exit</button>
-</header> -->
+    <ng-container *ngIf="!isAuth()">
+        <header class="header-wrapper">
+            <div class="content-wrapper">
+                <a routerLink="/auth/login" class="header-wrapper__link">
+                    <button mat-raised-button color="primary">Login</button>
+                </a>
+                <a routerLink="/auth/registration" class="header-wrapper__link">
+                    <button mat-raised-button color="primary">Registration</button>
+                </a>
+            </div>
+        </header>
+    </ng-container>
+</div>
