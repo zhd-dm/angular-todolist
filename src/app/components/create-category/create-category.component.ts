@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { ICategory } from 'src/types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-category',
@@ -22,7 +23,8 @@ export class CreateCategoryComponent implements OnInit {
   categories: ICategory[] = [];
 
   constructor(
-    public dialogRef: MatDialogRef<CreateCategoryComponent>,
+    private router: Router,
+    private dialogRef: MatDialogRef<CreateCategoryComponent>,
     private categoer: CategoryService
   ) { }
 
@@ -43,6 +45,11 @@ export class CreateCategoryComponent implements OnInit {
 
   updateCategory() {
     console.log('update')
+  }
+
+  goToCategories() {
+    this.router.navigate(['/home/categories']);
+    this.dialogRef.close();
   }
 
 }

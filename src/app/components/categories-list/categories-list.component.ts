@@ -21,7 +21,7 @@ export class CategoriesListComponent implements OnInit {
     private categoer: CategoryService
   ) { }
 
-  displayedColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = ['id', 'name', 'settings'];
 
   ngOnInit(): void {
     this.categories = this.categoer.getCategories();

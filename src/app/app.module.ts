@@ -26,6 +26,7 @@ import { ButtonCreateCategoryComponent } from './components/UI/button-create-cat
 import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { DeleteCategoryComponent } from './components/delete-category/delete-category.component';
+import { CategoriesPageComponent } from './components/pages/categories-page/categories-page.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { DeleteCategoryComponent } from './components/delete-category/delete-cat
     ButtonCreateCategoryComponent,
     EditCategoryComponent,
     CategoriesListComponent,
-    DeleteCategoryComponent
+    DeleteCategoryComponent,
+    CategoriesPageComponent
   ],
   imports: [
     BrowserModule,
