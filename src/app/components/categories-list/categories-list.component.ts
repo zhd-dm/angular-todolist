@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CategoryService } from 'src/app/services/category.service';
 import { ICategory } from 'src/types';
+import { DeleteCategoryComponent } from '../delete-category/delete-category.component';
+import { EditCategoryComponent } from '../edit-category/edit-category.component';
 
 @Component({
   selector: 'app-categories-list',
@@ -10,32 +13,39 @@ import { ICategory } from 'src/types';
 })
 export class CategoriesListComponent implements OnInit {
 
-  updateCategoryForm = new FormGroup ({
-    categoryIdFormControl: new FormControl(''),
-    categoryNameFormControl: new FormControl('', [Validators.minLength(3)])
-  })
+  categories: ICategory[] = [];
+  table: any;
 
   constructor(
+    private dialogRef: MatDialog,
     private categoer: CategoryService
   ) { }
 
-  updatedCategory: ICategory = {
-    id: 0,
-    name: ''
-  }
-
-  categories: ICategory[] = [];
+  displayedColumns: string[] = ['id', 'name'];
 
   ngOnInit(): void {
     this.categories = this.categoer.getCategories();
-    this.updateCategoryForm.controls['categoryIdFormControl'].setValue(this.updatedCategory.id);
+    this.table = new MatTableDataSource(this.categories);
   }
 
-  updateCategory(): void {
-    this.updatedCategory.id = this.updateCategoryForm.value.categoryIdFormControl;
-    this.updatedCategory.name = this.updateCategoryForm.value.categoryNameFormControl;
-    console.log('Updated category: ', this.updatedCategory)
-    // this.categoer.updateCategory(this.updatedCategory);
+  @ViewChild(MatTable) private categoriesTable: MatTable<ICategory> | undefined;
+
+  openModalEdit(row: any) {
+    let modalEdit = this.dialogRef.open(EditCategoryComponent, { data: row });
+    modalEdit.afterClosed().subscribe(editCategory => {
+      this.updateTable();
+    });
   }
 
+  openModalDelete(row: any) {
+    let modalDelete = this.dialogRef.open(DeleteCategoryComponent, { data: row });
+    modalDelete.afterClosed().subscribe(deleteCategory => {
+      this.updateTable();
+    });
+  }
+
+  updateTable() {
+    this.table = new MatTableDataSource(this.categoer.getCategories());
+    this.categoriesTable?.renderRows();
+  }
 }

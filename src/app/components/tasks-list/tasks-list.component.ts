@@ -60,7 +60,7 @@ export class TasksListComponent implements OnInit, AfterViewInit {
 
   openModalDelete(row: any) {
     let modalDelete = this.dialogRef.open(DeleteTaskComponent, { data: row });
-    modalDelete.afterClosed().subscribe(allTasks => {
+    modalDelete.afterClosed().subscribe(deleteTask => {
       this.updateTable();
     });
   }

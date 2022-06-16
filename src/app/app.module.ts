@@ -25,6 +25,7 @@ import { ButtonCreateTaskComponent } from './components/UI/button-create-task/bu
 import { ButtonCreateCategoryComponent } from './components/UI/button-create-category/button-create-category.component';
 import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
+import { DeleteCategoryComponent } from './components/delete-category/delete-category.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CategoriesListComponent } from './components/categories-list/categories
     ButtonCreateTaskComponent,
     ButtonCreateCategoryComponent,
     EditCategoryComponent,
-    CategoriesListComponent
+    CategoriesListComponent,
+    DeleteCategoryComponent
   ],
   imports: [
     BrowserModule,

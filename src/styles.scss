@@ -9,6 +9,7 @@ body {
 }
 
 body {
+    width: 100%;
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: $basic;
@@ -23,6 +24,18 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+}
+
+.table-list {
+    width: 70vw;
+    padding: 30px;
+    .table-list__priority_true {
+        text-align: center;
+        width: 40px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: $accent;
     }
 }
 

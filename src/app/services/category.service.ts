@@ -38,6 +38,17 @@ export class CategoryService {
     return localStorage.setItem('Categories', JSON.stringify(storage));
   }
 
+  deleteCategory(id: number) {
+    let storage: ICategory[] = [];
+    storage = JSON.parse(localStorage.getItem('Categories')!);
+    for(let i = 0; i < storage.length; i++) {
+      if(id == storage[i].id) {
+        storage.splice(i, 1);
+      }
+    }
+    return localStorage.setItem('Categories', JSON.stringify(storage));
+  }
+
   setId() {
     let id: number = Date.now();
     return id;

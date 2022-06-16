@@ -1,5 +1,3 @@
-<!-- <app-categories-list></app-categories-list> -->
-
 <form [formGroup]="createCategoryForm" class="form-group form-group__modal form-group__modal__create-category">
     <div class="mat-title">Create new category</div>
 
@@ -9,16 +7,5 @@
     </mat-form-field>
     <button type="submit" [disabled]="!createCategoryForm.valid" mat-raised-button color="accent" (click)="createCategory()">Create</button>
 </form>
-<!--
-<form [formGroup]="updateCategoryForm" class="form-group form-group__modal form-group__modal__update-category">
-    <div class="mat-title">Update old category</div>
-    <mat-form-field appearance="outline" color="accent">
-        <mat-label>Change category name</mat-label>
-        <mat-select>
-            <mat-option *ngFor="let category of categories" [value]="category.id">
-                {{category.name}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <button type="submit" mat-raised-button color="accent" (click)="updateCategory()">Update</button>
-</form> -->
+
+<button mat-raised-button color="accent"><a routerLink="/home/categories">Go to categories list</a></button>
