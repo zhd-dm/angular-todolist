@@ -20,6 +20,6 @@ export interface ICategory {
 }
 
 export interface IValidate {
-  status: Boolean;
-  message: String;
+  status: boolean;
+  message: string;
 }

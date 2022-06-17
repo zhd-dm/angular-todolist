@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
-import { ICategory } from 'src/types';
+import { ICategory, IValidate } from 'src/types';
 import { Router } from '@angular/router';
+import { reduce } from 'rxjs';
 
 @Component({
   selector: 'app-create-category',
@@ -39,12 +40,17 @@ export class CreateCategoryComponent implements OnInit {
 
   createCategory(): void {
     this.newCategory.name = this.createCategoryForm.value.categoryNameFormControl;
-    this.categoer.saveCategory(this.newCategory);
-    this.dialogRef.close();
-  }
+    console.log('Send to check: ', this.newCategory);
 
-  updateCategory() {
-    console.log('update')
+    let isValidate: IValidate = this.categoer.saveCategory(this.newCategory);
+
+    if(isValidate.status) {
+      console.log(isValidate.message);
+      this.dialogRef.close();
+    }
+    if(!isValidate.status) {
+      console.error(isValidate.message);
+    }
   }
 
   goToCategories() {

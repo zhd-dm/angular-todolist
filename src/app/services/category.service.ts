@@ -29,15 +29,18 @@ export class CategoryService {
   }
 
   saveCategory(newCategory: ICategory) {
-    // let isValidate: IValidate = this.checkCategory(newCategory.name);
-    // if(isValidate){}
-    let storage: ICategory[] = [];
-    if(!localStorage.getItem('Categories')) {
-      localStorage.setItem('Categories', JSON.stringify(CATEGORIES));
+    let isValidate: IValidate = this.checkCategory(newCategory.name);
+
+    if(isValidate.status){
+      let storage: ICategory[] = [];
+      storage = JSON.parse(localStorage.getItem('Categories')!);
+      storage.push(newCategory);
+      localStorage.setItem('Categories', JSON.stringify(storage));
+      return isValidate;
+    } else {
+      return isValidate;
     }
-    storage = JSON.parse(localStorage.getItem('Categories')!);
-    storage.push(newCategory);
-    localStorage.setItem('Categories', JSON.stringify(storage));
+
   }
 
   deleteCategory(id: number) {
@@ -53,6 +56,9 @@ export class CategoryService {
 
   checkCategory(name: string) {
     let storage: ICategory[] = [];
+    if(!localStorage.getItem('Categories')) {
+      localStorage.setItem('Categories', JSON.stringify(CATEGORIES));
+    }
     storage = JSON.parse(localStorage.getItem('Categories')!);
     for(let i = 0; i < storage.length; i++) {
       if(name === storage[i].name) return {status: false, message: 'Category name is busy!'};
