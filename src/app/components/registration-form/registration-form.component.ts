@@ -23,22 +23,18 @@ export class RegistrationFormComponent implements OnInit {
     private router: Router
   ){}
 
-  userData: IUser = {
-    id: this.logger.setId(),
-    name: "",
-    email: "",
-    password: ""
-  }
-
   ngOnInit(): void {
   }
 
   registration() {
-    this.userData.name = this.registrationForm.value.usernameFormControl;
-    this.userData.email = this.registrationForm.value.emailFormControl;
-    this.userData.password = this.registrationForm.value.passwordFormControl;
+    let userData: IUser = {
+      name: this.registrationForm.value.usernameFormControl,
+      email: this.registrationForm.value.emailFormControl,
+      password: this.registrationForm.value.passwordFormControl
+    };
+    console.log('Send to check: ', userData)
 
-    let isValidate: IValidate = this.logger.saveUser(this.userData);
+    let isValidate: IValidate = this.logger.saveUser(userData);
 
     if(isValidate.status) {
       console.log(isValidate.message);

@@ -31,11 +31,13 @@ export class LoginFormComponent implements OnInit {
   }
 
   logIn() {
-    this.userData.email = this.loginForm.value.emailFormControl;
-    this.userData.password = this.loginForm.value.passwordFormControl;
+    let userData: IUser = {
+      email: this.loginForm.value.emailFormControl,
+      password: this.loginForm.value.passwordFormControl
+    };
     console.log('Send to check: ', this.userData);
 
-    let isValidate: IValidate = this.logger.checkUser(this.userData);
+    let isValidate: IValidate = this.logger.checkUser(userData);
 
     if(isValidate.status) {
       console.log(isValidate.message);
