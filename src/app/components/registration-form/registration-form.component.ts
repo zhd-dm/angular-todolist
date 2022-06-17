@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { IUser } from 'src/types';
+import { IUser, IValidate } from 'src/types';
 
 @Component({
   selector: 'app-registration-form',
@@ -38,8 +38,14 @@ export class RegistrationFormComponent implements OnInit {
     this.userData.email = this.registrationForm.value.emailFormControl;
     this.userData.password = this.registrationForm.value.passwordFormControl;
 
-    if(this.logger.saveUser(this.userData)!) {
+    let isValidate: IValidate = this.logger.saveUser(this.userData);
+
+    if(isValidate.status) {
+      console.log(isValidate.message);
       this.router.navigate(['home']);
+    }
+    if(!isValidate.status) {
+      console.error(isValidate.message);
     }
   }
 }

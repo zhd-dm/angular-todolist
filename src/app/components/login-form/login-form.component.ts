@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { IUser } from 'src/types';
+import { IUser, IValidate } from 'src/types';
 
 @Component({
   selector: 'app-login-form',
@@ -35,8 +35,14 @@ export class LoginFormComponent implements OnInit {
     this.userData.password = this.loginForm.value.passwordFormControl;
     console.log('Send to check: ', this.userData);
 
-    if(this.logger.checkUser(this.userData)!) {
+    let isValidate: IValidate = this.logger.checkUser(this.userData);
+
+    if(isValidate.status) {
+      console.log(isValidate.message);
       this.router.navigate(['home']);
+    }
+    if(!isValidate.status) {
+      console.error(isValidate.message);
     }
   }
 }

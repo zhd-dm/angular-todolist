@@ -14,15 +14,14 @@ export class AuthService {
     storage = JSON.parse(localStorage.getItem('Users')!);
     for(let i = 0; i < storage.length; i++) {
       if(user.email === storage[i].email) {
-        console.error('Email busy');
-        return false;
+        return {status: false, message: 'Email busy!'};
       }
     }
     user.email = user.email.toLowerCase();
     storage.push(user);
     localStorage.setItem('loggedIn', JSON.stringify(user.email));
     localStorage.setItem('Users', JSON.stringify(storage));
-    return true;
+    return {status: true, message: 'Register successfully'};
   }
 
   checkUser(user: IUser) {
@@ -33,13 +32,11 @@ export class AuthService {
     storage = JSON.parse(localStorage.getItem('Users')!);
     for(let i = 0; i < storage.length; i++) {
       if(user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
-        console.log('Login success');
         localStorage.setItem('loggedIn', JSON.stringify(user.email.toLowerCase()));
-        return true;
+        return {status: true, message: 'Login success'};
       }
     }
-    console.error('User not found!');
-    return false;
+    return {status: false, message: 'User not found!'};
   }
 
   setId() {

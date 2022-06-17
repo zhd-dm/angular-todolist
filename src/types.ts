@@ -18,3 +18,8 @@ export interface ICategory {
   id?: number;
   name: string;
 }
+
+export interface IValidate {
+  status: Boolean;
+  message: String;
+}

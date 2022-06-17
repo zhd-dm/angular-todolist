@@ -1,6 +1,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="logIn()" class="form-group form-group__auth_login">
 
     <div class="mat-title mat-title__auth">Log In</div>
+    <!-- <div class="mat-title mat-title__auth" *ngIf="!isValidate">{{obj.message}}</div> -->
 
     <mat-form-field class="form-group__login_email" color="accent" appearance="outline">
         <mat-label>Email</mat-label>
