@@ -1,9 +1,5 @@
 <form [formGroup]="taskForm" (ngSubmit)="updateTask()" class="form-group form-group__modal form-group__modal__edit-task">
     <div class="mat-title">Edit task</div>
-    <!--
-      ИСПРАВИТЬ
-    -->
-    <input matInput formControlName="taskIdFormControl" style="visibility: hidden;">
 
     <mat-form-field class="form-group__modal__edit-task_task-name" color="accent" appearance="outline">
         <mat-label>Task name:</mat-label>

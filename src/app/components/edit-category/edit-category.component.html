@@ -1,1 +1,10 @@
-<p>edit-category works!</p>
+<form [formGroup]="categoryForm" (ngSubmit)="updateCategory()" class="form-group form-group__modal form-group__modal__category-task">
+    <div class="mat-title">Edit category</div>
+
+    <mat-form-field class="form-group__modal__category-task_task-name" color="accent" appearance="outline">
+        <mat-label>Task name:</mat-label>
+        <input matInput formControlName="categoryNameFormControl" placeholder="Main category">
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="accent">Update</button>
+</form>
