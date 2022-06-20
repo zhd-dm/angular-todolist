@@ -51,6 +51,9 @@ body {
     .mat-title__auth {
         color: $accent;
     }
+    &.is-phone {
+        margin: 30px 30px;
+    }
 }
 
 .form-group__modal {

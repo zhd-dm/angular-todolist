@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +13,8 @@ import { IUser, IValidate } from 'src/types';
 })
 export class RegistrationFormComponent implements OnInit {
 
+  isPhone: Boolean = false;
+
   registrationForm = new FormGroup ({
     usernameFormControl: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(12)]),
     emailFormControl: new FormControl('', [Validators.required, Validators.email]),
@@ -19,11 +22,19 @@ export class RegistrationFormComponent implements OnInit {
   });
 
   constructor(
+    private responsive: BreakpointObserver,
     private logger: AuthService,
     private router: Router
   ){}
 
   ngOnInit(): void {
+    this.responsive.observe(Breakpoints.HandsetPortrait)
+      .subscribe(result => {
+        this.isPhone = false;
+        if(result.matches) {
+          this.isPhone = true;
+        }
+      });
   }
 
   registration() {

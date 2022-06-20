@@ -1,4 +1,4 @@
-<form [formGroup]="registrationForm" (ngSubmit)="registration()" class="form-group form-group__auth_registration">
+<form [formGroup]="registrationForm" (ngSubmit)="registration()" class="form-group form-group__auth form-group__auth_registration" [ngClass]="{'is-phone': isPhone}">
 
     <div class="mat-title mat-title__auth">Registration</div>
 
