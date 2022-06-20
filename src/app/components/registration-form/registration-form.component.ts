@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { ResponsiveService } from 'src/app/services/responsive.service';
 import { IUser, IValidate } from 'src/types';
 
 @Component({
@@ -23,6 +24,7 @@ export class RegistrationFormComponent implements OnInit {
 
   constructor(
     private responsive: BreakpointObserver,
+    // private responsiver: ResponsiveService,
     private logger: AuthService,
     private router: Router
   ){}
