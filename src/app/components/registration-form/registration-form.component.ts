@@ -40,14 +40,14 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   registration(): void {
-    let userData: IUser = {
+    const userData: IUser = {
       name: this.registrationForm.value.usernameFormControl,
       email: this.registrationForm.value.emailFormControl,
       password: this.registrationForm.value.passwordFormControl
     };
     console.log('Send to check: ', userData)
 
-    let isValidate: IValidate = this.authService.saveUser(userData);
+    const isValidate: IValidate = this.authService.saveUser(userData);
 
     if(isValidate.status) {
       console.log(isValidate.message);

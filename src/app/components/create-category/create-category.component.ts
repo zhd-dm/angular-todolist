@@ -42,7 +42,7 @@ export class CreateCategoryComponent implements OnInit {
     this.newCategory.name = this.createCategoryForm.value.categoryNameFormControl;
     console.log('Send to check: ', this.newCategory);
 
-    let isValidate: IValidate = this.categoryService.saveCategory(this.newCategory);
+    const isValidate: IValidate = this.categoryService.saveCategory(this.newCategory);
 
     if(isValidate.status) {
       console.log(isValidate.message);

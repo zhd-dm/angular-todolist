@@ -31,14 +31,14 @@ export class CategoriesListComponent implements OnInit {
   @ViewChild(MatTable) private categoriesTable: MatTable<ICategory> | undefined;
 
   openModalEdit(row: any): void {
-    let modalEdit = this.dialogRef.open(EditCategoryComponent, { data: row });
+    const modalEdit = this.dialogRef.open(EditCategoryComponent, { data: row });
     modalEdit.afterClosed().subscribe(() => {
       this.updateTable();
     });
   }
 
   openModalDelete(row: any): void {
-    let modalDelete = this.dialogRef.open(DeleteCategoryComponent, { data: row });
+    const modalDelete = this.dialogRef.open(DeleteCategoryComponent, { data: row });
     modalDelete.afterClosed().subscribe(() => {
       this.updateTable();
     });

@@ -52,14 +52,14 @@ export class TasksListComponent implements OnInit, AfterViewInit {
   }
 
   openModalEdit(row: any): void {
-    let modalEdit = this.dialogRef.open(EditTaskComponent, { data: row });
+    const modalEdit = this.dialogRef.open(EditTaskComponent, { data: row });
     modalEdit.afterClosed().subscribe(editTask => {
       this.updateTable();
     });
   }
 
   openModalDelete(row: any): void {
-    let modalDelete = this.dialogRef.open(DeleteTaskComponent, { data: row });
+    const modalDelete = this.dialogRef.open(DeleteTaskComponent, { data: row });
     modalDelete.afterClosed().subscribe(deleteTask => {
       this.updateTable();
     });

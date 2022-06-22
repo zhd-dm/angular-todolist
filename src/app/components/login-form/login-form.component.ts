@@ -43,13 +43,13 @@ export class LoginFormComponent implements OnInit {
   }
 
   logIn(): void {
-    let userData: IUser = {
+    const userData: IUser = {
       email: this.loginForm.value.emailFormControl,
       password: this.loginForm.value.passwordFormControl
     };
     console.log('Send to check: ', userData);
 
-    let isValidate: IValidate = this.authService.checkUser(userData);
+    const isValidate: IValidate = this.authService.checkUser(userData);
 
     if(isValidate.status) {
       console.log(isValidate.message);
