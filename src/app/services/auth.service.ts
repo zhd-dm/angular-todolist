@@ -58,4 +58,9 @@ export class AuthService {
   exitUser(): void {
     localStorage.setItem('loggedIn', JSON.stringify(''));
   }
+
+  getAuthToken(): number {
+    return Date.now();
+  }
+
 }
