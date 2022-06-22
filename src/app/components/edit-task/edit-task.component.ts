@@ -14,11 +14,11 @@ import { CategoryService } from 'src/app/services/category.service';
 export class EditTaskComponent implements OnInit {
 
   taskForm = new FormGroup ({
-    taskIdFormControl: new FormControl(''),
-    taskNameFormControl: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    taskDeadlineFormControl: new FormControl('', [Validators.required]),
-    taskCategoryFormControl: new FormControl(''),
-    taskPriorityFormControl: new FormControl('')
+    id: new FormControl(''),
+    name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    deadline: new FormControl('', [Validators.required]),
+    category: new FormControl(''),
+    priority: new FormControl('')
   })
 
   constructor(
@@ -41,22 +41,34 @@ export class EditTaskComponent implements OnInit {
     this.categories = this.categoryService.getCategories();
 
     if(this.editedTaskData) {
-      // console.log(this.taskForm.controls)
-      this.taskForm.controls['taskIdFormControl'].setValue(this.editedTaskData.id);
-      this.taskForm.controls['taskNameFormControl'].setValue(this.editedTaskData.name);
-      this.taskForm.controls['taskDeadlineFormControl'].setValue(this.editedTaskData.deadline);
-      this.taskForm.controls['taskCategoryFormControl'].setValue(this.editedTaskData.category);
-      this.taskForm.controls['taskPriorityFormControl'].setValue(this.editedTaskData.priority);
+      // console.error(this.taskForm.controls);
+      // Object.keys(this.editedTaskData).forEach(key => {
+      //   console.error(this.taskForm.controls[key])
+      //   if(!this.taskForm.controls[key].value) {
+      //     this.taskForm.controls[key].value = ''
+      //   }
+      //   this.taskForm.controls[key].setValue(this.editedTaskData[key])
+      // });
+      this.taskForm.controls['id'].setValue(this.editedTaskData.id);
+      this.taskForm.controls['name'].setValue(this.editedTaskData.name);
+      this.taskForm.controls['deadline'].setValue(this.editedTaskData.deadline);
+      this.taskForm.controls['category'].setValue(this.editedTaskData.category);
+      this.taskForm.controls['priority'].setValue(this.editedTaskData.priority);
       console.log('Old data: ', this.editedTaskData);
     }
   }
 
   public updateTask(): void {
-    this.editedTask.id = this.taskForm.value.taskIdFormControl;
-    this.editedTask.name = this.taskForm.value.taskNameFormControl;
-    this.editedTask.deadline = this.taskForm.value.taskDeadlineFormControl;
-    this.editedTask.category = this.taskForm.value.taskCategoryFormControl;
-    this.editedTask.priority = this.taskForm.value.taskPriorityFormControl || false;
+    // Object.keys(this.editedTask).forEach(key => {
+      // this.editedTask[key] = this.taskForm.value[key]
+      // console.log(this.taskForm.value)
+    // });
+
+    this.editedTask.id = this.taskForm.value.id;
+    this.editedTask.name = this.taskForm.value.name;
+    this.editedTask.deadline = this.taskForm.value.deadline;
+    this.editedTask.category = this.taskForm.value.category;
+    this.editedTask.priority = this.taskForm.value.priority || false;
     console.log('Send to save: ', this.editedTask);
 
     this.taskService.updateTask(this.editedTask);

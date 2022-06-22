@@ -3,7 +3,7 @@
 
     <mat-form-field class="form-group__modal__edit-task_task-name" color="accent" appearance="outline">
         <mat-label>Task name:</mat-label>
-        <input matInput formControlName="taskNameFormControl" placeholder="Create app">
+        <input matInput formControlName="name" placeholder="Create app">
         <!-- <mat-error *ngIf="taskForm.get('taskNameFormControl').hasError('required')">
             Please enter a task name
         </mat-error>
@@ -14,7 +14,7 @@
 
     <mat-form-field class="form-group__modal__edit-task_deadline" color="accent" appearance="outline">
         <mat-label>Deadline:</mat-label>
-        <input matInput formControlName="taskDeadlineFormControl" [matDatepicker]="picker">
+        <input matInput formControlName="deadline" [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <!-- <mat-error *ngIf="taskDeadlineFormControl.hasError('required')">
@@ -24,14 +24,14 @@
 
     <mat-form-field class="form-group__modal__edit-task_category" color="accent" appearance="outline">
         <mat-label>Category:</mat-label>
-        <mat-select formControlName="taskCategoryFormControl">
+        <mat-select formControlName="category">
             <mat-option>Nothing</mat-option>
             <mat-option *ngFor="let category of categories" value={{category.name}}>{{category.name}}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <section class="form-group__modal__edit-task_priority">
-        <mat-checkbox formControlName="taskPriorityFormControl" class="example-margin">Priority?</mat-checkbox>
+        <mat-checkbox formControlName="priority" class="example-margin">Priority?</mat-checkbox>
     </section>
 
     <button type="submit" [disabled]="!taskForm.valid" mat-raised-button color="accent">Update</button>
