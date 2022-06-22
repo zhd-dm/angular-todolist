@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { IUser } from "src/types";
+import { IUser, IValidate } from "src/types";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  saveUser(user: IUser) {
+  saveUser(user: IUser): IValidate {
     let storage: IUser[];
     if(!localStorage.getItem('Users')) {
       localStorage.setItem('Users', JSON.stringify([]));
@@ -24,7 +24,7 @@ export class AuthService {
     return {status: true, message: 'Register successfully'};
   }
 
-  checkUser(user: IUser) {
+  checkUser(user: IUser): IValidate {
     let storage: IUser[] = [];
     if(!localStorage.getItem('Users')) {
       localStorage.setItem('Users', JSON.stringify([]));
@@ -39,20 +39,20 @@ export class AuthService {
     return {status: false, message: 'User not found!'};
   }
 
-  setId() {
+  setId(): number {
     let id: number = Date.now();
     return id;
   }
 
-  checkAuth() {
+  checkAuth(): string {
     let currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
     if (!currentUser || currentUser.length === 0 || currentUser === '') {
-      return localStorage.setItem('loggedIn', JSON.stringify(''));
+      localStorage.setItem('loggedIn', JSON.stringify(''));
     }
     return JSON.parse(localStorage.getItem('loggedIn')!);
   }
 
-  exitUser() {
-    return localStorage.setItem('loggedIn', JSON.stringify(''));
+  exitUser(): void {
+    localStorage.setItem('loggedIn', JSON.stringify(''));
   }
 }

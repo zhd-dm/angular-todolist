@@ -11,13 +11,12 @@ export class CategoryService {
 
   constructor() { }
 
-  getCategories() {
-    let storage: ICategory[] = [];
-    storage = JSON.parse(localStorage.getItem('Categories')!);
+  getCategories(): ICategory[] {
+    let storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
     return storage;
   }
 
-  updateCategory(category: ICategory) {
+  updateCategory(category: ICategory): void {
     let storage: ICategory[] = [];
     storage = JSON.parse(localStorage.getItem('Categories')!);
     for(let i = 0; i < storage.length; i++) {
@@ -25,10 +24,10 @@ export class CategoryService {
         storage[i].name = category.name;
       }
     }
-    return localStorage.setItem('Categories', JSON.stringify(storage));
+    localStorage.setItem('Categories', JSON.stringify(storage));
   }
 
-  saveCategory(newCategory: ICategory) {
+  saveCategory(newCategory: ICategory): IValidate {
     let isValidate: IValidate = this.checkCategory(newCategory.name);
 
     if(isValidate.status){
@@ -40,10 +39,9 @@ export class CategoryService {
     } else {
       return isValidate;
     }
-
   }
 
-  deleteCategory(id: number) {
+  deleteCategory(id: number): void {
     let storage: ICategory[] = [];
     storage = JSON.parse(localStorage.getItem('Categories')!);
     for(let i = 0; i < storage.length; i++) {
@@ -51,10 +49,10 @@ export class CategoryService {
         storage.splice(i, 1);
       }
     }
-    return localStorage.setItem('Categories', JSON.stringify(storage));
+    localStorage.setItem('Categories', JSON.stringify(storage));
   }
 
-  checkCategory(name: string) {
+  checkCategory(name: string): IValidate {
     let storage: ICategory[] = [];
     if(!localStorage.getItem('Categories')) {
       localStorage.setItem('Categories', JSON.stringify(CATEGORIES));
@@ -66,7 +64,7 @@ export class CategoryService {
     return {status: true, message: 'Success'};
   }
 
-  setId() {
+  setId(): number {
     let id: number = Date.now();
     return id;
   }
