@@ -35,7 +35,7 @@ export class EditCategoryComponent implements OnInit {
     }
   }
 
-  updateCategory() {
+  updateCategory(): void {
     this.editedCategory.id = this.categoryForm.value.categoryIdFormControl;
     this.editedCategory.name = this.categoryForm.value.categoryNameFormControl;
     console.log('Send to save: ', this.editedCategory);

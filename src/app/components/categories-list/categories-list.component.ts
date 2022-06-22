@@ -30,21 +30,21 @@ export class CategoriesListComponent implements OnInit {
 
   @ViewChild(MatTable) private categoriesTable: MatTable<ICategory> | undefined;
 
-  openModalEdit(row: any) {
+  openModalEdit(row: any): void {
     let modalEdit = this.dialogRef.open(EditCategoryComponent, { data: row });
     modalEdit.afterClosed().subscribe(() => {
       this.updateTable();
     });
   }
 
-  openModalDelete(row: any) {
+  openModalDelete(row: any): void {
     let modalDelete = this.dialogRef.open(DeleteCategoryComponent, { data: row });
     modalDelete.afterClosed().subscribe(() => {
       this.updateTable();
     });
   }
 
-  updateTable() {
+  updateTable(): void {
     this.table = new MatTableDataSource(this.categoryServise.getCategories());
     this.categoriesTable?.renderRows();
   }

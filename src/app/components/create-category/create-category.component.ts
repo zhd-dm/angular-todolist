@@ -53,7 +53,7 @@ export class CreateCategoryComponent implements OnInit {
     }
   }
 
-  goToCategories() {
+  goToCategories(): void {
     this.router.navigate(['/home/categories']);
     this.dialogRef.close();
   }

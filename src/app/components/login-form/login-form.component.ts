@@ -42,7 +42,7 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  logIn() {
+  logIn(): void {
     let userData: IUser = {
       email: this.loginForm.value.emailFormControl,
       password: this.loginForm.value.passwordFormControl

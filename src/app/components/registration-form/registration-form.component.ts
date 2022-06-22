@@ -39,7 +39,7 @@ export class RegistrationFormComponent implements OnInit {
       });
   }
 
-  registration() {
+  registration(): void {
     let userData: IUser = {
       name: this.registrationForm.value.usernameFormControl,
       email: this.registrationForm.value.emailFormControl,

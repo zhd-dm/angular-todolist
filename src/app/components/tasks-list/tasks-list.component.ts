@@ -34,7 +34,7 @@ export class TasksListComponent implements OnInit, AfterViewInit {
     this.table = new MatTableDataSource(this.tasks);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.table.sort = this.sort;
   }
 
@@ -43,7 +43,7 @@ export class TasksListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTable) private tasksTable: MatTable<ITask> | undefined;
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
-  announceSortChange(sortState: Sort) {
+  announceSortChange(sortState: Sort): void {
     if(sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction} ending`);
     } else {
@@ -51,21 +51,21 @@ export class TasksListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  openModalEdit(row: any) {
+  openModalEdit(row: any): void {
     let modalEdit = this.dialogRef.open(EditTaskComponent, { data: row });
     modalEdit.afterClosed().subscribe(editTask => {
       this.updateTable();
     });
   }
 
-  openModalDelete(row: any) {
+  openModalDelete(row: any): void {
     let modalDelete = this.dialogRef.open(DeleteTaskComponent, { data: row });
     modalDelete.afterClosed().subscribe(deleteTask => {
       this.updateTable();
     });
   }
 
-  updateTable() {
+  updateTable(): void {
     this.table = new MatTableDataSource(this.taskService.getTasks());
     this.table.sort = <MatSort>this.sort;
     this.tasksTable?.renderRows();
