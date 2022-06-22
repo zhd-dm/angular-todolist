@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCategoryComponent } from '../../create-category/create-category.component';
 
@@ -7,14 +7,11 @@ import { CreateCategoryComponent } from '../../create-category/create-category.c
   templateUrl: './button-create-category.component.html',
   styleUrls: ['./button-create-category.component.scss']
 })
-export class ButtonCreateCategoryComponent implements OnInit {
+export class ButtonCreateCategoryComponent {
 
   constructor(public dialogRef: MatDialog) { }
 
-  ngOnInit(): void {
-  }
-
-  openModalCreate() {
+  openModalCreate(): void {
     this.dialogRef.open(CreateCategoryComponent)
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog} from '@angular/material/dialog';
 import { CreateTaskComponent } from '../../create-task/create-task.component';
 
@@ -7,14 +7,11 @@ import { CreateTaskComponent } from '../../create-task/create-task.component';
   templateUrl: './button-create-task.component.html',
   styleUrls: ['./button-create-task.component.scss']
 })
-export class ButtonCreateTaskComponent implements OnInit {
+export class ButtonCreateTaskComponent {
 
   constructor(public dialogRef: MatDialog) { }
 
-  ngOnInit(): void {
-  }
-
-  openModalCreate() {
+  openModalCreate(): void {
     this.dialogRef.open(CreateTaskComponent)
   }
 }

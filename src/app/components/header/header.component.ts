@@ -1,5 +1,5 @@
 // import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,29 +8,18 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   isPhone: Boolean = false;
 
-  currentUser: any = this.authSersice.checkAuth();
+  currentUser: string = this.authSersice.checkAuth();
 
   constructor(
-    // private responsive: BreakpointObserver,
     private authSersice: AuthService,
     private router: Router
   ){}
 
-  ngOnInit(): void {
-    // this.responsive.observe(Breakpoints.HandsetPortrait)
-    //   .subscribe(result => {
-    //     this.isPhone = false;
-    //     if(result.matches) {
-    //       this.isPhone = true;
-    //     }
-    //   })
-  }
-
-  isAuth() {
+  isAuth(): boolean {
     if (!this.currentUser || this.currentUser.length === 0 || this.currentUser === "") {
         return false;
     } else {
@@ -38,7 +27,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  exit() {
+  exit(): void {
     this.router.navigate(['auth/login']);
     return this.authSersice.exitUser();
   }
