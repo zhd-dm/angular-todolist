@@ -1,4 +1,3 @@
-// import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,8 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent {
 
-  isPhone: Boolean = false;
-
+  isPhone: boolean = false;
   currentUser: string = this.authSersice.checkAuth();
 
   constructor(
@@ -29,7 +27,7 @@ export class HeaderComponent {
 
   exit(): void {
     this.router.navigate(['auth/login']);
-    return this.authSersice.exitUser();
+    this.authSersice.exitUser();
   }
 
 }

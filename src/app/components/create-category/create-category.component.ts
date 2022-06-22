@@ -1,27 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { ICategory, IValidate } from 'src/types';
 import { Router } from '@angular/router';
-import { reduce } from 'rxjs';
 
 @Component({
   selector: 'app-create-category',
   templateUrl: './create-category.component.html',
   styleUrls: ['./create-category.component.scss']
 })
-export class CreateCategoryComponent implements OnInit {
+export class CreateCategoryComponent {
 
   createCategoryForm = new FormGroup ({
-    categoryNameFormControl: new FormControl('', [Validators.required, Validators.minLength(3)])
+    name: new FormControl('', [Validators.required, Validators.minLength(3)])
   });
 
-  updateCategoryForm = new FormGroup ({
-    // categoryNameFormControl: new FormControl('', [Validators.required, Validators.minLength(3)])
-  });
-
-  categories: ICategory[] = [];
+  categories: ICategory[] = this.categoryService.getCategories();
 
   constructor(
     private router: Router,
@@ -30,16 +25,14 @@ export class CreateCategoryComponent implements OnInit {
   ) { }
 
   newCategory: ICategory = {
-    id: this.categoryService.setId(),
+    id: 0,
     name: ''
   }
 
-  ngOnInit(): void {
-    this.categories = this.categoryService.getCategories();
-  }
-
   createCategory(): void {
-    this.newCategory.name = this.createCategoryForm.value.categoryNameFormControl;
+    this.newCategory = this.createCategoryForm.value;
+    this.newCategory.id = this.categoryService.setId();
+
     console.log('Send to check: ', this.newCategory);
 
     const isValidate: IValidate = this.categoryService.saveCategory(this.newCategory);
@@ -54,7 +47,7 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   goToCategories(): void {
-    this.router.navigate(['/home/categories']);
+    this.router.navigate(['home/categories']);
     this.dialogRef.close();
   }
 

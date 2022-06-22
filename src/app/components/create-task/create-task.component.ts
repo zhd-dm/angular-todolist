@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/services/category.service';
@@ -10,44 +10,41 @@ import { ICategory, ITask } from 'src/types';
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss']
 })
-export class CreateTaskComponent implements OnInit {
-
-  // @Output() evEmit = new EventEmitter();
+export class CreateTaskComponent {
 
   createTaskForm = new FormGroup ({
-    taskNameFormControl: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    taskDeadlineFormControl: new FormControl('', [Validators.required]),
-    taskCategoryFormControl: new FormControl(''),
-    taskPriorityFormControl: new FormControl('')
-  })
+    name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    deadline: new FormControl('', [Validators.required]),
+    category: new FormControl(''),
+    priority: new FormControl('')
+  });
 
   constructor(
     public dialogRef: MatDialogRef<CreateTaskComponent>,
-    private tasker: TaskService,
+    private taskService: TaskService,
     private categoryService: CategoryService
   ) { }
 
   newTask: ITask = {
-    id: this.tasker.setId(),
+    id: 0,
     name: "",
     deadline: "",
     owner: ""
   }
 
-  categories: ICategory[] = [];
-
-  ngOnInit(): void {
-    this.categories = this.categoryService.getCategories();
-  }
+  categories: ICategory[] = this.categoryService.getCategories();
 
   createTask(): void {
-    this.newTask.name = this.createTaskForm.value.taskNameFormControl;
-    this.newTask.deadline = this.createTaskForm.value.taskDeadlineFormControl;
-    this.newTask.category = this.createTaskForm.value.taskCategoryFormControl;
-    this.newTask.priority = this.createTaskForm.value.taskPriorityFormControl || false;
+    this.newTask = this.createTaskForm.value;
 
-    // this.evEmit.emit(this.newTask);
-    this.tasker.saveTask(this.newTask);
+    this.newTask.id = this.taskService.setId()
+    if(this.createTaskForm.value.priority === '') {
+      this.newTask.priority = false;
+    }
+
+    console.log('Send to create: ', this.newTask);
+
+    this.taskService.saveTask(this.newTask);
     this.dialogRef.close(this.newTask);
   }
 }

@@ -3,26 +3,26 @@
 
     <mat-form-field class="form-group__modal__create-task_task-name" color="accent" appearance="outline">
         <mat-label>Task name:</mat-label>
-        <input type="text" matInput formControlName="taskNameFormControl" placeholder="Create app">
+        <input type="text" matInput formControlName="name" placeholder="Create app">
     </mat-form-field>
 
     <mat-form-field class="form-group__modal__create-task_deadline" color="accent" appearance="outline">
         <mat-label>Deadline:</mat-label>
-        <input type="text" matInput formControlName="taskDeadlineFormControl" [matDatepicker]="picker">
+        <input type="text" matInput formControlName="deadline" [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="form-group__modal__edit-task_category" color="accent" appearance="outline">
         <mat-label>Category:</mat-label>
-        <mat-select formControlName="taskCategoryFormControl">
+        <mat-select formControlName="category">
             <mat-option>Nothing</mat-option>
             <mat-option *ngFor="let category of categories" value={{category.name}}>{{category.name}}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <section class="form-group__modal__create-task_priority">
-        <mat-checkbox formControlName="taskPriorityFormControl" class="example-margin">Priority?</mat-checkbox>
+        <mat-checkbox formControlName="priority" class="example-margin">Priority?</mat-checkbox>
     </section>
 
     <button type="submit" [disabled]="!createTaskForm.valid" mat-raised-button color="accent">Create</button>

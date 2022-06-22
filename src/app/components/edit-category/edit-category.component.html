@@ -3,8 +3,8 @@
 
     <mat-form-field class="form-group__modal__category-task_task-name" color="accent" appearance="outline">
         <mat-label>Task name:</mat-label>
-        <input matInput formControlName="categoryNameFormControl" placeholder="Main category">
+        <input matInput formControlName="name" placeholder="Main category">
     </mat-form-field>
 
-    <button type="submit" mat-raised-button color="accent">Update</button>
+    <button type="submit" [disabled]="!categoryForm.valid" mat-raised-button color="accent">Update</button>
 </form>

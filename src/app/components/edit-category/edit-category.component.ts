@@ -11,10 +11,7 @@ import { ICategory } from 'src/types';
 })
 export class EditCategoryComponent implements OnInit {
 
-  categoryForm = new FormGroup({
-    categoryIdFormControl: new FormControl(''),
-    categoryNameFormControl: new FormControl('')
-  })
+  categoryForm: FormGroup = new FormGroup({});
 
   constructor(
     private dialogRef: MatDialogRef<EditCategoryComponent>,
@@ -29,15 +26,16 @@ export class EditCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.editedCategoryData) {
-      this.categoryForm.controls['categoryIdFormControl'].setValue(this.editedCategoryData.id);
-      this.categoryForm.controls['categoryNameFormControl'].setValue(this.editedCategoryData.name);
+      this.categoryForm = new FormGroup ({
+        id: new FormControl (this.editedCategoryData.id),
+        name: new FormControl (this.editedCategoryData.name, [Validators.required, Validators.minLength(3)])
+      });
       console.log('Old data: ', this.editedCategoryData);
     }
   }
 
   updateCategory(): void {
-    this.editedCategory.id = this.categoryForm.value.categoryIdFormControl;
-    this.editedCategory.name = this.categoryForm.value.categoryNameFormControl;
+    this.editedCategory = this.categoryForm.value;
     console.log('Send to save: ', this.editedCategory);
 
     this.categoryService.updateCategory(this.editedCategory);
