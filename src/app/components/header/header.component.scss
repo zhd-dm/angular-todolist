@@ -3,6 +3,7 @@
     margin-bottom: 60px;
     padding: 20px;
     background-color: $primary;
+    &.is-phone {}
     .header-wrapper__link {
         margin-right: 40px;
         &:last-child {

@@ -18,13 +18,13 @@ export class CategoriesListComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialog,
-    private categoer: CategoryService
+    private categoryServise: CategoryService
   ) { }
 
   displayedColumns: string[] = ['id', 'name', 'settings'];
 
   ngOnInit(): void {
-    this.categories = this.categoer.getCategories();
+    this.categories = this.categoryServise.getCategories();
     this.table = new MatTableDataSource(this.categories);
   }
 
@@ -32,20 +32,20 @@ export class CategoriesListComponent implements OnInit {
 
   openModalEdit(row: any) {
     let modalEdit = this.dialogRef.open(EditCategoryComponent, { data: row });
-    modalEdit.afterClosed().subscribe(editCategory => {
+    modalEdit.afterClosed().subscribe(() => {
       this.updateTable();
     });
   }
 
   openModalDelete(row: any) {
     let modalDelete = this.dialogRef.open(DeleteCategoryComponent, { data: row });
-    modalDelete.afterClosed().subscribe(deleteCategory => {
+    modalDelete.afterClosed().subscribe(() => {
       this.updateTable();
     });
   }
 
   updateTable() {
-    this.table = new MatTableDataSource(this.categoer.getCategories());
+    this.table = new MatTableDataSource(this.categoryServise.getCategories());
     this.categoriesTable?.renderRows();
   }
 }

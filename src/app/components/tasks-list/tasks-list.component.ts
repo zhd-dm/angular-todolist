@@ -25,12 +25,12 @@ export class TasksListComponent implements OnInit, AfterViewInit {
   constructor(
     public dialogRef: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
-    private tasker: TaskService,
+    private taskService: TaskService,
     // private changeDetRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.tasks = this.tasker.getTasks();
+    this.tasks = this.taskService.getTasks();
     this.table = new MatTableDataSource(this.tasks);
   }
 
@@ -66,7 +66,7 @@ export class TasksListComponent implements OnInit, AfterViewInit {
   }
 
   updateTable() {
-    this.table = new MatTableDataSource(this.tasker.getTasks());
+    this.table = new MatTableDataSource(this.taskService.getTasks());
     this.table.sort = <MatSort>this.sort;
     this.tasksTable?.renderRows();
   }

@@ -24,7 +24,7 @@ export class CreateTaskComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CreateTaskComponent>,
     private tasker: TaskService,
-    private categoer: CategoryService
+    private categoryService: CategoryService
   ) { }
 
   newTask: ITask = {
@@ -37,7 +37,7 @@ export class CreateTaskComponent implements OnInit {
   categories: ICategory[] = [];
 
   ngOnInit(): void {
-    this.categories = this.categoer.getCategories();
+    this.categories = this.categoryService.getCategories();
   }
 
   createTask(): void {

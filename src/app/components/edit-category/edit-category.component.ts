@@ -17,9 +17,9 @@ export class EditCategoryComponent implements OnInit {
   })
 
   constructor(
-    public dialogRef: MatDialogRef<EditCategoryComponent>,
+    private dialogRef: MatDialogRef<EditCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public editedCategoryData: any,
-    private categoer: CategoryService
+    private categoryService: CategoryService
   ) { }
 
   editedCategory: ICategory = {
@@ -40,7 +40,7 @@ export class EditCategoryComponent implements OnInit {
     this.editedCategory.name = this.categoryForm.value.categoryNameFormControl;
     console.log('Send to save: ', this.editedCategory);
 
-    this.categoer.updateCategory(this.editedCategory);
+    this.categoryService.updateCategory(this.editedCategory);
     this.dialogRef.close(this.editedCategory);
   }
 

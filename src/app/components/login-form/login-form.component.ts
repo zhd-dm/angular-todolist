@@ -22,8 +22,8 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     private responsive: BreakpointObserver,
-    // private responsiver: ResponsiveService,
-    private logger: AuthService,
+    // private responsiveService: ResponsiveService,
+    private authService: AuthService,
     private router: Router
   ){}
 
@@ -47,9 +47,9 @@ export class LoginFormComponent implements OnInit {
       email: this.loginForm.value.emailFormControl,
       password: this.loginForm.value.passwordFormControl
     };
-    console.log('Send to check: ', this.userData);
+    console.log('Send to check: ', userData);
 
-    let isValidate: IValidate = this.logger.checkUser(userData);
+    let isValidate: IValidate = this.authService.checkUser(userData);
 
     if(isValidate.status) {
       console.log(isValidate.message);

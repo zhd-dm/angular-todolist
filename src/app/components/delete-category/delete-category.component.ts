@@ -12,7 +12,7 @@ export class DeleteCategoryComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DeleteCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public deletedCategoryData: any,
-    private categoer: CategoryService
+    private categoryService: CategoryService
   ) { }
 
   id!: number;
@@ -24,7 +24,7 @@ export class DeleteCategoryComponent implements OnInit {
   }
 
   deleteCategory(): void {
-    this.categoer.deleteCategory(this.id);
-    this.dialogRef.close(this.categoer.getCategories());
+    this.categoryService.deleteCategory(this.id);
+    this.dialogRef.close(this.categoryService.getCategories());
   }
 }

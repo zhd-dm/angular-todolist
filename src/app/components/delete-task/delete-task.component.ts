@@ -12,7 +12,7 @@ export class DeleteTaskComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DeleteTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public deletedTaskData: any,
-    private tasker: TaskService
+    private taskService: TaskService
   ) { }
 
   id!: number;
@@ -24,8 +24,8 @@ export class DeleteTaskComponent implements OnInit {
   }
 
   deleteTask(): void {
-    this.tasker.deleteTask(this.id);
-    this.dialogRef.close(this.tasker.getTasks());
+    this.taskService.deleteTask(this.id);
+    this.dialogRef.close(this.taskService.getTasks());
   }
 
 }

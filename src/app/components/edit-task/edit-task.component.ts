@@ -24,8 +24,8 @@ export class EditTaskComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public editedTaskData: any,
-    private tasker: TaskService,
-    private categoer: CategoryService
+    private taskService: TaskService,
+    private categoryService: CategoryService
     ) {}
 
   editedTask: ITask = {
@@ -38,9 +38,10 @@ export class EditTaskComponent implements OnInit {
   categories: ICategory[] = [];
 
   ngOnInit(): void {
-    this.categories = this.categoer.getCategories();
+    this.categories = this.categoryService.getCategories();
 
     if(this.editedTaskData) {
+      // console.log(this.taskForm.controls)
       this.taskForm.controls['taskIdFormControl'].setValue(this.editedTaskData.id);
       this.taskForm.controls['taskNameFormControl'].setValue(this.editedTaskData.name);
       this.taskForm.controls['taskDeadlineFormControl'].setValue(this.editedTaskData.deadline);
@@ -58,7 +59,7 @@ export class EditTaskComponent implements OnInit {
     this.editedTask.priority = this.taskForm.value.taskPriorityFormControl || false;
     console.log('Send to save: ', this.editedTask);
 
-    this.tasker.updateTask(this.editedTask);
+    this.taskService.updateTask(this.editedTask);
     this.dialogRef.close(this.editedTask);
   }
 

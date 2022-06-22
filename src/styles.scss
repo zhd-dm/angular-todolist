@@ -16,11 +16,11 @@ body {
 }
 
 .container {
-    margin: 30px auto;
     &:first-child {
         margin: auto;
     }
     .content-wrapper {
+        padding: 0 300px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -28,7 +28,7 @@ body {
 }
 
 .table-list {
-    width: 70vw;
+    width: 100%;
     padding: 30px;
     .table-list__priority_true {
         text-align: center;
@@ -58,7 +58,7 @@ body {
 
 .form-group__modal {
     background: none;
-    width: 300px;
+    max-width: 300px;
     border: none;
     padding: 0;
     margin: 0;

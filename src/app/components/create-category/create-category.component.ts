@@ -26,23 +26,23 @@ export class CreateCategoryComponent implements OnInit {
   constructor(
     private router: Router,
     private dialogRef: MatDialogRef<CreateCategoryComponent>,
-    private categoer: CategoryService
+    private categoryService: CategoryService
   ) { }
 
   newCategory: ICategory = {
-    id: this.categoer.setId(),
+    id: this.categoryService.setId(),
     name: ''
   }
 
   ngOnInit(): void {
-    this.categories = this.categoer.getCategories();
+    this.categories = this.categoryService.getCategories();
   }
 
   createCategory(): void {
     this.newCategory.name = this.createCategoryForm.value.categoryNameFormControl;
     console.log('Send to check: ', this.newCategory);
 
-    let isValidate: IValidate = this.categoer.saveCategory(this.newCategory);
+    let isValidate: IValidate = this.categoryService.saveCategory(this.newCategory);
 
     if(isValidate.status) {
       console.log(isValidate.message);

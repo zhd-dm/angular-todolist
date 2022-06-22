@@ -24,8 +24,8 @@ export class RegistrationFormComponent implements OnInit {
 
   constructor(
     private responsive: BreakpointObserver,
-    // private responsiver: ResponsiveService,
-    private logger: AuthService,
+    // private responsiveService: ResponsiveService,
+    private authService: AuthService,
     private router: Router
   ){}
 
@@ -47,7 +47,7 @@ export class RegistrationFormComponent implements OnInit {
     };
     console.log('Send to check: ', userData)
 
-    let isValidate: IValidate = this.logger.saveUser(userData);
+    let isValidate: IValidate = this.authService.saveUser(userData);
 
     if(isValidate.status) {
       console.log(isValidate.message);
