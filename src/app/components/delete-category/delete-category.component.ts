@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/services/category.service';
+import { ICategory } from 'src/types';
 
 @Component({
   selector: 'app-delete-category',
@@ -9,13 +10,13 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class DeleteCategoryComponent implements OnInit {
 
+  id!: number;
+
   constructor(
     public dialogRef: MatDialogRef<DeleteCategoryComponent>,
-    @Inject(MAT_DIALOG_DATA) public deletedCategoryData: any,
+    @Inject(MAT_DIALOG_DATA) public deletedCategoryData: ICategory,
     private categoryService: CategoryService
   ) { }
-
-  id!: number;
 
   ngOnInit(): void {
     if(this.deletedCategoryData) {

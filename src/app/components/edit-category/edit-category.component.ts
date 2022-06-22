@@ -18,7 +18,7 @@ export class EditCategoryComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<EditCategoryComponent>,
-    @Inject(MAT_DIALOG_DATA) public editedCategoryData: any,
+    @Inject(MAT_DIALOG_DATA) public editedCategoryData: ICategory,
     private categoryService: CategoryService
   ) { }
 

@@ -23,7 +23,7 @@ export class EditTaskComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EditTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public editedTaskData: any,
+    @Inject(MAT_DIALOG_DATA) public editedTaskData: ITask,
     private taskService: TaskService,
     private categoryService: CategoryService
     ) {}

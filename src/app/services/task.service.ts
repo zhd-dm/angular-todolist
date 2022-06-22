@@ -28,7 +28,7 @@ export class TaskService {
     const currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
 
     for(let i = 0; i < storage.length; i++) {
-      if(task.id == storage[i].id) {
+      if(task.id === storage[i].id) {
         storage[i] = task;
         storage[i].owner = currentUser;
       }
@@ -49,7 +49,7 @@ export class TaskService {
   deleteTask(id: number): void {
     const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
     for(let i = 0; i < storage.length; i++) {
-      if(id == storage[i].id) {
+      if(id === storage[i].id) {
         storage.splice(i, 1);
       }
     }

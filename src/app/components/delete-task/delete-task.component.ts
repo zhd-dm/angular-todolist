@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TaskService } from 'src/app/services/task.service';
+import { ITask } from 'src/types';
 
 @Component({
   selector: 'app-delete-task',
@@ -11,7 +12,7 @@ export class DeleteTaskComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DeleteTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public deletedTaskData: any,
+    @Inject(MAT_DIALOG_DATA) public deletedTaskData: ITask,
     private taskService: TaskService
   ) { }
 

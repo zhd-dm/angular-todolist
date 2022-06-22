@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CategoryService } from 'src/app/services/category.service';
@@ -11,10 +11,10 @@ import { EditCategoryComponent } from '../edit-category/edit-category.component'
   templateUrl: './categories-list.component.html',
   styleUrls: ['./categories-list.component.scss']
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent {
 
-  categories: ICategory[] = [];
-  table: any;
+  categories: ICategory[] = this.categoryServise.getCategories();
+  table = new MatTableDataSource(this.categories);
 
   constructor(
     private dialogRef: MatDialog,
@@ -23,21 +23,16 @@ export class CategoriesListComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'settings'];
 
-  ngOnInit(): void {
-    this.categories = this.categoryServise.getCategories();
-    this.table = new MatTableDataSource(this.categories);
-  }
-
   @ViewChild(MatTable) private categoriesTable: MatTable<ICategory> | undefined;
 
-  openModalEdit(row: any): void {
+  openModalEdit(row: ICategory): void {
     const modalEdit = this.dialogRef.open(EditCategoryComponent, { data: row });
     modalEdit.afterClosed().subscribe(() => {
       this.updateTable();
     });
   }
 
-  openModalDelete(row: any): void {
+  openModalDelete(row: ICategory): void {
     const modalDelete = this.dialogRef.open(DeleteCategoryComponent, { data: row });
     modalDelete.afterClosed().subscribe(() => {
       this.updateTable();

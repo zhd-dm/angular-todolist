@@ -19,7 +19,7 @@ export class CategoryService {
   updateCategory(category: ICategory): void {
     const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
     for(let i = 0; i < storage.length; i++) {
-      if(category.id == storage[i].id) {
+      if(category.id === storage[i].id) {
         storage[i].name = category.name;
       }
     }
@@ -43,7 +43,7 @@ export class CategoryService {
   deleteCategory(id: number): void {
     const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
     for(let i = 0; i < storage.length; i++) {
-      if(id == storage[i].id) {
+      if(id === storage[i].id) {
         storage.splice(i, 1);
       }
     }

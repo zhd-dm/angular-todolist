@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -17,10 +17,10 @@ import { ITask } from 'src/types';
   styleUrls: ['./tasks-list.component.scss'],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListComponent implements OnInit, AfterViewInit {
+export class TasksListComponent implements AfterViewInit {
 
-  tasks: ITask[] = [];
-  table: any;                 // ?????
+  tasks: ITask[] = this.taskService.getTasks();
+  table: MatTableDataSource<ITask> = new MatTableDataSource(this.tasks);
 
   constructor(
     public dialogRef: MatDialog,
@@ -28,11 +28,6 @@ export class TasksListComponent implements OnInit, AfterViewInit {
     private taskService: TaskService,
     // private changeDetRef: ChangeDetectorRef
   ) {}
-
-  ngOnInit(): void {
-    this.tasks = this.taskService.getTasks();
-    this.table = new MatTableDataSource(this.tasks);
-  }
 
   ngAfterViewInit(): void {
     this.table.sort = this.sort;
@@ -51,16 +46,16 @@ export class TasksListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  openModalEdit(row: any): void {
+  openModalEdit(row: ITask): void {
     const modalEdit = this.dialogRef.open(EditTaskComponent, { data: row });
-    modalEdit.afterClosed().subscribe(editTask => {
+    modalEdit.afterClosed().subscribe(() => {
       this.updateTable();
     });
   }
 
-  openModalDelete(row: any): void {
+  openModalDelete(row: ITask): void {
     const modalDelete = this.dialogRef.open(DeleteTaskComponent, { data: row });
-    modalDelete.afterClosed().subscribe(deleteTask => {
+    modalDelete.afterClosed().subscribe(() => {
       this.updateTable();
     });
   }
@@ -71,7 +66,4 @@ export class TasksListComponent implements OnInit, AfterViewInit {
     this.tasksTable?.renderRows();
   }
 
-  // onTaskCreate(event: any) {
-  //   console.log('onTaskCreate', event)
-  // }
 }
