@@ -9,8 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent {
 
-  isPhone: boolean = false;
-  currentUser: string = this.authSersice.checkAuth();
+  isPhone = false;
+  currentUser = '';
 
   constructor(
     private authSersice: AuthService,
@@ -18,6 +18,7 @@ export class HeaderComponent {
   ){}
 
   isAuth(): boolean {
+    this.currentUser = this.authSersice.checkAuth();
     if (!this.currentUser || this.currentUser.length === 0 || this.currentUser === "") {
         return false;
     } else {
