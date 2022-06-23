@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { RegistrationPageComponent } from './components/pages/registration-page/registration-page.component';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
+import { CategoriesPageComponent } from './components/pages/categories-page/categories-page.component';
 
 import { HeaderComponent } from './components/header/header.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
@@ -26,7 +27,6 @@ import { ButtonCreateCategoryComponent } from './components/UI/button-create-cat
 import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { DeleteCategoryComponent } from './components/delete-category/delete-category.component';
-import { CategoriesPageComponent } from './components/pages/categories-page/categories-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import { CategoriesPageComponent } from './components/pages/categories-page/cate
     LoginPageComponent,
     RegistrationPageComponent,
     HomePageComponent,
+    CategoriesPageComponent,
     HeaderComponent,
     RegistrationFormComponent,
     LoginFormComponent,
@@ -46,8 +47,7 @@ import { CategoriesPageComponent } from './components/pages/categories-page/cate
     ButtonCreateCategoryComponent,
     EditCategoryComponent,
     CategoriesListComponent,
-    DeleteCategoryComponent,
-    CategoriesPageComponent
+    DeleteCategoryComponent
   ],
   imports: [
     BrowserModule,
