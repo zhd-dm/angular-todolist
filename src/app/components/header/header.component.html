@@ -1,5 +1,5 @@
 <div class="container">
-    <ng-container *ngIf="isAuth()">
+    <ng-container *ngIf="isAuth">
         <header class="header-wrapper">
             <div class="content-wrapper" [ngClass]="{'is-phone': isPhone}">
                 <a routerLink="/home" class="header-wrapper__link">
@@ -12,7 +12,7 @@
         </header>
     </ng-container>
 
-    <ng-container *ngIf="!isAuth()">
+    <ng-container *ngIf="!isAuth">
         <header class="header-wrapper">
             <div class="content-wrapper" [ngClass]="{'is-phone': isPhone}">
                 <a routerLink="/auth/login" class="header-wrapper__link">
