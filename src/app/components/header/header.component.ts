@@ -26,7 +26,7 @@ export class HeaderComponent implements DoCheck{
   }
 
   checkAuth(): boolean {
-    this.changeDetRef.checkNoChanges();
+    this.changeDetRef.reattach();
     this.currentUser = this.authSersice.checkAuth();
     if (!this.currentUser || this.currentUser.length === 0 || this.currentUser === "") {
         return false;
