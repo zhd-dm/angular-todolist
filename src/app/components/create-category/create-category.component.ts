@@ -47,7 +47,7 @@ export class CreateCategoryComponent {
   }
 
   goToCategories(): void {
-    this.router.navigate(['home/categories']);
+    this.router.navigate(['categories']);
     this.dialogRef.close();
   }
 

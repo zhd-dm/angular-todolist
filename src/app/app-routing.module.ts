@@ -9,7 +9,7 @@ import { RegistrationPageComponent } from './components/pages/registration-page/
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
-  { path: 'home/categories', component: CategoriesPageComponent },
+  { path: 'categories', component: CategoriesPageComponent },
   { path: 'auth/login', component: LoginPageComponent },
   { path: 'auth/registration', component: RegistrationPageComponent },
   { path: '**', redirectTo: '/home' }
