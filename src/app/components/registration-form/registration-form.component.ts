@@ -16,6 +16,7 @@ import { IUser, IValidate } from 'src/types';
 export class RegistrationFormComponent implements OnInit {
 
   isPhone: Boolean = false;
+  isValidate: IValidate = {status: false, message: ''};
 
   registrationForm = new FormGroup ({
     name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(12)]),
@@ -45,14 +46,10 @@ export class RegistrationFormComponent implements OnInit {
     const userData: IUser = this.registrationForm.value;
     console.log('Send to check: ', userData)
 
-    const isValidate: IValidate = this.authService.saveUser(userData);
+    this.isValidate = this.authService.saveUser(userData);
 
-    if(isValidate.status) {
-      console.log(isValidate.message);
+    if(this.isValidate.status) {
       this.router.navigate(['home']);
-    }
-    if(!isValidate.status) {
-      console.error(isValidate.message);
     }
   }
 }

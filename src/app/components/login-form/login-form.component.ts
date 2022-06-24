@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { ResponsiveService } from 'src/app/services/responsive.service';
 import { IUser, IValidate } from 'src/types';
 
 @Component({
@@ -15,6 +14,7 @@ import { IUser, IValidate } from 'src/types';
 export class LoginFormComponent implements OnInit {
 
   isPhone: Boolean = false;
+  isValidate: IValidate = {status: false, message: ''};
 
   loginForm = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),
@@ -24,7 +24,6 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private changeDetRef: ChangeDetectorRef,
     private responsive: BreakpointObserver,
-    // private responsiveService: ResponsiveService,
     private authService: AuthService,
     private router: Router
   ){}
@@ -48,14 +47,10 @@ export class LoginFormComponent implements OnInit {
     const userData: IUser = this.loginForm.value;
     console.log('Send to check: ', userData);
 
-    const isValidate: IValidate = this.authService.checkUser(userData);
+    this.isValidate = this.authService.checkUser(userData);
 
-    if(isValidate.status) {
-      console.log(isValidate.message);
+    if(this.isValidate.status) {
       this.router.navigate(['home']);
-    }
-    if(!isValidate.status) {
-      console.error(isValidate.message);
     }
   }
 }
