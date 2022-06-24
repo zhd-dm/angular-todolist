@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -15,28 +15,28 @@ import { ITask } from 'src/types';
   selector: 'app-tasks-list',
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TasksListComponent implements AfterViewInit {
 
   tasks: ITask[] = this.taskService.getTasks();
   table: MatTableDataSource<ITask> = new MatTableDataSource(this.tasks);
 
+  displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
+
   constructor(
     public dialogRef: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
     private taskService: TaskService,
-    // private changeDetRef: ChangeDetectorRef
+    private changeDetRef: ChangeDetectorRef
   ) {}
+
+  @ViewChild(MatTable) private tasksTable: MatTable<ITask> | undefined;
+  @ViewChild(MatSort) sort: MatSort = new MatSort;
 
   ngAfterViewInit(): void {
     this.table.sort = this.sort;
   }
-
-  displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
-
-  @ViewChild(MatTable) private tasksTable: MatTable<ITask> | undefined;
-  @ViewChild(MatSort) sort: MatSort = new MatSort;
 
   announceSortChange(sortState: Sort): void {
     if(sortState.direction) {
@@ -63,6 +63,9 @@ export class TasksListComponent implements AfterViewInit {
   updateTable(): void {
     this.table = new MatTableDataSource(this.taskService.getTasks());
     this.table.sort = <MatSort>this.sort;
+
+    // Обновляет не сразу, а после нескольких mousemove'ов
+    // this.changeDetRef.checkNoChanges();
     this.tasksTable?.renderRows();
   }
 

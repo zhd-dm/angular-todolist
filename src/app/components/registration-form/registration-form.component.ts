@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,19 +10,21 @@ import { IUser, IValidate } from 'src/types';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.scss']
+  styleUrls: ['./registration-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrationFormComponent implements OnInit {
 
   isPhone: Boolean = false;
 
   registrationForm = new FormGroup ({
-    usernameFormControl: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(12)]),
-    emailFormControl: new FormControl('', [Validators.required, Validators.email]),
-    passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)])
+    name: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(12)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)])
   });
 
   constructor(
+    private changeDetRef: ChangeDetectorRef,
     private responsive: BreakpointObserver,
     // private responsiveService: ResponsiveService,
     private authService: AuthService,
@@ -40,11 +42,7 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   registration(): void {
-    const userData: IUser = {
-      name: this.registrationForm.value.usernameFormControl,
-      email: this.registrationForm.value.emailFormControl,
-      password: this.registrationForm.value.passwordFormControl
-    };
+    const userData: IUser = this.registrationForm.value;
     console.log('Send to check: ', userData)
 
     const isValidate: IValidate = this.authService.saveUser(userData);

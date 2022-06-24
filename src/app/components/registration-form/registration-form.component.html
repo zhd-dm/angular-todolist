@@ -4,7 +4,7 @@
 
     <mat-form-field class="form-group__registration_username" color="accent" appearance="outline">
         <mat-label>Username</mat-label>
-        <input type="text" matInput formControlName="usernameFormControl" placeholder="Username">
+        <input type="text" matInput formControlName="name" placeholder="Username">
         <!-- <mat-error *ngIf="usernameFormControl.invalid">
             Username must be between 5 and 12 characters
         </mat-error>
@@ -15,7 +15,7 @@
 
     <mat-form-field class="form-group__registration_email" color="accent" appearance="outline">
         <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="emailFormControl" placeholder="Email">
+        <input type="email" matInput formControlName="email" placeholder="Email">
         <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Please enter a valid email address
         </mat-error>
@@ -26,7 +26,7 @@
 
     <mat-form-field class="form-group__registration_password" color="accent" appearance="outline">
         <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="passwordFormControl" placeholder="Password">
+        <input type="password" matInput formControlName="password" placeholder="Password">
         <!-- <mat-error *ngIf="passwordFormControl.invalid">
             Password must be between 6 and 16 characters
         </mat-error>

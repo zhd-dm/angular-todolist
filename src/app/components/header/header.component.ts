@@ -1,11 +1,12 @@
-import { Component, DoCheck } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements DoCheck{
 
@@ -14,6 +15,7 @@ export class HeaderComponent implements DoCheck{
   isAuth = false;
 
   constructor(
+    private changeDetRef: ChangeDetectorRef,
     private authSersice: AuthService,
     private router: Router
   ){}
@@ -24,6 +26,7 @@ export class HeaderComponent implements DoCheck{
   }
 
   checkAuth(): boolean {
+    this.changeDetRef.checkNoChanges();
     this.currentUser = this.authSersice.checkAuth();
     if (!this.currentUser || this.currentUser.length === 0 || this.currentUser === "") {
         return false;
