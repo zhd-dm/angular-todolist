@@ -42,8 +42,7 @@ export class AuthService {
   }
 
   setId(): number {
-    const id: number = Date.now();
-    return id;
+    return Date.now();
   }
 
   checkAuth(): string {

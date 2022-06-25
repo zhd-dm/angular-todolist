@@ -52,8 +52,7 @@ export class CategoryService {
   }
 
   setId(): number {
-    const id: number = Date.now();
-    return id;
+    return Date.now();
   }
 
   protected checkCategory(name: string): IValidate {

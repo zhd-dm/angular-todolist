@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 import { ITask } from 'src/types';
 
@@ -58,7 +59,6 @@ export class TaskService {
   }
 
   setId(): number {
-    const id: number = Date.now();
-    return id;
+    return Date.now();
   }
 }
