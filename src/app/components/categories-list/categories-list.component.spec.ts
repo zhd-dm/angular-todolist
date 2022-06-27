@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { CategoriesListComponent } from './categories-list.component';
 
 describe('CategoriesListComponent', () => {
@@ -8,6 +10,7 @@ describe('CategoriesListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ MatDialogModule ],
       declarations: [ CategoriesListComponent ]
     })
     .compileComponents();

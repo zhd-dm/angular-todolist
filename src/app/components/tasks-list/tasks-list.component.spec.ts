@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { TasksListComponent } from './tasks-list.component';
 
 describe('TasksListComponent', () => {
@@ -8,6 +10,7 @@ describe('TasksListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [MatDialogModule],
       declarations: [ TasksListComponent ]
     })
     .compileComponents();

@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { ButtonCreateTaskComponent } from './button-create-task.component';
 
 describe('ButtonCreateTaskComponent', () => {
@@ -8,6 +10,7 @@ describe('ButtonCreateTaskComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ MatDialogModule ],
       declarations: [ ButtonCreateTaskComponent ]
     })
     .compileComponents();

@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { EditTaskComponent } from './edit-task.component';
 
 describe('EditTaskComponent', () => {
@@ -8,7 +10,12 @@ describe('EditTaskComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditTaskComponent ]
+      imports: [ MatDialogModule ],
+      declarations: [ EditTaskComponent ],
+      providers: [
+        {provide: MatDialogRef, useValue: {}},
+        {provide: MAT_DIALOG_DATA, useValue: {}}
+      ]
     })
     .compileComponents();
   });

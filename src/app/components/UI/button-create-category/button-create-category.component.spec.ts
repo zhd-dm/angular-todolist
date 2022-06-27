@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { ButtonCreateCategoryComponent } from './button-create-category.component';
 
 describe('ButtonCreateCategoryComponent', () => {
@@ -8,6 +10,7 @@ describe('ButtonCreateCategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ MatDialogModule ],
       declarations: [ ButtonCreateCategoryComponent ]
     })
     .compileComponents();
