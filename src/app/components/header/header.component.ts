@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements DoCheck{
+export class HeaderComponent implements DoCheck, OnDestroy {
 
   isPhone = false;
   currentUser = '';
@@ -25,8 +25,11 @@ export class HeaderComponent implements DoCheck{
     this.isAuth = this.checkAuth();
   }
 
+  ngOnDestroy(): void {
+    console.log('ngOnDestroy')
+  }
+
   checkAuth(): boolean {
-    this.changeDetRef.reattach();
     this.currentUser = this.authSersice.checkAuth();
     if (!this.currentUser || this.currentUser.length === 0 || this.currentUser === "") {
         return false;

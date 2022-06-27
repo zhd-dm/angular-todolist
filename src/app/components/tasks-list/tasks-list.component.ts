@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy, DoCheck, OnChanges } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,7 @@ import { ITask } from 'src/types';
   styleUrls: ['./tasks-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListComponent implements AfterViewInit {
+export class TasksListComponent implements OnChanges, AfterViewInit {
 
   tasks: ITask[] = this.taskService.getTasks();
   table: MatTableDataSource<ITask> = new MatTableDataSource(this.tasks);
@@ -33,6 +33,11 @@ export class TasksListComponent implements AfterViewInit {
 
   @ViewChild(MatTable) private tasksTable: MatTable<ITask> | undefined;
   @ViewChild(MatSort) sort: MatSort = new MatSort;
+
+  ngOnChanges(): void {
+    console.log('ngOnChanges');
+    this.updateTable();
+  }
 
   ngAfterViewInit(): void {
     this.table.sort = this.sort;

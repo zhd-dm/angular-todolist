@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +28,8 @@ import { ButtonCreateCategoryComponent } from './components/UI/button-create-cat
 import { EditCategoryComponent } from './components/edit-category/edit-category.component';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { DeleteCategoryComponent } from './components/delete-category/delete-category.component';
+
+import { FakeBackendInterceptor } from './interceptors/fake-backend.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,9 @@ import { DeleteCategoryComponent } from './components/delete-category/delete-cat
     ReactiveFormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
