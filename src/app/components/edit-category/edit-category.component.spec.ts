@@ -20,6 +20,6 @@ describe('EditCategoryComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component.updateCategory).toBeTruthy();
   });
 });
