@@ -4,12 +4,6 @@
     <mat-form-field class="form-group__modal__edit-task_task-name" color="accent" appearance="outline">
         <mat-label>Task name:</mat-label>
         <input matInput formControlName="name" placeholder="Create app">
-        <!-- <mat-error *ngIf="taskForm.get('taskNameFormControl').hasError('required')">
-            Please enter a task name
-        </mat-error>
-        <mat-error *ngIf="taskForm.get('taskNameFormControl').invalid">
-            Task name must be more than 5 characters
-        </mat-error> -->
     </mat-form-field>
 
     <mat-form-field class="form-group__modal__edit-task_deadline" color="accent" appearance="outline">
@@ -17,9 +11,6 @@
         <input matInput formControlName="deadline" [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <!-- <mat-error *ngIf="taskDeadlineFormControl.hasError('required')">
-            Choose date
-        </mat-error> -->
     </mat-form-field>
 
     <mat-form-field class="form-group__modal__edit-task_category" color="accent" appearance="outline">
