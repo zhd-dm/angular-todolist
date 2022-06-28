@@ -26,8 +26,7 @@ export class TaskService {
   }
 
   deleteTask(task: any): Observable<any> {
-    debugger
-    return this.http.delete<number>(this.URL + ':' + task.id);
+    return this.http.delete<ITask>(this.URL + ':' + task.id, task);
   }
 
   setId(): number {

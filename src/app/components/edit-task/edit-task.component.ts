@@ -49,7 +49,7 @@ export class EditTaskComponent implements OnInit {
 
   updateTask(): void {
     this.editedTask = this.taskForm.value;
-    console.log('Send to save: ', this.taskForm.value);
+    console.log('Send to save: ', this.editedTask);
 
     this.taskService.updateTask(this.editedTask)
       .subscribe({

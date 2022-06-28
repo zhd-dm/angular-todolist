@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -22,7 +22,6 @@ export class LoginFormComponent implements OnInit {
   })
 
   constructor(
-    private changeDetRef: ChangeDetectorRef,
     private responsive: BreakpointObserver,
     private authService: AuthService,
     private router: Router

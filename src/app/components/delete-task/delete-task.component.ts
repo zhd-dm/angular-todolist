@@ -32,17 +32,5 @@ export class DeleteTaskComponent implements OnInit {
         next: task => this.dialogRef.close(task),
         error: error => console.error(error)
       })
-
-    this.dialogRef.close(this.taskService.getTasks());
   }
-  // updateTask(): void {
-  //   this.editedTask = this.taskForm.value;
-  //   console.log('Send to save: ', this.taskForm.value);
-
-  //   this.taskService.updateTask(this.editedTask)
-  //     .subscribe({
-  //       next: editedTask => this.dialogRef.close(editedTask),
-  //       error: error => console.error(error)
-  //     })
-  // }
 }
