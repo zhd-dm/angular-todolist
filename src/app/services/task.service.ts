@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -10,18 +11,22 @@ import { TASKS } from "../../data";
 })
 export class TaskService {
 
-  constructor() { }
+  URL = 'http://api/tasks';
 
-  getTasks(): ITask[] {
-    if(!localStorage.getItem('Tasks') || JSON.parse(localStorage.getItem('Tasks')!).length === 0) {
-      localStorage.setItem('Tasks', JSON.stringify(TASKS))
-    }
+  constructor(private http: HttpClient) { }
 
-    let storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
-    const currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
+  getTasks(): Observable<any> {
+    // if(!localStorage.getItem('Tasks') || JSON.parse(localStorage.getItem('Tasks')!).length === 0) {
+    //   localStorage.setItem('Tasks', JSON.stringify(TASKS))
+    // }
 
-    storage = storage.filter(task => task.owner === currentUser || task.owner === "");
-    return storage;
+    // let storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
+    // const currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
+
+    // storage = storage.filter(task => task.owner === currentUser || task.owner === "");
+    // return storage;
+
+    return this.http.get(this.URL);
   }
 
   updateTask(task: ITask): void {

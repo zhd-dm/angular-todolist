@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy, DoCheck, OnChanges } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy, DoCheck, OnChanges, OnInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -10,6 +10,7 @@ import { EditTaskComponent } from '../edit-task/edit-task.component';
 
 import { TaskService } from 'src/app/services/task.service';
 import { ITask } from 'src/types';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tasks-list',
@@ -17,10 +18,12 @@ import { ITask } from 'src/types';
   styleUrls: ['./tasks-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListComponent implements OnChanges, AfterViewInit {
+export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
 
-  tasks: ITask[] = this.taskService.getTasks();
-  table: MatTableDataSource<ITask> = new MatTableDataSource(this.tasks);
+  // tasks: Observable<ITask[]> = this.taskService.getTasks();
+  // table: Observable<MatTableDataSource<ITask[]>> = new MatTableDataSource(this.tasks);
+
+  dataSource = new MatTableDataSource<ITask>();
 
   displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
 
@@ -34,13 +37,25 @@ export class TasksListComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatTable) private tasksTable: MatTable<ITask> | undefined;
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
+  ngOnInit(): void {
+    this.getTasks();
+  }
+
   ngOnChanges(): void {
     console.log('ngOnChanges');
     this.updateTable();
   }
 
   ngAfterViewInit(): void {
-    this.table.sort = this.sort;
+    // this.table.sort = this.sort;
+  }
+
+  getTasks() {
+    this.taskService.getTasks()
+      .subscribe(res => {
+        console.log(res);
+        this.dataSource.data = res;
+      })
   }
 
   announceSortChange(sortState: Sort): void {
@@ -66,8 +81,8 @@ export class TasksListComponent implements OnChanges, AfterViewInit {
   }
 
   updateTable(): void {
-    this.table = new MatTableDataSource(this.taskService.getTasks());
-    this.table.sort = <MatSort>this.sort;
+    // this.table = new MatTableDataSource(this.taskService.getTasks());
+    // this.table.sort = <MatSort>this.sort;
 
     // Обновляет не сразу, а после нескольких mousemove'ов
     // this.changeDetRef.checkNoChanges();

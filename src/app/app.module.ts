@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -54,6 +55,7 @@ import { FakeBackendInterceptor } from './interceptors/fake-backend.interceptor'
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
