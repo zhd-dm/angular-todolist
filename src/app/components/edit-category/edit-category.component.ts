@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
-import { ICategory } from 'src/types';
+import { ICategory, IValidate } from 'src/types';
 
 @Component({
   selector: 'app-edit-category',
@@ -38,8 +39,17 @@ export class EditCategoryComponent implements OnInit {
     this.editedCategory = this.categoryForm.value;
     console.log('Send to save: ', this.editedCategory);
 
-    this.categoryService.updateCategory(this.editedCategory);
-    this.dialogRef.close(this.editedCategory);
-  }
+    const isValidate: Observable<IValidate> = this.categoryService.updateCategory(this.editedCategory);
 
+    isValidate.subscribe({
+        next: response => {
+          if(response.status) {
+            console.log(response.message);
+            this.dialogRef.close(this.editedCategory);
+          }
+          if(!response.status) console.error(response.message);
+        },
+        error: error => console.log(error)
+      })
+  }
 }

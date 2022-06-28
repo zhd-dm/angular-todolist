@@ -9,7 +9,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log(request.url);
+    // console.log(request.url);
+    // console.error(request.body)
 
     if(request.url.indexOf('auth') >= 0) {
       if(request.url.includes(authURL)) {
@@ -29,7 +30,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
 
       if(request.url.includes(taskURL + ':' + request.body.id)) {
-        console.log(request.body.id)
         switch(request.method) {
           case 'PUT': return this.editTask(request.body);
           case 'DELETE': return this.deleteTask(request.body.id);
@@ -47,7 +47,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       if(request.url.includes(categoryURL + ':' + request.body.id)) {
         switch(request.method) {
-          case 'PATCH': return this.editCategory(request.body);
+          case 'PUT': return this.editCategory(request.body);
           case 'DELETE': return this.deleteCategory(request.body.id);
         }
       }
@@ -57,14 +57,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 
   private getUsers(): Observable<HttpEvent<IUser[]>> {
-    console.log('getUsers')
     return of(
       new HttpResponse<IUser[]>({status: 200, body: []})
     )
   }
 
   private saveUser(user: IUser): Observable<HttpEvent<IUser>> {
-    console.log('saveUser')
     return of(
       new HttpResponse<IUser>({status: 200, body: user})
     )
@@ -98,7 +96,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 
   private editTask(task: ITask): Observable<HttpEvent<ITask>> {
-    console.log('editTask()');
     const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
     const currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
 
@@ -117,7 +114,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 
   private deleteTask(id: number): Observable<HttpEvent<number>> {
-    console.log('deleteTask()');
     const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
 
     for(let i = 0; i < storage.length; i++) {
@@ -142,13 +138,32 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 
   private saveCategory(newCategory: ICategory): Observable<HttpEvent<IValidate>> {
-    console.log('saveCategory()');
 
     const isValidate: IValidate = this.checkCategory(newCategory.name);
 
     if(isValidate.status){
       const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
       storage.push(newCategory);
+      localStorage.setItem('Categories', JSON.stringify(storage));
+    }
+
+    return of(
+      new HttpResponse<IValidate>({status: 200, body: isValidate})
+    )
+  }
+
+  private editCategory(category: ICategory): Observable<HttpEvent<IValidate>> {
+
+    const isValidate: IValidate = this.checkCategory(category.name);
+
+    if(isValidate.status) {
+      const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
+
+      for(let i = 0; i < storage.length; i++) {
+        if(category.id === storage[i].id) {
+          storage[i].name = category.name;
+        }
+      }
       localStorage.setItem('Categories', JSON.stringify(storage));
     }
 
@@ -170,15 +185,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     return {status: true, message: 'Successful category creation'};
   }
 
-  private editCategory(category: ICategory): Observable<HttpEvent<ICategory>> {
-    console.log('editCategory')
-    return of(
-      new HttpResponse<ICategory>({status: 200, body: category})
-    )
-  }
-
   private deleteCategory(id: number): Observable<HttpEvent<number>> {
-    console.log('deleteCategory')
     return of(
       new HttpResponse<number>({status: 200})
     )

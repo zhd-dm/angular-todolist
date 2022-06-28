@@ -17,15 +17,8 @@ export class CategoryService {
     return this.http.get<ICategory[]>(this.URL);
   }
 
-  updateCategory(category: ICategory): void {
-    const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
-    for(let i = 0; i < storage.length; i++) {
-      if(category.id === storage[i].id) {
-        storage[i].name = category.name;
-      }
-    }
-
-    localStorage.setItem('Categories', JSON.stringify(storage));
+  updateCategory(category: ICategory): Observable<IValidate> {
+    return this.http.put<IValidate>(this.URL, category);
   }
 
   saveCategory(newCategory: ICategory): Observable<IValidate> {
