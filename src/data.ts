@@ -44,4 +44,8 @@ export const CATEGORIES: ICategory[] = [
     id: 1,
     name: "Test category"
   }
-]
+];
+
+export const authURL = 'http://api/auth';
+export const taskURL = 'http://api/tasks';
+export const categoryURL = 'http://api/categories';

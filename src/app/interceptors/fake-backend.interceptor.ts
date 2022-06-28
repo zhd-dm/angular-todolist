@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { ICategory, ITask, IUser, IValidate } from 'src/types';
-import { CATEGORIES, TASKS } from 'src/data';
+import { authURL, CATEGORIES, categoryURL, TASKS, taskURL } from 'src/data';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if(request.url.includes('http://api/auth')) {
+
+    if(request.url.includes(authURL)) {
       switch(request.method) {
         case 'GET':
           return this.getUsers();
@@ -18,7 +19,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
     }
 
-    if(request.url.includes('http://api/tasks')) {
+    if(request.url.includes(taskURL)) {
       switch(request.method) {
         case 'GET':
           return this.getTasks();
@@ -27,19 +28,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
     }
 
-    // if(request.url.includes(`http://api/tasks:${request.body.id}`)) {
-    //   console.log(request.body.id)
-    //   switch(request.method) {
-    //     case 'PUT':
-    //       debugger
-    //       return this.editTask(request.body);
-    //     case 'DELETE':
-    //       debugger
-    //       return this.deleteTask(request.body.id);
-    //   }
-    // }
+    if(request.url.includes(taskURL + ':' + request.body.id)) {
+      console.log(request.body.id)
+      switch(request.method) {
+        case 'PUT':
+          debugger
+          return this.editTask(request.body);
+        case 'DELETE':
+          debugger
+          return this.deleteTask(request.body.id);
+      }
+    }
 
-    if(request.url.includes('http://api/categories')) {
+    if(request.url.includes(categoryURL)) {
       switch(request.method) {
         case 'GET':
           return this.getCategories();
@@ -48,12 +49,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
     }
 
-    if(request.url.includes(`http://api/categories:${request.body.id}`)) {
+    if(request.url.includes(categoryURL + ':' + request.body.id)) {
       switch(request.method) {
         case 'PATCH':
           return this.editCategory(request.body);
         case 'DELETE':
-          return this.deleteCategory(request.body);
+          return this.deleteCategory(request.body.id);
       }
     }
     return next.handle(request);
@@ -154,7 +155,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
       storage.push(newCategory);
       localStorage.setItem('Categories', JSON.stringify(storage));
-      // return isValidate;
     }
 
     return of(
