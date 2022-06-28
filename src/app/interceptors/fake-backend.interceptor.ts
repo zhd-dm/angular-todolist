@@ -18,7 +18,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
     }
 
-    if(request.url.includes('/api/tasks')) {
+    if(request.url.includes('http://api/tasks/')) {
+
       switch(request.method) {
         case 'GET':
           return this.getTasks();
@@ -30,8 +31,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     if(request.url.includes(`api/tasks:${request.body.id}`)) {
       console.log(request.body.id)
       switch(request.method) {
-        case 'PATCH':
-          debugger
+        case 'PUT':
           return this.editTask(request.body);
         case 'DELETE':
           return this.deleteTask(request.body.id);
@@ -87,15 +87,32 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     )
   }
 
-  private saveTask(task: ITask): Observable<HttpEvent<ITask>> {
-    console.log('saveTask')
+  private saveTask(newTask: ITask): Observable<HttpEvent<ITask>> {
+    console.log('saveTask');
+    const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
+    const currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
+
+    newTask.owner = currentUser;
+    storage.push(newTask);
+    localStorage.setItem('Tasks', JSON.stringify(storage));
     return of(
-      new HttpResponse<ITask>({status: 200, body: task})
+      new HttpResponse<ITask>({status: 200, body: newTask})
     )
   }
 
   private editTask(task: ITask): Observable<HttpEvent<ITask>> {
-    console.log('editTask')
+    console.log('editTask()');
+    const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
+    const currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
+
+    for(let i = 0; i < storage.length; i++) {
+      if(task.id === storage[i].id) {
+        storage[i] = task;
+        storage[i].owner = currentUser;
+      }
+    }
+
+    localStorage.setItem('Tasks', JSON.stringify(storage));
     return of(
       new HttpResponse<ITask>({status: 200, body: task})
     )

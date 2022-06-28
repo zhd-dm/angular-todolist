@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/services/category.service';
@@ -10,7 +10,7 @@ import { ICategory, ITask } from 'src/types';
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss']
 })
-export class CreateTaskComponent {
+export class CreateTaskComponent implements OnDestroy {
 
   createTaskForm = new FormGroup ({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -18,12 +18,6 @@ export class CreateTaskComponent {
     category: new FormControl(''),
     priority: new FormControl('')
   });
-
-  constructor(
-    public dialogRef: MatDialogRef<CreateTaskComponent>,
-    private taskService: TaskService,
-    private categoryService: CategoryService
-  ) { }
 
   newTask: ITask = {
     id: 0,
@@ -34,17 +28,30 @@ export class CreateTaskComponent {
 
   categories: ICategory[] = this.categoryService.getCategories();
 
+  constructor(
+    public dialogRef: MatDialogRef<CreateTaskComponent>,
+    private taskService: TaskService,
+    private categoryService: CategoryService
+  ) { }
+
+  ngOnDestroy(): void {
+    // this.taskService.saveTask().unsubscribe
+  }
+
   createTask(): void {
     this.newTask = this.createTaskForm.value;
+    this.newTask.id = this.taskService.setId();
 
-    this.newTask.id = this.taskService.setId()
     if(this.createTaskForm.value.priority === '') {
       this.newTask.priority = false;
     }
 
     console.log('Send to create: ', this.newTask);
 
-    this.taskService.saveTask(this.newTask);
-    this.dialogRef.close(this.newTask);
+    this.taskService.saveTask(this.newTask)
+      .subscribe({
+        next: newTask => this.dialogRef.close(newTask),
+        error: error => console.log(error)
+      })
   }
 }
