@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
 import { TaskService } from 'src/app/services/task.service';
 import { ICategory, ITask } from 'src/types';
@@ -26,7 +27,7 @@ export class CreateTaskComponent implements OnDestroy {
     owner: ""
   }
 
-  categories: ICategory[] = this.categoryService.getCategories();
+  categories: Observable<ICategory[]> = this.categoryService.getCategories();
 
   constructor(
     public dialogRef: MatDialogRef<CreateTaskComponent>,
@@ -51,7 +52,7 @@ export class CreateTaskComponent implements OnDestroy {
     this.taskService.saveTask(this.newTask)
       .subscribe({
         next: newTask => this.dialogRef.close(newTask),
-        error: error => console.log(error)
+        error: error => console.error(error)
       })
   }
 }

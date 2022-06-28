@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { CATEGORIES } from 'src/data';
 
@@ -9,11 +11,12 @@ import { ICategory, IValidate } from 'src/types';
 })
 export class CategoryService {
 
-  constructor() { }
+  URL = 'http://api/categories';
 
-  getCategories(): ICategory[] {
-    const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
-    return storage;
+  constructor(private http: HttpClient) { }
+
+  getCategories(): Observable<ICategory[]> {
+    return this.http.get<ICategory[]>(this.URL);
   }
 
   updateCategory(category: ICategory): void {

@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category.service';
 import { ICategory, IValidate } from 'src/types';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-category',
@@ -16,7 +17,7 @@ export class CreateCategoryComponent {
     name: new FormControl('', [Validators.required, Validators.minLength(3)])
   });
 
-  categories: ICategory[] = this.categoryService.getCategories();
+  categories: Observable<ICategory[]> = this.categoryService.getCategories();
 
   constructor(
     private router: Router,

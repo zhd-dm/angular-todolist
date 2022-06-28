@@ -1,8 +1,9 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
 import { CategoryService } from 'src/app/services/category.service';
 import { ICategory } from 'src/types';
 import { DeleteCategoryComponent } from '../delete-category/delete-category.component';
@@ -14,12 +15,13 @@ import { EditCategoryComponent } from '../edit-category/edit-category.component'
   styleUrls: ['./categories-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoriesListComponent implements AfterViewInit {
+export class CategoriesListComponent implements OnInit, AfterViewInit {
 
-  categories: ICategory[] = this.categoryServise.getCategories();
-  table: MatTableDataSource<ICategory> = new MatTableDataSource(this.categories);
+  dataSource!: MatTableDataSource<ICategory>;
 
   displayedColumns: string[] = ['id', 'name', 'settings'];
+
+  @ViewChild(MatSort) sort: MatSort = new MatSort;
 
   constructor(
     private changeDetRef: ChangeDetectorRef,
@@ -28,11 +30,23 @@ export class CategoriesListComponent implements AfterViewInit {
     private categoryServise: CategoryService
   ) { }
 
-  @ViewChild(MatTable) private categoriesTable: MatTable<ICategory> | undefined;
-  @ViewChild(MatSort) sort: MatSort = new MatSort;
+  ngOnInit(): void {
+    this.getCategories();
+  }
 
   ngAfterViewInit(): void {
-    this.table.sort = this.sort;
+    this.dataSource.sort = this.sort;
+  }
+
+  getCategories(): void {
+    this.categoryServise.getCategories()
+      .subscribe({
+        next: categories => {
+          this.dataSource = new MatTableDataSource(categories);
+          this.dataSource.sort = this.sort;
+        },
+        error: error => console.error(error)
+      })
   }
 
   announceSortChange(sortState: Sort): void {
@@ -58,7 +72,7 @@ export class CategoriesListComponent implements AfterViewInit {
   }
 
   updateTable(): void {
-    this.table = new MatTableDataSource(this.categoryServise.getCategories());
-    this.categoriesTable?.renderRows();
+    this.getCategories();
+    this.dataSource.sort = <MatSort>this.sort;
   }
 }

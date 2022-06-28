@@ -1,6 +1,6 @@
 <div class="container">
     <div class="content-wrapper">
-        <table mat-table [dataSource]="table" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8 table-list">
+        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8 table-list">
 
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by ID"> ID </th>
