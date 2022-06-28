@@ -9,54 +9,50 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    console.log(request.url);
 
-    if(request.url.includes(authURL)) {
-      switch(request.method) {
-        case 'GET':
-          return this.getUsers();
-        case 'POST':
-          return this.saveUser(request.body);
+    if(request.url === authURL) {
+      if(request.url.includes(authURL)) {
+        switch(request.method) {
+          case 'GET': return this.getUsers();
+          case 'POST': return this.saveUser(request.body);
+        }
       }
     }
 
-    if(request.url.includes(taskURL)) {
-      switch(request.method) {
-        case 'GET':
-          return this.getTasks();
-        case 'POST':
-          return this.saveTask(request.body);
+    if(request.url === taskURL) {
+      if(request.url.includes(taskURL)) {
+        switch(request.method) {
+          case 'GET': return this.getTasks();
+          case 'POST': return this.saveTask(request.body);
+        }
+      }
+
+      if(request.url.includes(taskURL + ':' + request.body.id)) {
+        console.log(request.body.id)
+        switch(request.method) {
+          case 'PUT': return this.editTask(request.body);
+          case 'DELETE': return this.deleteTask(request.body.id);
+        }
       }
     }
 
-    if(request.url.includes(taskURL + ':' + request.body.id)) {
-      console.log(request.body.id)
-      switch(request.method) {
-        case 'PUT':
-          debugger
-          return this.editTask(request.body);
-        case 'DELETE':
-          debugger
-          return this.deleteTask(request.body.id);
+    if(request.url === categoryURL) {
+      if(request.url.includes(categoryURL)) {
+        switch(request.method) {
+          case 'GET': return this.getCategories();
+          case 'POST': return this.saveCategory(request.body);
+        }
+      }
+
+      if(request.url.includes(categoryURL + ':' + request.body.id)) {
+        switch(request.method) {
+          case 'PATCH': return this.editCategory(request.body);
+          case 'DELETE': return this.deleteCategory(request.body.id);
+        }
       }
     }
 
-    if(request.url.includes(categoryURL)) {
-      switch(request.method) {
-        case 'GET':
-          return this.getCategories();
-        case 'POST':
-          return this.saveCategory(request.body);
-      }
-    }
-
-    if(request.url.includes(categoryURL + ':' + request.body.id)) {
-      switch(request.method) {
-        case 'PATCH':
-          return this.editCategory(request.body);
-        case 'DELETE':
-          return this.deleteCategory(request.body.id);
-      }
-    }
     return next.handle(request);
   }
 
@@ -138,7 +134,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 
   private getCategories(): Observable<HttpEvent<ICategory[]>> {
-    console.log('getCategories()');
     const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
 
     return of(
