@@ -53,7 +53,6 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
   getTasks() {
     this.taskService.getTasks()
       .subscribe(res => {
-        console.log(res);
         this.dataSource.data = res;
       })
   }

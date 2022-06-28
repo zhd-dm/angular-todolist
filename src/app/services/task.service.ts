@@ -29,18 +29,19 @@ export class TaskService {
     return this.http.get(this.URL);
   }
 
-  updateTask(task: ITask): void {
-    const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
-    const currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
+  updateTask(task: ITask): Observable<any> {
+    // const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
+    // const currentUser: string = JSON.parse(localStorage.getItem('loggedIn')!);
 
-    for(let i = 0; i < storage.length; i++) {
-      if(task.id === storage[i].id) {
-        storage[i] = task;
-        storage[i].owner = currentUser;
-      }
-    }
+    // for(let i = 0; i < storage.length; i++) {
+    //   if(task.id === storage[i].id) {
+    //     storage[i] = task;
+    //     storage[i].owner = currentUser;
+    //   }
+    // }
 
-    localStorage.setItem('Tasks', JSON.stringify(storage));
+    // localStorage.setItem('Tasks', JSON.stringify(storage));
+    return this.http.patch<ITask>(this.URL + ':' + task.id, task);
   }
 
   saveTask(newTask: ITask): void {
