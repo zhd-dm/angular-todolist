@@ -36,20 +36,47 @@ export class CreateCategoryComponent {
 
     console.log('Send to check: ', this.newCategory);
 
-    const isValidate: IValidate = this.categoryService.saveCategory(this.newCategory);
+    const isValidate: Observable<IValidate> = this.categoryService.saveCategory(this.newCategory);
 
-    if(isValidate.status) {
-      console.log(isValidate.message);
-      this.dialogRef.close();
-    }
-    if(!isValidate.status) {
-      console.error(isValidate.message);
-    }
+    // if(isValidate.status) {
+    //   console.log(isValidate.message);
+    //   this.dialogRef.close();
+    // }
+    // if(!isValidate.status) {
+    //   console.error(isValidate.message);
+    // }
+    isValidate.subscribe({
+      next: response => {
+        if(response.status) {
+          console.log(response.message);
+          this.dialogRef.close();
+        }
+        if(!response.status) console.error(response.message);
+      },
+      error: error => console.error(error)
+    })
   }
 
   goToCategories(): void {
     this.router.navigate(['categories']);
     this.dialogRef.close();
   }
+
+  // createTask(): void {
+  //   this.newTask = this.createTaskForm.value;
+  //   this.newTask.id = this.taskService.setId();
+
+  //   if(this.createTaskForm.value.priority === '') {
+  //     this.newTask.priority = false;
+  //   }
+
+  //   console.log('Send to create: ', this.newTask);
+
+  //   this.taskService.saveTask(this.newTask)
+  //     .subscribe({
+  //       next: newTask => this.dialogRef.close(newTask),
+  //       error: error => console.error(error)
+  //     })
+  // }
 
 }

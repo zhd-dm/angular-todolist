@@ -30,17 +30,18 @@ export class CategoryService {
     localStorage.setItem('Categories', JSON.stringify(storage));
   }
 
-  saveCategory(newCategory: ICategory): IValidate {
-    const isValidate: IValidate = this.checkCategory(newCategory.name);
+  saveCategory(newCategory: ICategory): Observable<IValidate> {
+    // const isValidate: IValidate = this.checkCategory(newCategory.name);
 
-    if(isValidate.status){
-      const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
-      storage.push(newCategory);
-      localStorage.setItem('Categories', JSON.stringify(storage));
-      return isValidate;
-    }
+    // if(isValidate.status){
+    //   const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
+    //   storage.push(newCategory);
+    //   localStorage.setItem('Categories', JSON.stringify(storage));
+    //   return isValidate;
+    // }
 
-    return isValidate;
+    // return isValidate;
+    return this.http.post<IValidate>(this.URL, newCategory);
   }
 
   deleteCategory(id: number): void {
@@ -58,17 +59,17 @@ export class CategoryService {
     return Date.now();
   }
 
-  protected checkCategory(name: string): IValidate {
-    if(!localStorage.getItem('Categories')) {
-      localStorage.setItem('Categories', JSON.stringify(CATEGORIES));
-    }
+  // protected checkCategory(name: string): IValidate {
+  //   if(!localStorage.getItem('Categories')) {
+  //     localStorage.setItem('Categories', JSON.stringify(CATEGORIES));
+  //   }
 
-    const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
-    for(let i = 0; i < storage.length; i++) {
-      if(name === storage[i].name) return {status: false, message: 'Category name is busy!'};
-    }
+  //   const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
+  //   for(let i = 0; i < storage.length; i++) {
+  //     if(name === storage[i].name) return {status: false, message: 'Category name is busy!'};
+  //   }
 
-    return {status: true, message: 'Success'};
-  }
+  //   return {status: true, message: 'Success'};
+  // }
 
 }

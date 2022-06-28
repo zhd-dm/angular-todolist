@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { ICategory, ITask, IUser } from 'src/types';
-import { TASKS } from 'src/data';
+import { ICategory, ITask, IUser, IValidate } from 'src/types';
+import { CATEGORIES, TASKS } from 'src/data';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -145,11 +145,34 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     )
   }
 
-  private saveCategory(category: ICategory): Observable<HttpEvent<ICategory>> {
-    console.log('saveCategory')
+  private saveCategory(newCategory: ICategory): Observable<HttpEvent<IValidate>> {
+    console.log('saveCategory()');
+
+    const isValidate: IValidate = this.checkCategory(newCategory.name);
+
+    if(isValidate.status){
+      const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
+      storage.push(newCategory);
+      localStorage.setItem('Categories', JSON.stringify(storage));
+      // return isValidate;
+    }
+
     return of(
-      new HttpResponse<ICategory>({status: 200, body: category})
+      new HttpResponse<IValidate>({status: 200, body: isValidate})
     )
+  }
+
+  protected checkCategory(name: string): IValidate {
+    if(!localStorage.getItem('Categories')) {
+      localStorage.setItem('Categories', JSON.stringify(CATEGORIES));
+    }
+
+    const storage: ICategory[] = JSON.parse(localStorage.getItem('Categories')!);
+    for(let i = 0; i < storage.length; i++) {
+      if(name === storage[i].name) return {status: false, message: 'Category name is busy!'};
+    }
+
+    return {status: true, message: 'Successful category creation'};
   }
 
   private editCategory(category: ICategory): Observable<HttpEvent<ICategory>> {
