@@ -48,6 +48,7 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     // this.table.sort = this.sort;
+    this.dataSource.sort = this.sort;
   }
 
   getTasks() {
@@ -80,8 +81,8 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   updateTable(): void {
-    // this.table = new MatTableDataSource(this.taskService.getTasks());
-    // this.table.sort = <MatSort>this.sort;
+    this.dataSource = new MatTableDataSource(this.getTasks()!);
+    this.dataSource.sort = <MatSort>this.sort;
 
     // Обновляет не сразу, а после нескольких mousemove'ов
     // this.changeDetRef.checkNoChanges();
