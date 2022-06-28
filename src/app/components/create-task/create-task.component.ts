@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { ICategory, ITask } from 'src/types';
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss']
 })
-export class CreateTaskComponent implements OnDestroy {
+export class CreateTaskComponent {
 
   createTaskForm = new FormGroup ({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
@@ -34,10 +34,6 @@ export class CreateTaskComponent implements OnDestroy {
     private taskService: TaskService,
     private categoryService: CategoryService
   ) { }
-
-  ngOnDestroy(): void {
-    // this.taskService.saveTask().unsubscribe
-  }
 
   createTask(): void {
     this.newTask = this.createTaskForm.value;

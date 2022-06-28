@@ -1,10 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { ResponsiveService } from 'src/app/services/responsive.service';
 import { IUser, IValidate } from 'src/types';
 
 @Component({
@@ -25,9 +24,7 @@ export class RegistrationFormComponent implements OnInit {
   });
 
   constructor(
-    private changeDetRef: ChangeDetectorRef,
     private responsive: BreakpointObserver,
-    // private responsiveService: ResponsiveService,
     private authService: AuthService,
     private router: Router
   ){}

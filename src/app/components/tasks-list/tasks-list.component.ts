@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy, DoCheck, OnChanges, OnInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ChangeDetectionStrategy, OnChanges, OnInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -10,7 +10,6 @@ import { EditTaskComponent } from '../edit-task/edit-task.component';
 
 import { TaskService } from 'src/app/services/task.service';
 import { ITask } from 'src/types';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tasks-list',
@@ -29,8 +28,7 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(
     public dialogRef: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
-    private taskService: TaskService,
-    private changeDetRef: ChangeDetectorRef
+    private taskService: TaskService
   ) {}
 
   ngOnInit(): void {

@@ -4,8 +4,6 @@ import { Observable, of } from 'rxjs';
 
 import { ITask } from 'src/types';
 
-import { TASKS } from "../../data";
-
 @Injectable({
   providedIn: 'root'
 })

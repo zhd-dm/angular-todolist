@@ -1,9 +1,8 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 import { CategoryService } from 'src/app/services/category.service';
 import { ICategory } from 'src/types';
 import { DeleteCategoryComponent } from '../delete-category/delete-category.component';
@@ -24,7 +23,6 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort;
 
   constructor(
-    private changeDetRef: ChangeDetectorRef,
     private dialogRef: MatDialog,
     private _liveAnnouncer: LiveAnnouncer,
     private categoryServise: CategoryService

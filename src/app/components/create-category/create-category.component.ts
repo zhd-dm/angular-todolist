@@ -38,13 +38,6 @@ export class CreateCategoryComponent {
 
     const isValidate: Observable<IValidate> = this.categoryService.saveCategory(this.newCategory);
 
-    // if(isValidate.status) {
-    //   console.log(isValidate.message);
-    //   this.dialogRef.close();
-    // }
-    // if(!isValidate.status) {
-    //   console.error(isValidate.message);
-    // }
     isValidate.subscribe({
       next: response => {
         if(response.status) {
@@ -61,22 +54,4 @@ export class CreateCategoryComponent {
     this.router.navigate(['categories']);
     this.dialogRef.close();
   }
-
-  // createTask(): void {
-  //   this.newTask = this.createTaskForm.value;
-  //   this.newTask.id = this.taskService.setId();
-
-  //   if(this.createTaskForm.value.priority === '') {
-  //     this.newTask.priority = false;
-  //   }
-
-  //   console.log('Send to create: ', this.newTask);
-
-  //   this.taskService.saveTask(this.newTask)
-  //     .subscribe({
-  //       next: newTask => this.dialogRef.close(newTask),
-  //       error: error => console.error(error)
-  //     })
-  // }
-
 }

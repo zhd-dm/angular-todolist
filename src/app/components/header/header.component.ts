@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,14 +8,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements DoCheck, OnDestroy {
+export class HeaderComponent implements DoCheck {
 
   isPhone = false;
   currentUser = '';
   isAuth = false;
 
   constructor(
-    private changeDetRef: ChangeDetectorRef,
     private authSersice: AuthService,
     private router: Router
   ){}
@@ -23,10 +22,6 @@ export class HeaderComponent implements DoCheck, OnDestroy {
   // Слишком много вызовов - переделать
   ngDoCheck(): void {
     this.isAuth = this.checkAuth();
-  }
-
-  ngOnDestroy(): void {
-    console.log('ngOnDestroy')
   }
 
   checkAuth(): boolean {
