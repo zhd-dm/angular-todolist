@@ -16,17 +16,33 @@ export class DeleteTaskComponent implements OnInit {
     private taskService: TaskService
   ) { }
 
-  id!: number;
+  task = { id: 0 };
 
   ngOnInit(): void {
     if(this.deletedTaskData) {
-      this.id = this.deletedTaskData.id
+      this.task.id = this.deletedTaskData.id;
     }
   }
 
   deleteTask(): void {
-    this.taskService.deleteTask(this.id);
+    console.log('Send to delete: ', this.task);
+
+    this.taskService.deleteTask(this.task)
+      .subscribe({
+        next: task => this.dialogRef.close(task),
+        error: error => console.error(error)
+      })
+
     this.dialogRef.close(this.taskService.getTasks());
   }
+  // updateTask(): void {
+  //   this.editedTask = this.taskForm.value;
+  //   console.log('Send to save: ', this.taskForm.value);
 
+  //   this.taskService.updateTask(this.editedTask)
+  //     .subscribe({
+  //       next: editedTask => this.dialogRef.close(editedTask),
+  //       error: error => console.error(error)
+  //     })
+  // }
 }

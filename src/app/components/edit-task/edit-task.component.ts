@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ICategory, ITask } from 'src/types';
 import { TaskService } from 'src/app/services/task.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-task',
@@ -26,10 +27,11 @@ export class EditTaskComponent implements OnInit {
     id: 0,
     name: "",
     deadline: "",
-    owner: ""
+    owner: "",
+    category: ""
   }
 
-  categories: ICategory[] = this.categoryService.getCategories();
+  categories: Observable<ICategory[]> = this.categoryService.getCategories();
 
   ngOnInit(): void {
     if(this.editedTaskData) {
@@ -49,8 +51,10 @@ export class EditTaskComponent implements OnInit {
     this.editedTask = this.taskForm.value;
     console.log('Send to save: ', this.taskForm.value);
 
-    this.taskService.updateTask(this.editedTask);
-    this.dialogRef.close(this.editedTask);
+    this.taskService.updateTask(this.editedTask)
+      .subscribe({
+        next: editedTask => this.dialogRef.close(editedTask),
+        error: error => console.error(error)
+      })
   }
-
 }

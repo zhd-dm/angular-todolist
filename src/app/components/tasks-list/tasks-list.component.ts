@@ -82,7 +82,6 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
   updateTable(): void {
     this.getTasks();
     this.dataSource.sort = <MatSort>this.sort;
-
   }
 
 }
