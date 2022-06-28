@@ -24,7 +24,7 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
 
   displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
 
-  @ViewChild(MatSort) sort: MatSort = new MatSort();
+  @ViewChild(MatSort) sort: MatSort = new MatSort;
 
   constructor(
     public dialogRef: MatDialog,
@@ -80,12 +80,9 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   updateTable(): void {
-    // this.dataSource = new MatTableDataSource(this.getTasks()!);
-    // this.dataSource.sort = <MatSort>this.sort;
+    this.getTasks();
+    this.dataSource.sort = <MatSort>this.sort;
 
-    // Обновляет не сразу, а после нескольких mousemove'ов
-    // this.changeDetRef.checkNoChanges();
-    // this.tasksTable?.renderRows();
   }
 
 }
