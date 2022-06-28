@@ -20,12 +20,11 @@ import { Observable } from 'rxjs';
 })
 export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
 
-  // tasks: Observable<ITask[]> = this.taskService.getTasks();
-  // table: Observable<MatTableDataSource<ITask[]>> = new MatTableDataSource(this.tasks);
-
-  dataSource = new MatTableDataSource<ITask>();
+  dataSource!: MatTableDataSource<ITask>;
 
   displayedColumns: string[] = ['id', 'name', 'deadline', 'priority', 'category', 'settings'];
+
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   constructor(
     public dialogRef: MatDialog,
@@ -33,9 +32,6 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
     private taskService: TaskService,
     private changeDetRef: ChangeDetectorRef
   ) {}
-
-  @ViewChild(MatTable) private tasksTable: MatTable<ITask> | undefined;
-  @ViewChild(MatSort) sort: MatSort = new MatSort;
 
   ngOnInit(): void {
     this.getTasks();
@@ -47,14 +43,17 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.table.sort = this.sort;
     this.dataSource.sort = this.sort;
   }
 
-  getTasks() {
+  getTasks(): void {
     this.taskService.getTasks()
-      .subscribe(res => {
-        this.dataSource.data = res;
+      .subscribe({
+        next: tasks => {
+          this.dataSource = new MatTableDataSource(tasks);
+          this.dataSource.sort = this.sort;
+        },
+        error: error => console.log(error)
       })
   }
 
@@ -81,12 +80,12 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   updateTable(): void {
-    this.dataSource = new MatTableDataSource(this.getTasks()!);
-    this.dataSource.sort = <MatSort>this.sort;
+    // this.dataSource = new MatTableDataSource(this.getTasks()!);
+    // this.dataSource.sort = <MatSort>this.sort;
 
     // Обновляет не сразу, а после нескольких mousemove'ов
     // this.changeDetRef.checkNoChanges();
-    this.tasksTable?.renderRows();
+    // this.tasksTable?.renderRows();
   }
 
 }
