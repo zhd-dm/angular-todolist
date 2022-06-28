@@ -11,7 +11,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     console.log(request.url);
 
-    if(request.url === authURL) {
+    if(request.url.indexOf('auth') >= 0) {
       if(request.url.includes(authURL)) {
         switch(request.method) {
           case 'GET': return this.getUsers();
@@ -20,7 +20,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
     }
 
-    if(request.url === taskURL) {
+    if(request.url.indexOf('tasks') >= 0) {
       if(request.url.includes(taskURL)) {
         switch(request.method) {
           case 'GET': return this.getTasks();
@@ -37,7 +37,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
     }
 
-    if(request.url === categoryURL) {
+    if(request.url.indexOf('categories') >= 0) {
       if(request.url.includes(categoryURL)) {
         switch(request.method) {
           case 'GET': return this.getCategories();
