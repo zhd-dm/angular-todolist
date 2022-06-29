@@ -114,15 +114,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 
   private deleteTask(id: number): Observable<HttpEvent<number>> {
-    const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
+    // const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
 
-    for(let i = 0; i < storage.length; i++) {
-      if(id === storage[i].id) {
-        storage.splice(i, 1);
-      }
-    }
+    // for(let i = 0; i < storage.length; i++) {
+    //   if(id === storage[i].id) {
+    //     storage.splice(i, 1);
+    //   }
+    // }
 
-    localStorage.setItem('Tasks', JSON.stringify(storage));
+    // localStorage.setItem('Tasks', JSON.stringify(storage));
 
     return of(
       new HttpResponse<number>({status: 200})

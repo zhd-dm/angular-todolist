@@ -25,8 +25,17 @@ export class TaskService {
     return this.http.post<ITask>(this.URL, newTask);
   }
 
-  deleteTask(task: any): Observable<any> {
-    return this.http.delete<ITask>(this.URL + ':' + task.id, task);
+  deleteTask(task: any): void {
+    const storage: ITask[] = JSON.parse(localStorage.getItem('Tasks')!);
+
+    for(let i = 0; i < storage.length; i++) {
+      if(task.id === storage[i].id) {
+        storage.splice(i, 1);
+      }
+    }
+
+    localStorage.setItem('Tasks', JSON.stringify(storage));
+    // return this.http.delete<ITask>(this.URL + ':' + task.id, task);
   }
 
   setId(): number {
