@@ -1,9 +1,13 @@
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-
 import { MatDialogRef } from '@angular/material/dialog';
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CreateTaskComponent } from './create-task.component';
 
@@ -13,7 +17,10 @@ describe('CreateTaskComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, ReactiveFormsModule],
+      imports: [
+        HttpClientModule, ReactiveFormsModule, MatSelectModule,
+        MatCheckboxModule, MatInputModule, BrowserAnimationsModule
+      ],
       declarations: [CreateTaskComponent],
       providers: [
         {provide: MatDialogRef, useValue: {}}
@@ -29,7 +36,7 @@ describe('CreateTaskComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,9 +1,13 @@
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EditTaskComponent } from './edit-task.component';
 
@@ -13,7 +17,11 @@ describe('EditTaskComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatDialogModule, HttpClientModule, ReactiveFormsModule],
+      imports: [
+        MatDialogModule, HttpClientModule, ReactiveFormsModule,
+        MatSelectModule, MatInputModule, MatCheckboxModule,
+        BrowserAnimationsModule
+      ],
       declarations: [EditTaskComponent],
       providers: [
         {provide: MatDialogRef, useValue: {}},
@@ -30,7 +38,7 @@ describe('EditTaskComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
