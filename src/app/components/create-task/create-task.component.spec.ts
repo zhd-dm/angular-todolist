@@ -39,4 +39,20 @@ describe('CreateTaskComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Форма валидна', async () => {
+    component.createTaskForm.controls['name'].setValue('Create App');
+    component.createTaskForm.controls['deadline'].setValue('123456');
+    component.createTaskForm.controls['priority'].setValue('2022-06-22T21:00:00.000Z');
+    component.createTaskForm.controls['category'].setValue('Main');
+    expect(component.createTaskForm.valid).toBeTruthy();
+  });
+
+  it('Форма невалидна', async () => {
+    component.createTaskForm.controls['name'].setValue('');
+    component.createTaskForm.controls['deadline'].setValue('');
+    component.createTaskForm.controls['priority'].setValue('');
+    component.createTaskForm.controls['category'].setValue('');
+    expect(component.createTaskForm.valid).toBeFalsy();
+  });
 });

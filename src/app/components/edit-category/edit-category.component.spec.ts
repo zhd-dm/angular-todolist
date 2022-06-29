@@ -33,4 +33,14 @@ describe('EditCategoryComponent', () => {
   it('should create', () => {
     expect(component.updateCategory).toBeTruthy();
   });
+
+  it('Форма валидна', async () => {
+    component.categoryForm.controls['name'].setValue('Second');
+    expect(component.categoryForm.valid).toBeTruthy();
+  });
+
+  it('Форма невалидна', async () => {
+    component.categoryForm.controls['name'].setValue('');
+    expect(component.categoryForm.valid).toBeFalsy();
+  });
 });
