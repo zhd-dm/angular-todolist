@@ -3,7 +3,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { DeleteTaskComponent } from '../delete-task/delete-task.component';
 import { EditTaskComponent } from '../edit-task/edit-task.component';
