@@ -5,6 +5,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { CreateCategoryComponent } from './create-category.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('CreateCategoryComponent', () => {
   let component: CreateCategoryComponent;
@@ -16,7 +17,8 @@ describe('CreateCategoryComponent', () => {
       declarations: [CreateCategoryComponent],
       providers: [
         {provide: MatDialogRef, useValue: {}}
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   });
