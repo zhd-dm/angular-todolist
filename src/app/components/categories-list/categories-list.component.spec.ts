@@ -29,4 +29,15 @@ describe('CategoriesListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Проверка работоспособности getCategories()', () => {
+    expect(component.getCategories).toBeTruthy();
+  });
+
+  it('Вызов метода getCategories() 1 раз', () => {
+    spyOn(component, 'getCategories').and.callThrough();
+    component.getCategories();
+    expect(component.getCategories).toHaveBeenCalledTimes(1);
+  });
+
 });

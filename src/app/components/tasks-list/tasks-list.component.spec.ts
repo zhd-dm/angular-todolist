@@ -1,11 +1,10 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
-import { TaskService } from 'src/app/services/task.service';
+import { By } from '@angular/platform-browser';
 
 import { TasksListComponent } from './tasks-list.component';
 
@@ -32,4 +31,15 @@ describe('TasksListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Проверка работоспособности getTasks()', () => {
+    expect(component.getTasks).toBeTruthy();
+  });
+
+  it('Вызов метода getTasks() 1 раз', () => {
+    spyOn(component, 'getTasks').and.callThrough();
+    component.getTasks();
+    expect(component.getTasks).toHaveBeenCalledTimes(1);
+  });
+
 });
