@@ -1,10 +1,16 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { IUser, IValidate } from "src/types";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  URL = 'api/auth';
+
+  constructor(private http: HttpClient) {}
 
   saveUser(user: IUser): IValidate {
     if(!localStorage.getItem('Users')) {
@@ -26,19 +32,21 @@ export class AuthService {
   }
 
   checkUser(user: IUser): IValidate {
-    if(!localStorage.getItem('Users')) {
-      localStorage.setItem('Users', JSON.stringify([]));
-    }
+  if(!localStorage.getItem('Users')) {
+    localStorage.setItem('Users', JSON.stringify([]));
+  }
 
-    const storage: IUser[] = JSON.parse(localStorage.getItem('Users')!);
-    for(let i = 0; i < storage.length; i++) {
-      if(user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
-        localStorage.setItem('loggedIn', JSON.stringify(user.email.toLowerCase()));
-        return {status: true, message: 'Login success'};
-      }
-    }
+  const storage: IUser[] = JSON.parse(localStorage.getItem('Users')!);
 
-    return {status: false, message: 'User not found!'};
+  for(let i = 0; i < storage.length; i++) {
+    if(user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
+      localStorage.setItem('loggedIn', JSON.stringify(user.email.toLowerCase()));
+      return {status: true, message: 'Login success'};
+    }
+  }
+
+  return {status: false, message: 'User not found!'};
+    // return this.http.get<IValidate>(this.URL, user);
   }
 
   setId(): number {

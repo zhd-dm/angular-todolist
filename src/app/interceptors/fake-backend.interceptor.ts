@@ -15,7 +15,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     if(request.url.indexOf('auth') >= 0) {
       if(request.url.includes(authURL)) {
         switch(request.method) {
-          case 'GET': return this.getUsers();
+          case 'GET': return this.getUsers(request.body);
           case 'POST': return this.saveUser(request.body);
         }
       }
@@ -56,9 +56,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 
-  private getUsers(): Observable<HttpEvent<IUser[]>> {
+  private getUsers(user: IUser): Observable<HttpEvent<IValidate>> {
+
+    const isValidate: IValidate = this.checkUser(user);
+
     return of(
-      new HttpResponse<IUser[]>({status: 200, body: []})
+      new HttpResponse<IValidate>({status: 200, body: isValidate})
     )
   }
 
@@ -183,6 +186,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     return {status: true, message: 'Successful category creation'};
+  }
+
+  protected checkUser(user: IUser): IValidate {
+    if(!localStorage.getItem('Users')) {
+      localStorage.setItem('Users', JSON.stringify([]));
+    }
+
+    const storage: IUser[] = JSON.parse(localStorage.getItem('Users')!);
+
+    for(let i = 0; i < storage.length; i++) {
+      if(user.email.toLowerCase() === storage[i].email && user.password === storage[i].password) {
+        localStorage.setItem('loggedIn', JSON.stringify(user.email.toLowerCase()));
+        return {status: true, message: 'Login success'};
+      }
+    }
+
+    return {status: false, message: 'User not found!'};
   }
 
   private deleteCategory(id: number): Observable<HttpEvent<number>> {
