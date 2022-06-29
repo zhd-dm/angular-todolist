@@ -24,7 +24,8 @@ export class CreateTaskComponent {
     id: 0,
     name: "",
     deadline: "",
-    owner: ""
+    owner: "",
+    category: ""
   }
 
   categories: Observable<ICategory[]> = this.categoryService.getCategories();

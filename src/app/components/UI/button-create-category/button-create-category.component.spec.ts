@@ -24,7 +24,7 @@ describe('ButtonCreateCategoryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('openModalCreate()', () => {
+    expect(component.openModalCreate).toBeTruthy();
   });
 });

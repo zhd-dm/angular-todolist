@@ -6,6 +6,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CreateCategoryComponent } from './create-category.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('CreateCategoryComponent', () => {
   let component: CreateCategoryComponent;
@@ -13,7 +14,7 @@ describe('CreateCategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatDialogModule, HttpClientModule],
+      imports: [RouterTestingModule, MatDialogModule, HttpClientModule, ReactiveFormsModule],
       declarations: [CreateCategoryComponent],
       providers: [
         {provide: MatDialogRef, useValue: {}}

@@ -24,7 +24,7 @@ describe('ButtonCreateTaskComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('openModalCreate()', () => {
+    expect(component.openModalCreate).toBeTruthy();
   });
 });
