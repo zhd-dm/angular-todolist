@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -10,8 +11,8 @@ describe('CategoriesListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ MatDialogModule ],
-      declarations: [ CategoriesListComponent ]
+      imports: [MatDialogModule, HttpClientModule],
+      declarations: [CategoriesListComponent]
     })
     .compileComponents();
   });

@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { CreateCategoryComponent } from './create-category.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('CreateCategoryComponent', () => {
   let component: CreateCategoryComponent;
@@ -11,8 +12,8 @@ describe('CreateCategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MatDialogModule],
-      declarations: [ CreateCategoryComponent ],
+      imports: [RouterTestingModule, MatDialogModule, HttpClientModule],
+      declarations: [CreateCategoryComponent],
       providers: [
         {provide: MatDialogRef, useValue: {}}
       ]
