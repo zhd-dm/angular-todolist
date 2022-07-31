@@ -25,10 +25,7 @@ export class CreateCategoryComponent {
     private categoryService: CategoryService
   ) { }
 
-  newCategory: ICategory = {
-    id: 0,
-    name: ''
-  }
+  newCategory: ICategory = {} as ICategory;
 
   createCategory(): void {
     this.newCategory = this.createCategoryForm.value;

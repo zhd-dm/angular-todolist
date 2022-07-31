@@ -20,10 +20,7 @@ export class EditCategoryComponent implements OnInit {
     private categoryService: CategoryService
   ) { }
 
-  editedCategory: ICategory = {
-    id: 0,
-    name: ''
-  }
+  editedCategory: ICategory = {} as ICategory;
 
   ngOnInit(): void {
     if(this.editedCategoryData) {

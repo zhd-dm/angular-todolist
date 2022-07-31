@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,7 +14,7 @@ import { EditCategoryComponent } from '../edit-category/edit-category.component'
   styleUrls: ['./categories-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoriesListComponent implements OnInit, AfterViewInit {
+export class CategoriesListComponent implements OnInit {
 
   dataSource!: MatTableDataSource<ICategory>;
 
@@ -30,10 +30,6 @@ export class CategoriesListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getCategories();
-  }
-
-  ngAfterViewInit(): void {
-    // this.dataSource.sort = this.sort;
   }
 
   getCategories(): void {

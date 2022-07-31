@@ -29,11 +29,5 @@ export class DeleteTaskComponent implements OnInit {
 
     this.taskService.deleteTask(this.task);
     this.dialogRef.close(this.taskService.getTasks());
-
-    // this.taskService.deleteTask(this.task)
-    //   .subscribe({
-    //     next: task => this.dialogRef.close(task),
-    //     error: error => console.error(error)
-    //   })
   }
 }

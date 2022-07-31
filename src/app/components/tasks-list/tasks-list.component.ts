@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectionStrategy, OnChanges, OnInit } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy, OnChanges, OnInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,7 @@ import { ITask } from 'src/types';
   styleUrls: ['./tasks-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
+export class TasksListComponent implements OnInit, OnChanges {
 
   dataSource!: MatTableDataSource<ITask>;
 
@@ -38,10 +38,6 @@ export class TasksListComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnChanges(): void {
     console.log('ngOnChanges');
     this.updateTable();
-  }
-
-  ngAfterViewInit(): void {
-    // this.dataSource.sort = this.sort;
   }
 
   getTasks(): void {

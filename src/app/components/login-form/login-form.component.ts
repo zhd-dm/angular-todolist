@@ -14,7 +14,7 @@ import { IUser, IValidate } from 'src/types';
 export class LoginFormComponent implements OnInit {
 
   isPhone: Boolean = false;
-  isValidate: IValidate = {status: false, message: ''};
+  isValidate: IValidate = {} as IValidate;
 
   loginForm = new FormGroup({
     email : new FormControl('', [Validators.required, Validators.email]),
@@ -27,10 +27,7 @@ export class LoginFormComponent implements OnInit {
     private router: Router
   ){}
 
-  userData: IUser = {
-    email: '',
-    password: ''
-  }
+  userData: IUser = {} as IUser;
 
   ngOnInit(): void {
     this.responsive.observe(Breakpoints.HandsetPortrait)

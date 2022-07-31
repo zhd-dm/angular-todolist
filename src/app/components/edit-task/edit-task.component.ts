@@ -23,13 +23,7 @@ export class EditTaskComponent implements OnInit {
     private categoryService: CategoryService
     ) {}
 
-  editedTask: ITask = {
-    id: 0,
-    name: "",
-    deadline: "",
-    owner: "",
-    category: ""
-  }
+  editedTask: ITask = {} as ITask;
 
   categories: Observable<ICategory[]> = this.categoryService.getCategories();
 

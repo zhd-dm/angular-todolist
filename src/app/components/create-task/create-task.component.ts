@@ -20,13 +20,7 @@ export class CreateTaskComponent {
     priority: new FormControl('')
   });
 
-  newTask: ITask = {
-    id: 0,
-    name: "",
-    deadline: "",
-    owner: "",
-    category: ""
-  }
+  newTask: ITask = {} as ITask;
 
   categories: Observable<ICategory[]> = this.categoryService.getCategories();
 
